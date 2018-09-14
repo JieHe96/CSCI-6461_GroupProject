@@ -1,6 +1,7 @@
 /** 
 public class Instruction 
 {
+
 	// create objects 
  		opcode 
  		IX
@@ -15,9 +16,11 @@ public class Instruction
 	 * 
 	 */
 
-
+  // call decode class for each of the parts of the instruction register 
 
     // convert input into object values using switch case 
 
 	// 
+
 }
+
