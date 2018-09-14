@@ -1,20 +1,18 @@
 /** 
 public class Instruction 
-{
+{ }
 
-	// create objects 
+	/*create objects 
  		opcode 
  		IX
  		R
  		I
- 		Address
+ 		Address*/ 
  		
  
  
 	//fetch input from the screen 
-	 * 
-	 * 
-	 */
+	 
 
   // call decode class for each of the parts of the instruction register 
 
@@ -22,5 +20,4 @@ public class Instruction
 
 	// 
 
-}
 
