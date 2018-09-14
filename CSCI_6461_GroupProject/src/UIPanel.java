@@ -4,6 +4,7 @@ import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
+/** UIPanel Class :- The class that define the front panel of the simulator :- An extendable class from the class "Jpanel" */
 
 public class UIPanel extends JPanel{
 	public UIPanel(GridLayout gridLayout) {
