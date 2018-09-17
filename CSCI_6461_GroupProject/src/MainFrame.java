@@ -98,6 +98,7 @@ public class MainFrame extends JFrame{
 		controlPanel.add(stopButton);
 		bottom.add(controlPanel);
 		return bottom;
+		
 	}
 	
 	private ActionListener inputButtonListener = new ActionListener() {
