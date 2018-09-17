@@ -21,20 +21,20 @@ public class Register {
 	public int x3;
 	
 	public Register() {
-		r0 = 0;
-		r1 = 0;
-		r2 = 0;
-		r3 = 0;
 		pc = 0;
-		cc = 0;
-		ir = 0;
-		mar = 0;
-		mbr = 0;
-		msr = 0;
-		mfr = 0;
-		x1 = 0;
-		x2 = 0;
-		x3 = 0;
+		r0 = 1;
+		r1 = 2;
+		r2 = 3;
+		r3 = 4;
+		cc = 5;
+		ir = 6;
+		mar = 7;
+		mbr = 8;
+		msr = 9;
+		mfr = 10;
+		x1 = 11;
+		x2 = 12;
+		x3 = 13;
 	}
 	
 }

@@ -11,6 +11,7 @@ public class Memory {
 		addrVec = new Vector<Integer> (32);
 		memoVec = new Vector<Integer> (2048);
 		registers = new Register();
+		addrVec.set(0, 14);
 	}
 	
 	public Vector<Integer> GetAddr() {return addrVec;} // Creating vector for address vectors
