@@ -1,6 +1,11 @@
 /** 
 public class Instruction 
-{ }
+{ 
+
+
+
+
+}
 
 	/*create objects 
  		opcode 

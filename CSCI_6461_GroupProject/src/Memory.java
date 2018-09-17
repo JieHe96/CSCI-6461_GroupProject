@@ -13,7 +13,9 @@ public class Memory {
 		registers = new Register();
 	}
 	
-	public Vector<Integer> GetAddr() {return addrVec;}
-	public Vector<Integer> GetMemo() {return memoVec;}
+	public Vector<Integer> GetAddr() {return addrVec;} // Creating vector for address vectors
+
+	public Vector<Integer> GetMemo() {return memoVec;} // Creating vector for memory vectors
+	
 	public Register GetRegister() { return registers; };
 }
