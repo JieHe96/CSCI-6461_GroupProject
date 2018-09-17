@@ -51,12 +51,6 @@ public class Instruction
 	
 	
 	
-	
-Instruction opcode=new Instruction();
-Instruction ix=new Instruction();
-Instruction r =new Instruction();
-Instruction i =new Instruction();
-Instruction address=new Instruction();
 
 
 
