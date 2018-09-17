@@ -5,7 +5,6 @@ public class Register {
 	 * {"R0:", "R1:", "R2:", "R3:", "PC:", "CC:", "IR:", 
 	 * "MAR:", "MBR:", "MSR:", "MFR:", "X1:", "X2:", "X3:"};
 	 */
-	
 	public int r0;
 	public int r1;
 	public int r2;
