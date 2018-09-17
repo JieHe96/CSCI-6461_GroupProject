@@ -40,7 +40,6 @@ public class MainFrame extends JFrame{
 		top.add(registerPanel);
 		
 		JPanel bottomPanel = initUIPanel();
-		
 		add(top);
 		add(bottomPanel);
 	}
