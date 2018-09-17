@@ -7,29 +7,33 @@ public class Decode {
      * @param end	low bit
      * @return		value of value[start:end]
      */
-    static private int getBit(int value, int start, int end) {
+    /**gettin the values from the instruction set */ 
+	
+	static private int getBit(int value, int start, int end) {
         return value << (15-start) >>> (15-start+end);
     }
 
     //decode
 
-    private int ss, tt, ii, dd, hh;
+    public int iregister, iindex, itype, iaddress, hh;
 
-    private void phaseDecode() throws Exception {
+    public void phaseDecode() throws Exception {
 
-        // IR
+        // Instruction register 
         int ir = regs.getReg(regs.IR);
 
-        // decode，op = ir[5:0]
+        // decode，op = ir[5:0] 
+        //operand part of the instruction
         int op    = getBit(ir, 5, 0);
 
-
+        iregister = getBit(ir, 7, 6);//r
+         iindex = getBit(ir, 9, 8);//ix
+        itype = getBit(ir, 10, 10);//i
+        iaddress = getBit(ir, 15, 11);//ad
+        
         switch (op) {
+        //creating switch cases for instruction types 
 
-            ss = getBit(ir, 7, 6);//r
-            tt = getBit(ir, 9, 8);//ix
-            ii = getBit(ir, 10, 10);//i
-            dd = getBit(ir, 15, 11);//ad
             case 0x01: LDR();    break;
             case 0x02: STR();    break;
             case 0x03: LDA();    break;
