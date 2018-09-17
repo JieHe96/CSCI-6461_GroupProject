@@ -18,7 +18,7 @@ public class Decode<string> {
 
     //decode
 
-    public void ToDecimal(String Str)
+    public int ToDecimal(String Str)
     {
         return ( Integer.parseInt(Str,2);
     }
@@ -72,11 +72,9 @@ public class Decode<string> {
     }
 
   
-    public void ToBinary(){
-        int rBinary = Integer.toBinaryString(rDecimal));
-        int ixBinary = Integer.toBinaryString(ixdecimal));
-        int iBinary = Integer.toBinaryString(iDecimal));
-        int adBinary = Integer.toBinaryString(adDecimal));
+    public String ToBinary(Int X){
+        return (Integer.toBinaryString(X));
+        
 
     }
 }

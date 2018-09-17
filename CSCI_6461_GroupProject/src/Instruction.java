@@ -1,23 +1,12 @@
 /**Class that defines instruction objects  */ 
+
 public class Instruction 
 { 
-	
-	// int opcode=0; // Initialised to zero, called for different values of opcodes 
-	
+	Decode de = new Decode();
 	
 	
-	/*//comments start here 
-	 
-	 static private int getBit(int value, int start, int end)
-	  {
-        return value << (15-start) >>> (15-start+end);
-	  }
-	  
-	  */ 
-	   
-	  /*
-
-    //instruction fetch
+	
+	   //instruction fetch
 
     public int iregister, iindex, itype, iaddress, hh;
 
@@ -36,43 +25,16 @@ public class Instruction
         	String itype =IR.substring(10);//i
         	String iaddress =IR.substring(11,15);//ad
         	
-        	int opcode=decimal(opbinary);
-        	int ireg=decimal(iregister);
-        	int index=decimal(iindex);
-        	int instype=decimal(itype);
-        	int insadd=decimal(iaddress);
+        	int opcode=de.ToDecimal(opbinary);// decimal op
+        	int ireg=de.decimal(iregister);//decimal r
+        	int index=de.decimal(iindex);// decial ix
+        	int instype=de.decimal(itype);//decimal i
+        	int insadd=de.decimal(iaddress);//decimal address
         	
         	
+        	}
 
-	 */
-	
-	
-	
-	
-	
-	
-	
-
-
-
-};
-
-	/*create objects 
- 		opcode 
- 		IX
- 		R
- 		I
- 		Address*/ 
- 		
- 
- 
-	//fetch input from the screen 
-	 
-
-  // call decode class for each of the parts of the instruction register 
 
     // convert input into object values using switch case 
 
-	// 
-
-
+	}
