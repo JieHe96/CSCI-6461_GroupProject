@@ -26,11 +26,11 @@ public class Instruction {
     	//fetching various parts of the instructions 
         //operand part of the instruction
     	
-        String opbinary =ins.substring(0,5);
-        String iregister =ins.substring(6,7);//r
-        String iindex =ins.substring(8,9);//ix
-        String itype =ins.substring(10);//i
-        String iaddress =ins.substring(11,15);//ad
+        String opbinary =ins.substring(0,6);
+        String iregister =ins.substring(7,8);//r
+        String iindex =ins.substring(9,10);//ix
+        String itype =ins.substring(11);//i
+        String iaddress =ins.substring(12,15);//ad
         	
         opcode = de.ToDecimal(opbinary);// decimal op
         ireg = de.ToDecimal(iregister);//decimal r
