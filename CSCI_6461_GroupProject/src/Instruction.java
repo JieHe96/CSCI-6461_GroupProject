@@ -21,27 +21,28 @@ public class Instruction
 
     public int iregister, iindex, itype, iaddress, hh;
 
-    public void instruction fetch() throws Exception 
+    public void instruction fetch(String IR) throws Exception 
     	{
 
         // Instruction register 
-        ---------------------------// insert fetch instruction from input screen and assingn to variable ir 
-			String IR= 
+        // insert fetch instruction from input screen and assingn to variable ir 
+		
     //fetching various parts of the instructions 
-     *     
+     
         //operand part of the instruction
         	String opbinary =IR.substring(0,5);
-      
-        	iregister =IR.substring(6,7);//r
-         	iindex =IR.substring(8,9);//ix
-        	itype =IR.substring(10);//i
-        	iaddress =IR.substring(11,15);//ad
+           	String iregister =IR.substring(6,7);//r
+         	String iindex =IR.substring(8,9);//ix
+        	String itype =IR.substring(10);//i
+        	String iaddress =IR.substring(11,15);//ad
         	
-        	
+        	int opcode=decimal(opbinary);
         	int ireg=decimal(iregister);
         	int index=decimal(iindex);
         	int instype=decimal(itype);
         	int insadd=decimal(iaddress);
+        	
+        	
 
 	 */
 	
