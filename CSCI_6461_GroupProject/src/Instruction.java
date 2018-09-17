@@ -1,40 +1,52 @@
 /**Class that defines instruction objects  */ 
 
-public class Instruction 
-{ 
-	Decode de = new Decode();
+public class Instruction {
 	
+	private Decode de;
 	
-	
-	   //instruction fetch
-
-    public int iregister, iindex, itype, iaddress, hh;
-
-    public void instruction fetch(String IR) throws Exception 
-    	{
+    private int opcode;
+    private int ireg;
+    private int index;
+    private int instype;
+    private int insadd;
+    
+    public Instruction() {
+    	de = new Decode();
+    	opcode = 0;
+    	ireg = 0;
+    	index = 0;
+    	instype = 0;
+    	insadd = 0;
+    }
+    
+    public void FetchInstruction(String ins) {
 
         // Instruction register 
         // insert fetch instruction from input screen and assingn to variable ir 
-		
-    //fetching various parts of the instructions 
-     
+    	//fetching various parts of the instructions 
         //operand part of the instruction
-        	String opbinary =IR.substring(0,5);
-           	String iregister =IR.substring(6,7);//r
-         	String iindex =IR.substring(8,9);//ix
-        	String itype =IR.substring(10);//i
-        	String iaddress =IR.substring(11,15);//ad
+    	
+        String opbinary =ins.substring(0,5);
+        String iregister =ins.substring(6,7);//r
+        String iindex =ins.substring(8,9);//ix
+        String itype =ins.substring(10);//i
+        String iaddress =ins.substring(11,15);//ad
         	
-        	int opcode=de.ToDecimal(opbinary);// decimal op
-        	int ireg=de.decimal(iregister);//decimal r
-        	int index=de.decimal(iindex);// decial ix
-        	int instype=de.decimal(itype);//decimal i
-        	int insadd=de.decimal(iaddress);//decimal address
+        opcode = de.ToDecimal(opbinary);// decimal op
+        ireg = de.ToDecimal(iregister);//decimal r
+        index = de.ToDecimal(iindex);// decial ix
+        instype = de.ToDecimal(itype);//decimal i
+        insadd = de.ToDecimal(iaddress);//decimal address
+        
+        System.out.println(opcode);
+        System.out.println(ireg);
+        System.out.println(index);
+        System.out.println(instype);
+        System.out.println(insadd);
         	
-        	
-        	}
+    }
 
 
     // convert input into object values using switch case 
 
-	}
+}

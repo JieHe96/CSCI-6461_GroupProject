@@ -11,14 +11,14 @@ public class Decode
 
     /**gettin the values from the instruction set */ 
 	
-	public int ToDecimal(String Str)
+	public int ToDecimal(String str)
     {
-        return ( Integer.parseInt(Str,2);
+        return (Integer.parseInt(str,2));
     }
     
-    public String ToBinary(Int X)
+    public String ToBinary(int x)
     {
-        return (Integer.toBinaryString(X));
+        return (Integer.toBinaryString(x));
     }
 
 

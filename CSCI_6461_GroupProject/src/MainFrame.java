@@ -21,8 +21,10 @@ public class MainFrame extends JFrame{
 	
 	JTextField inputText;
 	JList<String> instructionList;
+	JList<String> registerList;
 	private Memory myMemory;
 	private Instruction myInstructions;
+	DefaultListModel registerModel;
 	
 	
 	public MainFrame(String title) {
@@ -59,9 +61,24 @@ public class MainFrame extends JFrame{
 		TitledBorder registerBorder = new TitledBorder("Registers");
 		registerPanel.setBorder(registerBorder);
 		// creating register arrays having values ? 
-		String registers[] = {"R0:", "R1:", "R2:", "R3:", "PC:", "CC:", "IR:", 
-								"MAR:", "MBR:", "MSR:", "MFR:", "X1:", "X2:", "X3:"};
-		JList registerList = new JList(registers);
+		registerModel = new DefaultListModel();
+		registerModel.addElement("R0:");
+		registerModel.addElement("R1:");
+		registerModel.addElement("R2:");
+		registerModel.addElement("R3:");
+		registerModel.addElement("R4:");
+		registerModel.addElement("PC:");
+		registerModel.addElement("CC:");
+		registerModel.addElement("IR:");
+		registerModel.addElement("MAR:");
+		registerModel.addElement("MBR:");
+		registerModel.addElement("MSR:");
+		registerModel.addElement("MFR:");
+		registerModel.addElement("X1:");
+		registerModel.addElement("X2:");
+		registerModel.addElement("X3:");
+		registerList = new JList<String>();
+		registerList.setModel(registerModel);
 		registerPanel.setViewportView(registerList);
 		return registerPanel;
 	}
@@ -114,7 +131,10 @@ public class MainFrame extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String ins = instructionList.getModel().getElementAt(0);
-			
+			registerModel.setElementAt("IR:" + ins, 7);
+			registerList.setModel(registerModel);
+			System.out.println(ins);
+			myInstructions.FetchInstruction(ins);
 		}
 	};
 	
