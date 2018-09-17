@@ -18,6 +18,12 @@ public class Decode<string> {
 
     //decode
 
+    public void ToDecimal(String Str)
+    {
+        return ( Integer.parseInt(Str,2);
+    }
+
+    
     public int iregister, iindex, itype, iaddress, hh;
 
     public void phaseDecode() throws Exception {
@@ -40,10 +46,11 @@ public class Decode<string> {
         //operand part of the instruction
 
 
-        iregister = getBit(ir, 7, 6);//r
+       /* iregister = getBit(ir, 7, 6);//r
          iindex = getBit(ir, 9, 8);//ix
         itype = getBit(ir, 10, 10);//i
         iaddress = getBit(ir, 15, 11);//ad
+        */
         
          /*switch (op) {
         //creating switch cases for instruction types 
@@ -64,14 +71,8 @@ public class Decode<string> {
         //print("  ^ s=" + ss + " t=" + tt + " d=" + dd + " h=" + hh + " i=" + ii);
     }
 
-    public void BinaryToDecimal(){
-        int rDecimal = Interger.parseInt(iregister,2);
-        int ixdecimal = Interger.parseInt(iindex,2);
-        int iDecimal = Interger.parseInt(itype,2);
-        int adDecimal = Interger.parseInt(iaddress,2);
-    }
-
-    public void DecimalToBinary(){
+  
+    public void ToBinary(){
         int rBinary = Integer.toBinaryString(rDecimal));
         int ixBinary = Integer.toBinaryString(ixdecimal));
         int iBinary = Integer.toBinaryString(iDecimal));
