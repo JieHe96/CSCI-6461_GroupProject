@@ -24,14 +24,14 @@ public class Decode {
 
         // decode，op = ir[5:0] 
         //operand part of the instruction
-        int op    = getBit(ir, 5, 0);
+        int opbinary    = getBit(ir, 5, 0);
 
         iregister = getBit(ir, 7, 6);//r
          iindex = getBit(ir, 9, 8);//ix
         itype = getBit(ir, 10, 10);//i
         iaddress = getBit(ir, 15, 11);//ad
         
-        switch (op) {
+         /*switch (op) {
         //creating switch cases for instruction types 
 
             case 0x01: LDR();    break;
@@ -39,8 +39,7 @@ public class Decode {
             case 0x03: LDA();    break;
             case 0x29: LDX();    break;
             case 0x2A: STX();    break;
-
-
+*/
         }
 
         //print("  ^ s=" + ss + " t=" + tt + " d=" + dd + " h=" + hh + " i=" + ii);
