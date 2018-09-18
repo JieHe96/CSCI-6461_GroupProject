@@ -10,6 +10,7 @@ public class Instruction {
     private int instype;
     private int insadd;
     private int pcAddr;
+    private int pcCounter;
     
     public Instruction() {
     	de = new Decode();
@@ -19,6 +20,7 @@ public class Instruction {
     	instype = 0;
     	insadd = 0;
     	pcAddr = 15; //next free space
+    	pcCounter = 15;
     }
     
     public void FetchInstruction(String ins) {
@@ -57,13 +59,44 @@ public class Instruction {
 	    		break;
 	    	case 3:
 	    		break;
-	    	case 41:
+	    	case 33:
 	    		break;
-	    	case 42:
+	    	case 34:
 	    		break;
     	}
+    	
     }
 
+    public void AddToPC(String ins) {
+    	Word tmp = new Word();
+    	for (int i = 0; i < 16; i++) {
+    		if (ins.charAt(i) == '1') tmp.set(i, true);
+    		else tmp.set(i, false);
+    	}
+    	MainApp.myMemory.GetMemo().set(pcAddr, tmp);
+    	pcAddr++;
+    }
+    
+    public void IncreasePC() {
+    	pcCounter++;
+    }
+    
+    public int GetPCAddr() {
+    	return pcAddr;
+    }
+    
+    public int GetCounter() {
+    	return pcCounter;
+    }
+    
+    public boolean ResetPC() {
+    	if (pcCounter == pcAddr) {
+    		pcAddr = 15;
+    		pcCounter = 15;
+    		return true;
+    	}
+    	return false;
+    }
 
     // convert input into object values using switch case 
 

@@ -1,4 +1,4 @@
-import java.util.Scanner
+import java.util.Scanner;
 public class Decode 
 {
     /**
@@ -20,61 +20,5 @@ public class Decode
     {
         return (Integer.toBinaryString(x));
     }
-
-    public String BinaryToOctal(String s)
-    {
-        return (Integer.toOctalString(s));
-    }
- 
-
-/* static private int getBit(int value, int start, int end) {
-   return value << (15-start) >>> (15-start+end);
-    }
-
-    //decode
-
-   /* 
-
-    
-    //public int iregister, iindex, itype, iaddress, hh;
-
-//    public void phaseDecode() throws Exception {
-
-        // Instruction register 
-   int ir = regs.getReg(regs.IR);
-
-         decode，op = ir[5:0] 
-        operand part of the instruction
-        int opbinary    = getBit(ir, 5, 0);
-
-    
-    public void phaseDecode() throws Exception {
-
-        // Instruction register
-        int ir = regs.getReg(regs.IR);
-
-        // decode，op = ir[5:0]
-        //operand part of the instruction
-
-
-       /* iregister = getBit(ir, 7, 6);//r
-         iindex = getBit(ir, 9, 8);//ix
-        itype = getBit(ir, 10, 10);//i
-        iaddress = getBit(ir, 15, 11);//ad
-        
-        /*
-       //creating switch cases for instruction types 
-        switch (op) {
-            //creating switch cases for instruction types
-
-            case 01: LDR();    break;
-            case 02: STR();    break;
-            case 03: LDA();    break;
-            case 41: LDX();    break;
-            case 42: STX();    break;
-        }
-        //print("  ^ s=" + ss + " t=" + tt + " d=" + dd + " h=" + hh + " i=" + ii);
-   		*/
-
-  
+}
    

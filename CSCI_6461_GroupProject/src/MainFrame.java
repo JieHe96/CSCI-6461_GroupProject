@@ -22,6 +22,7 @@ public class MainFrame extends JFrame{
 	JTextField inputText;
 	JList<String> instructionList;
 	JList<String> registerList;
+	DefaultListModel<String> instructionModel;
 	DefaultListModel<String> registerModel;
 	
 	
@@ -49,7 +50,9 @@ public class MainFrame extends JFrame{
 		JScrollPane instructionPanel = new JScrollPane();
 		TitledBorder instructionBorder = new TitledBorder("Instructions");
 		instructionPanel.setBorder(instructionBorder);
+		instructionModel = new DefaultListModel<String>();
 		instructionList = new JList<String>();
+		instructionList.setModel(instructionModel);
 		instructionPanel.setViewportView(instructionList);
 		return instructionPanel;
 	}
@@ -119,9 +122,10 @@ public class MainFrame extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			DefaultListModel<String> model = new DefaultListModel<String>();
-			model.addElement(inputText.getText());
-			instructionList.setModel(model);
+			String ins = inputText.getText();
+			instructionModel.addElement(ins);
+			instructionList.setModel(instructionModel);
+			MainApp.myInstructions.AddToPC(ins);
 		}
 	};
 	
@@ -133,6 +137,19 @@ public class MainFrame extends JFrame{
 			registerList.setModel(registerModel);
 			System.out.println(ins);
 			MainApp.myInstructions.FetchInstruction(ins);
+			MainApp.myInstructions.IncreasePC();
+			registerModel.setElementAt("PC: " + MainApp.myInstructions.GetCounter(), 5);
+			registerList.setModel(registerModel);
+			
+			//delete one instruction
+			instructionModel.removeElementAt(0);
+			instructionList.setModel(instructionModel);
+			//update the PC
+			if (MainApp.myInstructions.ResetPC()) {
+				registerModel.setElementAt("PC: " + MainApp.myInstructions.GetCounter(), 5);
+				registerList.setModel(registerModel);
+			}
+			
 		}
 	};
 	
