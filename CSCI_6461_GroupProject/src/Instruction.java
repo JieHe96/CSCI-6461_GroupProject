@@ -9,6 +9,7 @@ public class Instruction {
     private int index;
     private int instype;
     private int insadd;
+    public String insmode;
     
     public Instruction() {
     	de = new Decode();
@@ -44,8 +45,20 @@ public class Instruction {
         System.out.println(index);
         System.out.println(instype);
         System.out.println(insadd);
+        
+        /*//
+         * if(instype==0)
+         * insmode="immediate";
+         * else 
+         * insmode="indirect";
+         
+         */
         	
     }
+    	
+    
+
+    /** convert input into object values using switch case */ 
     
     public void Execute() {
     	switch (opcode) {
@@ -64,6 +77,5 @@ public class Instruction {
     }
 
 
-    // convert input into object values using switch case 
 
 }
