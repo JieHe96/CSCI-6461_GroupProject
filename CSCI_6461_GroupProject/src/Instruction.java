@@ -53,7 +53,18 @@ public class Instruction {
     
     public void Execute() {
     	switch (opcode) {
-	    	case 1:
+	    	case 1://LDR r, x, address[,I]
+	    		if(instype=0)//immediate addressing
+	    		{ 
+	    			// move contents of address to the register 
+	    			// Word r = MainApp.myMemory.GetRegisterValue(ireg);// 
+	    			MainApp.myMemory.GetMemo().get(iaddrress);
+	    			
+	    			
+	    			
+	    		}
+	    		else if ( instype==1) // indirect addressing 
+	    			
 	    		break;
 	    	case 2:
 	    		break;

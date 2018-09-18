@@ -37,4 +37,17 @@ public class Memory {
 		}
 	}
 	
+	private Word GetRegisterValue(int regNum) {
+		switch (regNum) {
+			case 0:
+				return memoVec.get(1);
+			case 1:
+				return memoVec.get(2);
+			case 2:
+				return memoVec.get(3);
+			case 3:
+				return memoVec.get(4);
+		}
+		return null;
+	}
 }
