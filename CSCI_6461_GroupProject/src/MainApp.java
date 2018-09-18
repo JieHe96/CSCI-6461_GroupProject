@@ -8,6 +8,10 @@ import java.util.*;
 public class MainApp {
 	
 	public static MainFrame frame;
+
+	public static Memory myMemory;
+	public static Instruction myInstructions;
+	
 	
 	public static void main (String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -20,7 +24,13 @@ public class MainApp {
 			}
 			
 		});
+		
+		init();
 	}
 	
+	private static void init() {
+		myMemory = new Memory();
+		myInstructions = new Instruction();
+	}
 	
 }

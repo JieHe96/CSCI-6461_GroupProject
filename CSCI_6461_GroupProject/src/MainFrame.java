@@ -22,8 +22,6 @@ public class MainFrame extends JFrame{
 	JTextField inputText;
 	JList<String> instructionList;
 	JList<String> registerList;
-	private Memory myMemory;
-	private Instruction myInstructions;
 	DefaultListModel<String> registerModel;
 	
 	
@@ -134,13 +132,12 @@ public class MainFrame extends JFrame{
 			registerModel.setElementAt("IR:" + ins, 7);
 			registerList.setModel(registerModel);
 			System.out.println(ins);
-			myInstructions.FetchInstruction(ins);
+			MainApp.myInstructions.FetchInstruction(ins);
 		}
 	};
 	
 	private void init() {
-		myMemory = new Memory();
-		myInstructions = new Instruction();
+		
 	}
 	
 }

@@ -5,20 +5,21 @@ public class Register {
 	 * {"R0:", "R1:", "R2:", "R3:", "PC:", "CC:", "IR:", 
 	 * "MAR:", "MBR:", "MSR:", "MFR:", "X1:", "X2:", "X3:"};
 	 */
-	public int r0;
-	public int r1;
-	public int r2;
-	public int r3;
-	public int pc;
-	public int cc;
-	public int ir;
-	public int mar;
-	public int mbr;
-	public int msr;
-	public int mfr;
-	public int x1;
-	public int x2;
-	public int x3;
+	public short r0;
+	public short r1;
+	public short r2;
+	public short r3;
+	public short pc;
+	public short cc;
+	public short ir;
+	public short mar;
+	public short mbr;
+	public short msr;
+	public short mfr;
+	public short x1;
+	public short x2;
+	public short x3;
+	public short blank;
 	
 	public Register() {
 		pc = 0;
@@ -35,6 +36,7 @@ public class Register {
 		x1 = 11;
 		x2 = 12;
 		x3 = 13;
+		blank = 14;
 	}
 	
 }

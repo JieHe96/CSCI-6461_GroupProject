@@ -9,6 +9,7 @@ public class Instruction {
     private int index;
     private int instype;
     private int insadd;
+    private int pcAddr;
     
     public Instruction() {
     	de = new Decode();
@@ -17,6 +18,7 @@ public class Instruction {
     	index = 0;
     	instype = 0;
     	insadd = 0;
+    	pcAddr = 15; //next free space
     }
     
     public void FetchInstruction(String ins) {
@@ -55,9 +57,9 @@ public class Instruction {
 	    		break;
 	    	case 3:
 	    		break;
-	    	case 33:
+	    	case 41:
 	    		break;
-	    	case 34:
+	    	case 42:
 	    		break;
     	}
     }
