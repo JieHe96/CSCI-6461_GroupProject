@@ -49,15 +49,16 @@ public class Instruction {
     
     public void Execute() {
     	switch (opcode) {
-	    	case 1:
+	    	case 1://LDR r,x,address
+	    		
 	    		break;
-	    	case 2:
+	    	case 2://STR r,x,address
 	    		break;
-	    	case 3:
+	    	case 3://LDA r,x,address
 	    		break;
-	    	case 33:
+	    	case 33://LDX x,address
 	    		break;
-	    	case 34:
+	    	case 34://STX X,address
 	    		break;
     	}
     }
