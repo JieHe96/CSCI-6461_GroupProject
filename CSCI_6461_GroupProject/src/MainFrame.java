@@ -24,7 +24,7 @@ public class MainFrame extends JFrame{
 	JList<String> registerList;
 	private Memory myMemory;
 	private Instruction myInstructions;
-	DefaultListModel registerModel;
+	DefaultListModel<String> registerModel;
 	
 	
 	public MainFrame(String title) {
@@ -61,7 +61,7 @@ public class MainFrame extends JFrame{
 		TitledBorder registerBorder = new TitledBorder("Registers");
 		registerPanel.setBorder(registerBorder);
 		// creating register arrays having values ? 
-		registerModel = new DefaultListModel();
+		registerModel = new DefaultListModel<String>();
 		registerModel.addElement("R0:");
 		registerModel.addElement("R1:");
 		registerModel.addElement("R2:");
@@ -121,7 +121,7 @@ public class MainFrame extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			DefaultListModel model = new DefaultListModel();
+			DefaultListModel<String> model = new DefaultListModel<String>();
 			model.addElement(inputText.getText());
 			instructionList.setModel(model);
 		}

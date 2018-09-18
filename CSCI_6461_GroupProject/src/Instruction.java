@@ -27,10 +27,11 @@ public class Instruction {
         //operand part of the instruction
     	
         String opbinary =ins.substring(0,6);
-        String iregister =ins.substring(7,8);//r
-        String iindex =ins.substring(9,10);//ix
-        String itype =ins.substring(11);//i
-        String iaddress =ins.substring(12,15);//ad
+        String iregister =ins.substring(6,8);//r
+        String iindex =ins.substring(8,10);//ix
+        char temp = ins.charAt(10);
+        String itype = new StringBuilder().append("").append(temp).toString();
+        String iaddress =ins.substring(11,16);//ad
         	
         opcode = de.ToDecimal(opbinary);// decimal op
         ireg = de.ToDecimal(iregister);//decimal r
@@ -44,6 +45,21 @@ public class Instruction {
         System.out.println(instype);
         System.out.println(insadd);
         	
+    }
+    
+    public void Execute() {
+    	switch (opcode) {
+	    	case 1:
+	    		break;
+	    	case 2:
+	    		break;
+	    	case 3:
+	    		break;
+	    	case 33:
+	    		break;
+	    	case 34:
+	    		break;
+    	}
     }
 
 
