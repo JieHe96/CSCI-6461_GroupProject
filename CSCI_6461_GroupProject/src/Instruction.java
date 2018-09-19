@@ -66,13 +66,17 @@ public class Instruction {
 	    		else if ( instype==1) // indirect addressing 
 	    			
 	    		break;
-	    	case 2:
+	    	case 2: // STR r,x,address 
+	    		//store the contents of the register to the memory of the effective address
 	    		break;
-	    	case 3:
+	    	case 3: // LDA r ,x,address 
+	    		//Load the register with the address (not the content) 
 	    		break;
-	    	case 33:
+	    	case 33:// LDX x,address 
+	    		//Load index register with contents of the  memory location
 	    		break;
-	    	case 34:
+	    	case 34://STX x,address 
+	    		//Store the index Register value into the Memory Location
 	    		break;
     	}
     	
