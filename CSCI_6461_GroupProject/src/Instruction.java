@@ -78,6 +78,15 @@ public class Instruction {
 	    	case 34://STX x,address 
 	    		//Store the index Register value into the Memory Location
 	    		break;
+	    	case 8:// JZ r,x,address :- Jump if Zero
+	    			// if c(r)=0 -> PC=EA else PC=PC+1
+	    		break;
+	    	case 9: //JNE r,x,address : Jump if not equal
+	    		// if c(r)!=0 -> PC=EA else PC=PC+1
+	    		break;
+	    	case 10: // JCC cc,x,address : Jump if Condition Code 
+	    		// if cc bit=1 , PC=EA else PC=PC+1
+	    		break;
     	}
     	
     }
