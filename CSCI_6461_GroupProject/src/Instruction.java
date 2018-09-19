@@ -30,12 +30,12 @@ public class Instruction {
     	//fetching various parts of the instructions 
         //operand part of the instruction
     	
-        String opbinary =ins.substring(0,6);
-        String iregister =ins.substring(6,8);//r
-        String iindex =ins.substring(8,10);//ix
+        String opbinary = ins.substring(0,6);
+        String iregister = ins.substring(6,8);//r
+        String iindex = ins.substring(8,10);//ix
         char temp = ins.charAt(10);
         String itype = new StringBuilder().append("").append(temp).toString();
-        String iaddress =ins.substring(11,16);//ad
+        String iaddress = ins.substring(11,16);//ad
         	
         opcode = de.ToDecimal(opbinary);// decimal op
         ireg = de.ToDecimal(iregister);//decimal r
@@ -54,16 +54,15 @@ public class Instruction {
     public void Execute() {
     	switch (opcode) {
 	    	case 1://LDR r, x, address[,I]
-	    		if(instype=0)//immediate addressing
+	    		if(instype == 0)//immediate addressing
 	    		{ 
 	    			// move contents of address to the register 
 	    			// Word r = MainApp.myMemory.GetRegisterValue(ireg);// 
-	    			MainApp.myMemory.GetMemo().get(iaddrress);
-	    			
+	    			Word ix = MainApp.myMemory.GetIXValue(index);
 	    			
 	    			
 	    		}
-	    		else if ( instype==1) // indirect addressing 
+	    		else if (instype == 1) // indirect addressing 
 	    			
 	    		break;
 	    	case 2: // STR r,x,address 

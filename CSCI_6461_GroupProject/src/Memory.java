@@ -37,7 +37,7 @@ public class Memory {
 		}
 	}
 	
-	private Word GetRegisterValue(int regNum) {
+	public Word GetGRValue(int regNum) {
 		switch (regNum) {
 			case 0:
 				return memoVec.get(1);
@@ -47,6 +47,20 @@ public class Memory {
 				return memoVec.get(3);
 			case 3:
 				return memoVec.get(4);
+		}
+		return null;
+	}
+	
+	public Word GetIXValue(int regNum) {
+		switch (regNum) {
+			case 0:
+				return null;
+			case 1:
+				return memoVec.get(11);
+			case 2:
+				return memoVec.get(12);
+			case 3:
+				return memoVec.get(13);
 		}
 		return null;
 	}
