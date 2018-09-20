@@ -1,3 +1,5 @@
+import java.util.BitSet;
+
 /**Class that defines instruction objects  */ 
 
 public class Instruction {
@@ -44,11 +46,11 @@ public class Instruction {
         String itype = new StringBuilder().append("").append(temp).toString();
         String iaddress = ins.substring(11,16);//ad
         	
-        opcode = Decode.ToDecimal(opbinary);// decimal op
-        ireg = Decode.ToDecimal(iregister);//decimal r
-        index = Decode.ToDecimal(iindex);// decial ix
-        instype = Decode.ToDecimal(itype);//decimal i
-        insadd = Decode.ToDecimal(iaddress);//decimal address
+        opcode = Decode.binaryToDecimal(opbinary);// decimal op
+        ireg = Decode.binaryToDecimal(iregister);//decimal r
+        index = Decode.binaryToDecimal(iindex);// decial ix
+        instype = Decode.binaryToDecimal(itype);//decimal i
+        insadd = Decode.binaryToDecimal(iaddress);//decimal address
         
         System.out.println(opcode);
         System.out.println(ireg);
@@ -61,9 +63,39 @@ public class Instruction {
     public void execute() {
     	switch (opcode) {
 	    	case 1://LDR r, x, address[,I]
+	    		if (instype == 0) {
+	    			
+	    		}
+	    		else {
+	    			
+	    		}
 	    		break;
-	    	case 2: // STR r,x,address 
-	    		//store the contents of the register to the memory of the effective address
+	    	case 2: // STR r,x,address
+	    		System.out.println("in");
+	    		int ea = 0;
+	    		//Calculate EA
+	    		if (instype == 0) {
+	    			if (index == 0) {
+	    				ea = insadd;
+	    			}
+	    			else {
+	    				ea = index + insadd;
+	    			}
+	    		}
+	    		else {
+	    			if (index == 0) {
+	    				//String addr = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				
+	    			}
+	    			else {
+	    				
+	    			}
+	    		}
+	    		//Set MAR = EA
+	    		String eaStr = Decode.IntegerTo16sBinary(ea);
+	    		String rValue = MainApp.myRegisters.getGRValue(ireg);
+	    		MainApp.myRegisters.writeToRegister("MAR", eaStr, 16);
+	    		MainApp.myRegisters.writeToRegister("MBR", rValue, 16);
 	    		break;
 	    	case 3: // LDA r ,x,address 
 	    		//Load the register with the address (not the content) 

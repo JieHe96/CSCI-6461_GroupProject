@@ -49,7 +49,7 @@ public class Register {
 		}
 	}
 	
-	public String getRegister(String name) {
+	public String getRegister(String name, boolean isDecimal) {
 		char[] chars = new char[16];
 		Arrays.fill(chars, '0');
 		for (int i = 0; i < registerMap.get(name).length(); i++) {
@@ -58,11 +58,29 @@ public class Register {
 			}
 		}
 		String str = new String(chars);
+		if (isDecimal) {
+			int buff = Decode.binaryToDecimal(str);
+			str = String.valueOf(buff);
+		}
 		return str;
 	}
 	
 	public Map<String, BitSet> getRegisterMap() {
 		return registerMap;
+	}
+	
+	public String getGRValue(int num) {
+		switch (num) {
+			case 0:
+				return getRegister("R0", false);
+			case 1:
+				return getRegister("R1", false);
+			case 2:
+				return getRegister("R2", false);
+			case 3:
+				return getRegister("R3", false);
+		}
+		return null;
 	}
 	
 }

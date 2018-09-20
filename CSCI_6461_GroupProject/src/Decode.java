@@ -11,13 +11,15 @@ public class Decode
 
     /**gettin the values from the instruction set */ 
 	
-	public static int ToDecimal(String str)
-    {
+	public static int ToDecimal(String str) {
         return (Integer.parseInt(str));
     }
+	
+	public static int binaryToDecimal(String str) {
+		return (Integer.parseInt(str, 2));
+	}
     
-    public static String IntegerTo16sBinary(int x)
-    {
+    public static String IntegerTo16sBinary(int x) {
     	return String.format("%16s", Integer.toBinaryString(x)).replace(" ", "0");
     }
 }

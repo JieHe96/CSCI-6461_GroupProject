@@ -24,6 +24,8 @@ public class MainFrame extends JFrame{
 	JTextField pcText;
 	JButton singleRunButton;
 	JTextField irText;
+	JTextField marText;
+	JTextField mbrText;
 	
 	public MainFrame(String title) {
 		super(title);
@@ -67,7 +69,7 @@ public class MainFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MainApp.myRegisters.writeToRegister("R0", r0Text.getText(), 16);
-				System.out.println(MainApp.myRegisters.getRegister("R0"));
+				System.out.println(MainApp.myRegisters.getRegister("R0", false));
 			}
 		});
 		r0Panel.add(r0Label, BorderLayout.WEST);
@@ -82,7 +84,7 @@ public class MainFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MainApp.myRegisters.writeToRegister("R1", r1Text.getText(), 16);
-				System.out.println(MainApp.myRegisters.getRegister("R1"));
+				System.out.println(MainApp.myRegisters.getRegister("R1", false));
 			}
 		});
 		r1Panel.add(r1Label, BorderLayout.WEST);
@@ -97,7 +99,7 @@ public class MainFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MainApp.myRegisters.writeToRegister("R2", r2Text.getText(), 16);
-				System.out.println(MainApp.myRegisters.getRegister("R2"));
+				System.out.println(MainApp.myRegisters.getRegister("R2", false));
 			}
 		});
 		r2Panel.add(r2Label, BorderLayout.WEST);
@@ -112,7 +114,7 @@ public class MainFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MainApp.myRegisters.writeToRegister("R3", r3Text.getText(), 16);
-				System.out.println(MainApp.myRegisters.getRegister("R3"));
+				System.out.println(MainApp.myRegisters.getRegister("R3", false));
 			}
 		});
 		r3Panel.add(r3Label, BorderLayout.WEST);
@@ -127,7 +129,7 @@ public class MainFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MainApp.myRegisters.writeToRegister("X1", x1Text.getText(), 16);
-				System.out.println(MainApp.myRegisters.getRegister("X1"));
+				System.out.println(MainApp.myRegisters.getRegister("X1", false));
 			}
 		});
 		x1Panel.add(x1Label, BorderLayout.WEST);
@@ -142,7 +144,7 @@ public class MainFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MainApp.myRegisters.writeToRegister("X2", x2Text.getText(), 16);
-				System.out.println(MainApp.myRegisters.getRegister("X2"));
+				System.out.println(MainApp.myRegisters.getRegister("X2", false));
 			}
 		});
 		x2Panel.add(x2Label, BorderLayout.WEST);
@@ -157,7 +159,7 @@ public class MainFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MainApp.myRegisters.writeToRegister("X3", x3Text.getText(), 16);
-				System.out.println(MainApp.myRegisters.getRegister("X3"));
+				System.out.println(MainApp.myRegisters.getRegister("X3", false));
 			}
 		});
 		x3Panel.add(x3Label, BorderLayout.WEST);
@@ -175,7 +177,7 @@ public class MainFrame extends JFrame{
 		JPanel marPanel = new JPanel(new BorderLayout());
 		JLabel marLabel = new JLabel("MAR");
 		JButton marButton = new JButton("Write");
-		JTextField marText = new JTextField();
+		marText = new JTextField();
 		marPanel.add(marLabel, BorderLayout.WEST);
 		marPanel.add(marText, BorderLayout.CENTER);
 		marPanel.add(marButton, BorderLayout.EAST);
@@ -189,7 +191,7 @@ public class MainFrame extends JFrame{
 		JPanel mbrPanel = new JPanel(new BorderLayout());
 		JLabel mbrLabel = new JLabel("MBR");
 		JButton mbrButton = new JButton("Write");
-		JTextField mbrText = new JTextField();
+		mbrText = new JTextField();
 		mbrPanel.add(mbrLabel, BorderLayout.WEST);
 		mbrPanel.add(mbrText, BorderLayout.CENTER);
 		mbrPanel.add(mbrButton, BorderLayout.EAST);
@@ -209,8 +211,8 @@ public class MainFrame extends JFrame{
 		JPanel msrPanel = new JPanel(new BorderLayout());
 		JLabel msrLabel = new JLabel("MSR");
 		JTextField msrText = new JTextField();
-		mbrPanel.add(msrLabel, BorderLayout.WEST);
-		mbrPanel.add(msrText, BorderLayout.CENTER);
+		msrPanel.add(msrLabel, BorderLayout.WEST);
+		msrPanel.add(msrText, BorderLayout.CENTER);
 		
 		registerPanel.add(r0Panel);
 		registerPanel.add(r1Panel);
@@ -299,8 +301,12 @@ public class MainFrame extends JFrame{
 			String pcNum = pcText.getText();
 			int index = Decode.ToDecimal(pcNum);
 			MainApp.myInstructionList.runSingleInstruction(index);
-			String ir = MainApp.myRegisters.getRegister("IR");
+			String ir = MainApp.myRegisters.getRegister("IR", false);
+			String mar = MainApp.myRegisters.getRegister("MAR", true);
+			String mbr = MainApp.myRegisters.getRegister("MBR", false);
 			irText.setText(ir);
+			marText.setText(mar);
+			mbrText.setText(mbr);
 		}
 	};
 	

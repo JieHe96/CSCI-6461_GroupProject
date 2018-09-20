@@ -17,6 +17,7 @@ public class InstructionList {
 	public void runSingleInstruction(int index) {
 		if (instructionList.containsKey(index)) {
 			instructionList.get(index).fetchInstruction();
+			instructionList.get(index).execute();
 		}
 	}
 }
