@@ -1,31 +1,32 @@
 LDA--- RR XX I ADRES
 => Load register with the address 
 
+User Enters PC / Instruction
 IR = 000011 RR XX I ADRES
 PC = current location
 
 
-if(I==0)
+if(I==0)								// Value of I from Instruction 
 	{
-	if(X=x0)
-		{ EA=Address }
+	if(X=x0)							// Value of X from the Instruction
+		{ EA=Address }     				//Get address from instruction
 	if(x=x1,x2,x3)
-		{ EA=Address + [Xx] } 
+		{ EA=Address + [Xx] } 			// Get [Xx] from the X register 
 	}
 	
 if(I==1)
 	{
 	if(X=x0)
-		{ EA=[Address] }
-	if(x=x1,x2,x3)
-		{ EA=[Address + [Xx] ] }
+		{ EA=[Address] }					//fetch value from address vector and store in EA
+	if(x=x1,x2,x3)							
+		{ EA=[Address + [Xx] ] }			
 	}
 
-MAR=EA
-MDR=[MAR]
-RR=MAR
+MAR=EA						// Update the value of the MAR register and equal it to variable EA
+MDR=[MAR]					// Update the value of the MDR with the value at the MAR 
+RR=MAR						//Update the value of RR with the value of  MAR 
  
- Update RR,MAR,MDR
+ Update RR,MAR,MDR			// Update the display and the values respectively
 
 Example :- 
 LDA R0 0 25  
