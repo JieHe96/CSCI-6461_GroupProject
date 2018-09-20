@@ -1,0 +1,43 @@
+--LDA- RR XX I ADRES
+=> Load register with the address 
+
+IR = 000001 RR XX I ADRES
+PC = current location
+
+
+if(I==0)
+	{
+	if(X=x0)
+		{ EA=Address }
+	if(x=x1,x2,x3)
+		{ EA=Address + [Xx] }
+	}
+	
+if(I==1)
+	{
+	if(X=x0)
+		{ EA=[Address] }
+	if(x=x1,x2,x3)
+		{ EA=[Address + [Xx] ] }
+	}
+
+MAR=EA
+MDR=[EA]
+RR=MAR
+ 
+ 
+
+Example :- 
+LDA R0 0 25  
+-> Load R0 with contents of '25'
+	
+	START
+	Display current value of PC 
+	Update IR 
+	I=0;
+	X=0;
+	EA=25
+	MAR=25
+	MDR=[25]
+	R0=25 
+	END 
