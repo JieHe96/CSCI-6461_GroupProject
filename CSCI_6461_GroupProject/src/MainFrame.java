@@ -19,12 +19,9 @@ import javax.swing.DefaultListModel;
 
 public class MainFrame extends JFrame{
 	
-	JTextField inputText;
-	JList<String> instructionList;
-	JList<String> registerList;
-	DefaultListModel<String> instructionModel;
-	DefaultListModel<String> registerModel;
-	
+	JTextField addrText;
+	JTextField valueText;
+	JTextField pcText;
 	
 	public MainFrame(String title) {
 		super(title);
@@ -50,8 +47,8 @@ public class MainFrame extends JFrame{
 		JScrollPane instructionPanel = new JScrollPane();
 		TitledBorder instructionBorder = new TitledBorder("Instructions");
 		instructionPanel.setBorder(instructionBorder);
-		instructionModel = new DefaultListModel<String>();
-		instructionList = new JList<String>();
+		DefaultListModel instructionModel = new DefaultListModel<String>();
+		JList instructionList = new JList<String>();
 		instructionList.setModel(instructionModel);
 		instructionPanel.setViewportView(instructionList);
 		return instructionPanel;
@@ -120,7 +117,7 @@ public class MainFrame extends JFrame{
 		JPanel pcPanel = new JPanel(new BorderLayout());
 		JLabel pcLabel = new JLabel("PC");
 		JButton pcButton = new JButton("Write");
-		JTextField pcText = new JTextField();
+		pcText = new JTextField();
 		pcPanel.add(pcLabel, BorderLayout.WEST);
 		pcPanel.add(pcText, BorderLayout.CENTER);
 		pcPanel.add(pcButton, BorderLayout.EAST);
@@ -193,19 +190,20 @@ public class MainFrame extends JFrame{
 		
 		JPanel valuePanel = new JPanel(new BorderLayout());
 		JLabel valueLabel = new JLabel("Value: ");
-		JTextField valueText = new JTextField();
+		valueText = new JTextField();
 		valuePanel.add(valueLabel, BorderLayout.WEST);
 		valuePanel.add(valueText, BorderLayout.CENTER);
 		
 		JPanel addrPanel = new JPanel(new BorderLayout());
 		JLabel addrLabel = new JLabel("Address: ");
-		JTextField addrText = new JTextField();
+		addrText = new JTextField();
 		addrPanel.add(addrLabel, BorderLayout.WEST);
 		addrPanel.add(addrText, BorderLayout.CENTER);
 		
 		JPanel rwPanel = new JPanel(new GridLayout(1,2));
 		JButton readButton = new JButton("Read");
 		JButton writeButton = new JButton("Write");
+		writeButton.addActionListener(writeButtonListener);
 		rwPanel.add(readButton);
 		rwPanel.add(writeButton);
 		
@@ -219,7 +217,6 @@ public class MainFrame extends JFrame{
 		TitledBorder controlBorder = new TitledBorder("Control");
 		controlPanel.setBorder(controlBorder);
 		JButton singleRunButton = new JButton("Single Run");
-		singleRunButton.addActionListener(singleRunButtonListener);
 		JButton loadButton = new JButton("Load");
 		JButton startButton = new JButton("Start");
 		JButton stopButton = new JButton("Stop");
@@ -232,40 +229,24 @@ public class MainFrame extends JFrame{
 		
 	}
 	
-	private ActionListener inputButtonListener = new ActionListener() {
+	private ActionListener writeButtonListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			String ins = inputText.getText();
-			instructionModel.addElement(ins);
-			instructionList.setModel(instructionModel);
-			MainApp.myInstructions.AddToPC(ins);
+			String addr = addrText.getText();
+			String value = valueText.getText();
+			int index = Integer.parseInt(addr);
+			System.out.println(index);
+			MainApp.myMemory.writeToMemory(index, value);
+			SetPC(addr);
 		}
 	};
 	
-	private ActionListener singleRunButtonListener = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String ins = instructionList.getModel().getElementAt(0);
-			registerModel.setElementAt("IR:" + ins, 7);
-			registerList.setModel(registerModel);
-			System.out.println(ins);
-			MainApp.myInstructions.FetchInstruction(ins);
-			MainApp.myInstructions.IncreasePC();
-			registerModel.setElementAt("PC: " + MainApp.myInstructions.GetCounter(), 5);
-			registerList.setModel(registerModel);
-			
-			//delete one instruction
-			instructionModel.removeElementAt(0);
-			instructionList.setModel(instructionModel);
-			//update the PC
-			if (MainApp.myInstructions.ResetPC()) {
-				registerModel.setElementAt("PC: " + MainApp.myInstructions.GetCounter(), 5);
-				registerList.setModel(registerModel);
-			}
-			
+	private void SetPC(String value) {
+		String pcStr = pcText.getText();
+		if (pcText.getText().isEmpty()) {
+			pcText.setText(value);
 		}
-	};
+	}
 	
 	private void init() {
 		

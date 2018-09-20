@@ -14,11 +14,11 @@ public class Register {
 	public BitSet mbr;
 	public BitSet msr;
 	public BitSet mfr;
-	public int pc;
-	public int mar;
-	public int x1;
-	public int x2;
-	public int x3;
+	public BitSet pc;
+	public BitSet mar;
+	public BitSet x1;
+	public BitSet x2;
+	public BitSet x3;
 	
 	public Register() {
 		init();
@@ -34,11 +34,11 @@ public class Register {
 		mbr = new BitSet(16);
 		msr = new BitSet(16);
 		mfr = new BitSet(4);
-		pc = 0;
-		mar = 0;
-		x1 = 0;
-		x2 = 0;
-		x3 = 0;
+		pc = new BitSet(12);
+		mar = new BitSet(16);
+		x1 = new BitSet(16);
+		x2 = new BitSet(16);
+		x3 = new BitSet(16);
 	}
 	
 }

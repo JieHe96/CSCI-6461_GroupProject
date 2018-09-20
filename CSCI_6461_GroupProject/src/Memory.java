@@ -21,4 +21,17 @@ public class Memory {
 			memoVec.add(ept);
 		}
 	}
+	
+	public void writeToMemory(int index, String value) {
+		Word word = new Word();
+    	for (int i = 0; i < 16; i++) {
+    		if (value.charAt(i) == '1') word.set(i, true);
+    		else word.set(i, false);
+    	}
+		memoVec.set(index, word);
+	}
+	
+	public Word readFromMemory(int index) {
+		return memoVec.get(index);
+	}
 }

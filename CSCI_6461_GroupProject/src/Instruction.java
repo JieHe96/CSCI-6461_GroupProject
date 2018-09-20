@@ -56,10 +56,6 @@ public class Instruction {
 	    	case 1://LDR r, x, address[,I]
 	    		if(instype == 0)//immediate addressing
 	    		{ 
-	    			// move contents of address to the register 
-	    			// Word r = MainApp.myMemory.GetRegisterValue(ireg);// 
-	    			Word ix = MainApp.myMemory.GetIXValue(index);
-	    			
 	    			
 	    		}
 	    		else if (instype == 1) // indirect addressing 
