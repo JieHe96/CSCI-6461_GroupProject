@@ -1,0 +1,38 @@
+--LDX- RR XX I ADRES
+=> Load Index Register with Contents of Address 
+
+IR = 100001 RR XX I ADRES
+PC = current location
+
+
+if(I==0)
+	{
+		EA=Address 
+	}
+	
+if(I==1)
+	{
+		EA=[Address]
+	}
+
+MAR=EA
+MDR=[MAR]
+[Xx]=MDR
+ 
+ Update Xx,MAR,MDR
+
+Example :- 
+LDX X1 0 30  
+-> Load X1 with contents of '30'
+	
+	START
+	Display current value of PC 
+	Update IR 
+	I=0;
+	X=1;
+	EA=30
+	MAR=30
+	MDR=[30]
+	X1=MDR 
+	UPDATE Xx,MAR,MDR,ADDRESS 
+	END 

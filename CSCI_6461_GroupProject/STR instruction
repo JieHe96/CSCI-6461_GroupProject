@@ -1,7 +1,8 @@
---LDA- RR XX I ADRES
-=> Load register with the address 
+-STR--	RR XX I ADRES
 
-IR = 000011 RR XX I ADRES
+=> Load Address location with the contents of RR 
+
+IR = 000010 RR XX I ADRES
 PC = current location
 
 
@@ -22,23 +23,26 @@ if(I==1)
 	}
 
 MAR=EA
-MDR=[EA]
-RR=MAR
- 
- Update RR,MAR,MDR
+MDR=[RR]
+[MAR]=MDR
 
-Example :- 
-LDA R0 0 25  
--> Load R0 with contents of '25'
-	
-	START
+
+ Update RR,MAR,MDR
+ 
+ 
+ 
+ Example : 
+ STR R0 0 20
+ -> Store location 20 with [R0]
+ 
+ START
 	Display current value of PC 
 	Update IR 
 	I=0;
 	X=0;
-	EA=25
-	MAR=25
-	MDR=[25]
-	R0=25 
+	EA=20
+	MAR=20
+	MDR=[R0]
+	[MAR]=MDR
 	UPDATE RR,MAR,MDR,ADDRESS 
 	END 
