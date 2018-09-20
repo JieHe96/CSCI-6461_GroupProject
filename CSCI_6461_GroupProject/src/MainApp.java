@@ -15,7 +15,7 @@ public class MainApp {
 	public static Register myRegisters;
 	
 	
-	public static void main (String[] args) {
+	public static void main (final String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 
 			public void run() {

@@ -29,8 +29,6 @@ public class Register {
 		registerMap.put("X1", new BitSet(16));
 		registerMap.put("X2", new BitSet(16));
 		registerMap.put("X3", new BitSet(16));
-		
-		System.out.println(registerMap.get("R0").length());
 	}
 	
 	public void writeToRegister(String name, String value, int length) {
