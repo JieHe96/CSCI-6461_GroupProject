@@ -63,39 +63,47 @@ public class Instruction {
     public void execute() {
     	switch (opcode) {
 	    	case 1://LDR r, x, address[,I]
-	    		if (instype == 0) {
-	    			
-	    		}
-	    		else {
-	    			
-	    		}
-	    		break;
-	    	case 2: // STR r,x,address
-	    		System.out.println("in");
-	    		int ea = 0;
+	    		int ldr_ea = 0;
 	    		//Calculate EA
 	    		if (instype == 0) {
-	    			if (index == 0) {
-	    				ea = insadd;
-	    			}
-	    			else {
-	    				ea = index + insadd;
-	    			}
+	    			if (index == 0) ldr_ea = insadd;
+	    			else ldr_ea = index + insadd;
 	    		}
 	    		else {
 	    			if (index == 0) {
-	    				//String addr = MainApp.myMemory.readFromMemory(insadd).convertToString();
 	    				
 	    			}
 	    			else {
 	    				
 	    			}
 	    		}
-	    		//Set MAR = EA
-	    		String eaStr = Decode.IntegerTo16sBinary(ea);
-	    		String rValue = MainApp.myRegisters.getGRValue(ireg);
-	    		MainApp.myRegisters.writeToRegister("MAR", eaStr, 16);
-	    		MainApp.myRegisters.writeToRegister("MBR", rValue, 16);
+	    		String ldr_eaStr = Decode.IntegerTo16sBinary(ldr_ea);
+	    		String ldr_mValue = MainApp.myMemory.readFromMemory(ldr_ea).convertToString();
+	    		MainApp.myRegisters.writeToRegister("MAR", ldr_eaStr, 16);
+	    		MainApp.myRegisters.writeToRegister("MBR", ldr_mValue, 16);
+	    		MainApp.myRegisters.writeToGR(ireg, ldr_mValue);
+	    		break;
+	    	case 2: // STR r,x,address
+	    		int str_ea = 0;
+	    		//Calculate EA
+	    		if (instype == 0) {
+	    			if (index == 0) str_ea = insadd;
+	    			else str_ea = index + insadd;
+	    		}
+	    		else {
+	    			if (index == 0) {
+	    				
+	    			}
+	    			else {
+	    				
+	    			}
+	    		}
+	    		//Set MAR = EA, MBR = [RR], then write to memory
+	    		String str_eaStr = Decode.IntegerTo16sBinary(str_ea);
+	    		String str_rValue = MainApp.myRegisters.getGRValue(ireg);
+	    		MainApp.myRegisters.writeToRegister("MAR", str_eaStr, 16);
+	    		MainApp.myRegisters.writeToRegister("MBR", str_rValue, 16);
+	    		MainApp.myMemory.writeToMemory(str_ea, str_rValue);
 	    		break;
 	    	case 3: // LDA r ,x,address 
 	    		//Load the register with the address (not the content) 

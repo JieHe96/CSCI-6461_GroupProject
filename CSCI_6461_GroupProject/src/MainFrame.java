@@ -26,6 +26,7 @@ public class MainFrame extends JFrame{
 	JTextField irText;
 	JTextField marText;
 	JTextField mbrText;
+	JTextField r1Text;
 	
 	public MainFrame(String title) {
 		super(title);
@@ -79,7 +80,7 @@ public class MainFrame extends JFrame{
 		JPanel r1Panel = new JPanel(new BorderLayout());
 		JLabel r1Label = new JLabel("R1");
 		JButton r1Button = new JButton("Write");
-		JTextField r1Text = new JTextField();
+		r1Text = new JTextField();
 		r1Button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -304,17 +305,20 @@ public class MainFrame extends JFrame{
 			String ir = MainApp.myRegisters.getRegister("IR", false);
 			String mar = MainApp.myRegisters.getRegister("MAR", true);
 			String mbr = MainApp.myRegisters.getRegister("MBR", false);
+			String r1 = MainApp.myRegisters.getRegister("R1", false);
 			irText.setText(ir);
 			marText.setText(mar);
 			mbrText.setText(mbr);
+			r1Text.setText(r1);
+			System.out.println(MainApp.myMemory.GetMemo().get(8).convertToString());
 		}
 	};
 	
 	private void SetPC(String value) {
-		String pcStr = pcText.getText();
-		if (pcText.getText().isEmpty()) {
+		//String pcStr = pcText.getText();
+		//if (pcText.getText().isEmpty()) {
 			pcText.setText(value);
-		}
+		//}
 	}
 	
 }
