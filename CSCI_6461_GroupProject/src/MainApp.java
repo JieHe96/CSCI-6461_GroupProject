@@ -18,7 +18,7 @@ public class MainApp {
 
 			public void run() {
 				frame = new MainFrame("Computer Simulator");
-				frame.setSize(800, 400);
+				frame.setSize(800, 500);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
 			}

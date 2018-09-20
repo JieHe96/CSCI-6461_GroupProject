@@ -5,38 +5,40 @@ public class Register {
 	 * {"R0:", "R1:", "R2:", "R3:", "PC:", "CC:", "IR:", 
 	 * "MAR:", "MBR:", "MSR:", "MFR:", "X1:", "X2:", "X3:"};
 	 */
-	public short r0;
-	public short r1;
-	public short r2;
-	public short r3;
-	public short pc;
-	public short cc;
-	public short ir;
-	public short mar;
-	public short mbr;
-	public short msr;
-	public short mfr;
-	public short x1;
-	public short x2;
-	public short x3;
-	public short blank;
+	public BitSet r0;
+	public BitSet r1;
+	public BitSet r2;
+	public BitSet r3;
+	public BitSet cc;
+	public BitSet ir;
+	public BitSet mbr;
+	public BitSet msr;
+	public BitSet mfr;
+	public int pc;
+	public int mar;
+	public int x1;
+	public int x2;
+	public int x3;
 	
 	public Register() {
+		init();
+	}
+	
+	private void init() {
+		r0 = new BitSet(16);
+		r1 = new BitSet(16);
+		r2 = new BitSet(16);
+		r3 = new BitSet(16);
+		cc = new BitSet(4);
+		ir = new BitSet(16);
+		mbr = new BitSet(16);
+		msr = new BitSet(16);
+		mfr = new BitSet(4);
 		pc = 0;
-		r0 = 1;
-		r1 = 2;
-		r2 = 3;
-		r3 = 4;
-		cc = 5;
-		ir = 6;
-		mar = 7;
-		mbr = 8;
-		msr = 9;
-		mfr = 10;
-		x1 = 11;
-		x2 = 12;
-		x3 = 13;
-		blank = 14;
+		mar = 0;
+		x1 = 0;
+		x2 = 0;
+		x3 = 0;
 	}
 	
 }
