@@ -62,6 +62,13 @@ public class MainFrame extends JFrame{
 		JLabel r0Label = new JLabel("R0");
 		JButton r0Button = new JButton("Write");
 		JTextField r0Text = new JTextField();
+		r0Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainApp.myRegisters.writeToRegister("R0", r0Text.getText(), 16);
+				System.out.println(MainApp.myRegisters.getRegister("R0"));
+			}
+		});
 		r0Panel.add(r0Label, BorderLayout.WEST);
 		r0Panel.add(r0Text, BorderLayout.CENTER);
 		r0Panel.add(r0Button, BorderLayout.EAST);
@@ -70,6 +77,13 @@ public class MainFrame extends JFrame{
 		JLabel r1Label = new JLabel("R1");
 		JButton r1Button = new JButton("Write");
 		JTextField r1Text = new JTextField();
+		r1Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainApp.myRegisters.writeToRegister("R1", r1Text.getText(), 16);
+				System.out.println(MainApp.myRegisters.getRegister("R1"));
+			}
+		});
 		r1Panel.add(r1Label, BorderLayout.WEST);
 		r1Panel.add(r1Text, BorderLayout.CENTER);
 		r1Panel.add(r1Button, BorderLayout.EAST);
@@ -78,6 +92,13 @@ public class MainFrame extends JFrame{
 		JLabel r2Label = new JLabel("R2");
 		JButton r2Button = new JButton("Write");
 		JTextField r2Text = new JTextField();
+		r2Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainApp.myRegisters.writeToRegister("R2", r2Text.getText(), 16);
+				System.out.println(MainApp.myRegisters.getRegister("R2"));
+			}
+		});
 		r2Panel.add(r2Label, BorderLayout.WEST);
 		r2Panel.add(r2Text, BorderLayout.CENTER);
 		r2Panel.add(r2Button, BorderLayout.EAST);
@@ -86,6 +107,13 @@ public class MainFrame extends JFrame{
 		JLabel r3Label = new JLabel("R3");
 		JButton r3Button = new JButton("Write");
 		JTextField r3Text = new JTextField();
+		r3Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainApp.myRegisters.writeToRegister("R3", r3Text.getText(), 16);
+				System.out.println(MainApp.myRegisters.getRegister("R3"));
+			}
+		});
 		r3Panel.add(r3Label, BorderLayout.WEST);
 		r3Panel.add(r3Text, BorderLayout.CENTER);
 		r3Panel.add(r3Button, BorderLayout.EAST);
@@ -94,6 +122,13 @@ public class MainFrame extends JFrame{
 		JLabel x1Label = new JLabel("X1");
 		JButton x1Button = new JButton("Write");
 		JTextField x1Text = new JTextField();
+		x1Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainApp.myRegisters.writeToRegister("X1", x1Text.getText(), 16);
+				System.out.println(MainApp.myRegisters.getRegister("X1"));
+			}
+		});
 		x1Panel.add(x1Label, BorderLayout.WEST);
 		x1Panel.add(x1Text, BorderLayout.CENTER);
 		x1Panel.add(x1Button, BorderLayout.EAST);
@@ -102,6 +137,13 @@ public class MainFrame extends JFrame{
 		JLabel x2Label = new JLabel("X2");
 		JButton x2Button = new JButton("Write");
 		JTextField x2Text = new JTextField();
+		x2Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainApp.myRegisters.writeToRegister("X2", x2Text.getText(), 16);
+				System.out.println(MainApp.myRegisters.getRegister("X2"));
+			}
+		});
 		x2Panel.add(x2Label, BorderLayout.WEST);
 		x2Panel.add(x2Text, BorderLayout.CENTER);
 		x2Panel.add(x2Button, BorderLayout.EAST);
@@ -110,6 +152,13 @@ public class MainFrame extends JFrame{
 		JLabel x3Label = new JLabel("X3");
 		JButton x3Button = new JButton("Write");
 		JTextField x3Text = new JTextField();
+		x3Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainApp.myRegisters.writeToRegister("X3", x3Text.getText(), 16);
+				System.out.println(MainApp.myRegisters.getRegister("X3"));
+			}
+		});
 		x3Panel.add(x3Label, BorderLayout.WEST);
 		x3Panel.add(x3Text, BorderLayout.CENTER);
 		x3Panel.add(x3Button, BorderLayout.EAST);

@@ -1,44 +1,61 @@
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class Register {
 	/**
 	 * {"R0:", "R1:", "R2:", "R3:", "PC:", "CC:", "IR:", 
 	 * "MAR:", "MBR:", "MSR:", "MFR:", "X1:", "X2:", "X3:"};
 	 */
-	public BitSet r0;
-	public BitSet r1;
-	public BitSet r2;
-	public BitSet r3;
-	public BitSet cc;
-	public BitSet ir;
-	public BitSet mbr;
-	public BitSet msr;
-	public BitSet mfr;
-	public BitSet pc;
-	public BitSet mar;
-	public BitSet x1;
-	public BitSet x2;
-	public BitSet x3;
+	private Map<String, BitSet> registerMap;
 	
 	public Register() {
 		init();
 	}
 	
 	private void init() {
-		r0 = new BitSet(16);
-		r1 = new BitSet(16);
-		r2 = new BitSet(16);
-		r3 = new BitSet(16);
-		cc = new BitSet(4);
-		ir = new BitSet(16);
-		mbr = new BitSet(16);
-		msr = new BitSet(16);
-		mfr = new BitSet(4);
-		pc = new BitSet(12);
-		mar = new BitSet(16);
-		x1 = new BitSet(16);
-		x2 = new BitSet(16);
-		x3 = new BitSet(16);
+		registerMap = new HashMap<String, BitSet> ();
+		
+		registerMap.put("PC", new BitSet(12));
+		registerMap.put("MAR", new BitSet(16));
+		registerMap.put("IR", new BitSet(16));
+		registerMap.put("MBR", new BitSet(16));
+		registerMap.put("CC", new BitSet(4));
+		registerMap.put("MFR", new BitSet(4));
+		registerMap.put("MSR", new BitSet(16));
+		registerMap.put("R0", new BitSet(16));
+		registerMap.put("R1", new BitSet(16));
+		registerMap.put("R2", new BitSet(16));
+		registerMap.put("R3", new BitSet(16));
+		registerMap.put("X1", new BitSet(16));
+		registerMap.put("X2", new BitSet(16));
+		registerMap.put("X3", new BitSet(16));
+		
+		System.out.println(registerMap.get("R0").length());
+	}
+	
+	public void writeToRegister(String name, String value, int length) {
+		if (registerMap.containsKey(name)) {
+			if (name == "X1" || name == "X2" || name == "X3") {
+				int decNum = Decode.ToDecimal(value);
+				String biNum = Decode.IntegerTo16sBinary(decNum);
+				System.out.println(biNum);
+				value = biNum;
+			}
+			BitSet buffer = new BitSet(length);
+			for (int i = 0; i < length; i++) {
+				if (value.charAt(i) == '1') buffer.set(i, true);
+	    		else buffer.set(i, false);
+			}
+			registerMap.put(name, buffer);
+		}
+	}
+	
+	public BitSet getRegister(String name) {
+		return registerMap.get(name);
+	}
+	
+	public Map<String, BitSet> getRegisterMap() {
+		return registerMap;
 	}
 	
 }

@@ -4,7 +4,6 @@ public class Memory {
 	
 	//private variable need for the memory class
 	private Vector<Word> memoVec;
-	private Register registers;
 	
 	public Memory() {
 		initMemory();

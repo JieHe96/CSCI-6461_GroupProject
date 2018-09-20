@@ -4,6 +4,7 @@ import javax.swing.SwingUtilities;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class MainApp {
 	
@@ -11,6 +12,7 @@ public class MainApp {
 
 	public static Memory myMemory;
 	public static Instruction myInstructions;
+	public static Register myRegisters;
 	
 	
 	public static void main (String[] args) {
@@ -31,6 +33,7 @@ public class MainApp {
 	private static void init() {
 		myMemory = new Memory();
 		myInstructions = new Instruction();
+		myRegisters = new Register();
 	}
 	
 }
