@@ -1,7 +1,7 @@
-LDA--- RR XX I ADRES
-=> Load register with the address 
+LDR--- RR XX I ADRES
+=> Load register with value from the address 
 
-IR = 000011 RR XX I ADRES
+IR = 000001 RR XX I ADRES
 PC = current location
 
 
@@ -23,22 +23,22 @@ if(I==1)
 
 MAR=EA
 MDR=[MAR]
-RR=MAR
+RR=MDR // Loading the value at the location into the Register
  
  Update RR,MAR,MDR
 
 Example :- 
-LDA R0 0 25  
--> Load R0 with '25'
+LDR	0 1 20  
+-> Load R0 with contents of '20 THROUGH indirect addressing'
 	
 	START
 	Display current value of PC 
 	Update IR 
-	I=0;
+	I=1;
 	X=0;
-	EA=25
-	MAR=25
+	EA=[20]
+	MAR=EA
 	MDR=[MAR]
-	R0 = MAR
+	R0=MDR //INDIRECT ADDRESSING 
 	UPDATE RR,MAR,MDR,ADDRESS 
 	END 

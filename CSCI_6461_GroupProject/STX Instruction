@@ -1,0 +1,38 @@
+--STX- RR XX I ADRES
+=> Store contents of the Index Register at  the  Address  location 
+
+IR = 100010 RR XX I ADRES
+PC = current location
+
+
+if(I==0)
+	{
+		EA=Address 
+	}
+	
+if(I==1)
+	{
+		EA=[Address]
+	}
+
+MAR=EA
+MDR=[Xx]
+[MAR]=MDR
+ 
+ Update Xx,MAR,MDR
+
+Example :- 
+STX X1  0 1 20   
+-> Load X1  contents into location '20'
+	
+	START
+	Display current value of PC 
+	Update IR 
+	I=1;
+	X=1;
+	EA=[20]
+	MAR=EA
+	MDR=[X1]
+	[MAR]=MDR 
+	UPDATE Xx,MAR,MDR,ADDRESS 
+	END 
