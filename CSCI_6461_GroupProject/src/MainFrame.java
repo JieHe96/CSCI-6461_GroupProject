@@ -22,11 +22,12 @@ public class MainFrame extends JFrame{
 	JTextField addrText;
 	JTextField valueText;
 	JTextField pcText;
+	JButton singleRunButton;
+	JTextField irText;
 	
 	public MainFrame(String title) {
 		super(title);
 		
-		init();
 		setLayout(new BorderLayout());
 		JPanel top = new JPanel(new GridLayout(1,2));
 		
@@ -181,7 +182,7 @@ public class MainFrame extends JFrame{
 		
 		JPanel irPanel = new JPanel(new BorderLayout());
 		JLabel irLabel = new JLabel("IR");
-		JTextField irText = new JTextField();
+		irText = new JTextField();
 		irPanel.add(irLabel, BorderLayout.WEST);
 		irPanel.add(irText, BorderLayout.CENTER);
 		
@@ -265,7 +266,8 @@ public class MainFrame extends JFrame{
 		JPanel controlPanel = new JPanel(new FlowLayout());
 		TitledBorder controlBorder = new TitledBorder("Control");
 		controlPanel.setBorder(controlBorder);
-		JButton singleRunButton = new JButton("Single Run");
+		singleRunButton = new JButton("Single Run");
+		singleRunButton.addActionListener(singleRunButtonListener);
 		JButton loadButton = new JButton("Load");
 		JButton startButton = new JButton("Start");
 		JButton stopButton = new JButton("Stop");
@@ -286,7 +288,19 @@ public class MainFrame extends JFrame{
 			int index = Integer.parseInt(addr);
 			System.out.println(index);
 			MainApp.myMemory.writeToMemory(index, value);
+			MainApp.myInstructionList.addToInstructionList(index, value);
 			SetPC(addr);
+		}
+	};
+	
+	private ActionListener singleRunButtonListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String pcNum = pcText.getText();
+			int index = Decode.ToDecimal(pcNum);
+			MainApp.myInstructionList.runSingleInstruction(index);
+			String ir = MainApp.myRegisters.getRegister("IR");
+			irText.setText(ir);
 		}
 	};
 	
@@ -295,10 +309,6 @@ public class MainFrame extends JFrame{
 		if (pcText.getText().isEmpty()) {
 			pcText.setText(value);
 		}
-	}
-	
-	private void init() {
-		
 	}
 	
 }

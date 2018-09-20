@@ -11,7 +11,7 @@ public class MainApp {
 	public static MainFrame frame;
 
 	public static Memory myMemory;
-	public static Instruction myInstructions;
+	public static InstructionList myInstructionList;
 	public static Register myRegisters;
 	
 	
@@ -32,7 +32,7 @@ public class MainApp {
 	
 	private static void init() {
 		myMemory = new Memory();
-		myInstructions = new Instruction();
+		myInstructionList = new InstructionList();
 		myRegisters = new Register();
 	}
 	

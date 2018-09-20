@@ -38,7 +38,6 @@ public class Register {
 			if (name == "X1" || name == "X2" || name == "X3") {
 				int decNum = Decode.ToDecimal(value);
 				String biNum = Decode.IntegerTo16sBinary(decNum);
-				System.out.println(biNum);
 				value = biNum;
 			}
 			BitSet buffer = new BitSet(length);
@@ -50,8 +49,16 @@ public class Register {
 		}
 	}
 	
-	public BitSet getRegister(String name) {
-		return registerMap.get(name);
+	public String getRegister(String name) {
+		char[] chars = new char[16];
+		Arrays.fill(chars, '0');
+		for (int i = 0; i < registerMap.get(name).length(); i++) {
+			if (registerMap.get(name).get(i) == true) {
+				chars[i] = '1';
+			}
+		}
+		String str = new String(chars);
+		return str;
 	}
 	
 	public Map<String, BitSet> getRegisterMap() {

@@ -2,29 +2,36 @@
 
 public class Instruction {
 	
-	private Decode de;
-	
+	private Word value;
+		
     private int opcode;
     private int ireg;
     private int index;
     private int instype;
     private int insadd;
-    private int pcAddr;
-    private int pcCounter;
     
     public Instruction() {
-    	de = new Decode();
+    	value = new Word();
     	opcode = 0;
     	ireg = 0;
     	index = 0;
     	instype = 0;
     	insadd = 0;
-    	pcAddr = 15; //next free space
-    	pcCounter = 15;
     }
     
-    public void FetchInstruction(String ins) {
+    
+	public void assignValue(String val) {
+    	for (int i = 0; i < 16; i++) {
+    		if (val.charAt(i) == '1') value.set(i, true);
+    		else value.set(i, false);
+    	}
+	}
+    
+    public void fetchInstruction() {
 
+    	String ins = value.convertToString();
+    	
+    	System.out.println(ins);
         // Instruction register 
         // insert fetch instruction from input screen and assingn to variable ir 
     	//fetching various parts of the instructions 
@@ -37,29 +44,23 @@ public class Instruction {
         String itype = new StringBuilder().append("").append(temp).toString();
         String iaddress = ins.substring(11,16);//ad
         	
-        opcode = de.ToDecimal(opbinary);// decimal op
-        ireg = de.ToDecimal(iregister);//decimal r
-        index = de.ToDecimal(iindex);// decial ix
-        instype = de.ToDecimal(itype);//decimal i
-        insadd = de.ToDecimal(iaddress);//decimal address
+        opcode = Decode.ToDecimal(opbinary);// decimal op
+        ireg = Decode.ToDecimal(iregister);//decimal r
+        index = Decode.ToDecimal(iindex);// decial ix
+        instype = Decode.ToDecimal(itype);//decimal i
+        insadd = Decode.ToDecimal(iaddress);//decimal address
         
         System.out.println(opcode);
         System.out.println(ireg);
         System.out.println(index);
         System.out.println(instype);
         System.out.println(insadd);
-        	
+        MainApp.myRegisters.writeToRegister("IR", ins, 16);
     }
     
-    public void Execute() {
+    public void execute() {
     	switch (opcode) {
 	    	case 1://LDR r, x, address[,I]
-	    		if(instype == 0)//immediate addressing
-	    		{ 
-	    			
-	    		}
-	    		else if (instype == 1) // indirect addressing 
-	    			
 	    		break;
 	    	case 2: // STR r,x,address 
 	    		//store the contents of the register to the memory of the effective address
@@ -82,41 +83,7 @@ public class Instruction {
 	    	case 10: // JCC cc,x,address : Jump if Condition Code 
 	    		// if cc bit=1 , PC=EA else PC=PC+1
 	    		break;
-    	}
-    	
+    	}	
     }
-
-    public void AddToPC(String ins) {
-    	Word tmp = new Word();
-    	for (int i = 0; i < 16; i++) {
-    		if (ins.charAt(i) == '1') tmp.set(i, true);
-    		else tmp.set(i, false);
-    	}
-    	MainApp.myMemory.GetMemo().set(pcAddr, tmp);
-    	pcAddr++;
-    }
-    
-    public void IncreasePC() {
-    	pcCounter++;
-    }
-    
-    public int GetPCAddr() {
-    	return pcAddr;
-    }
-    
-    public int GetCounter() {
-    	return pcCounter;
-    }
-    
-    public boolean ResetPC() {
-    	if (pcCounter == pcAddr) {
-    		pcAddr = 15;
-    		pcCounter = 15;
-    		return true;
-    	}
-    	return false;
-    }
-
-    // convert input into object values using switch case 
 
 }
