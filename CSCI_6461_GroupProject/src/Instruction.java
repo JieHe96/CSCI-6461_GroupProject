@@ -179,6 +179,60 @@ public class Instruction {
 	    		
 	    	case 33:// LDX x,address 
 	    		//Load index register with contents of the  memory location
+	    		
+	    		
+	    		/*
+	    		 int ldx_ea = 0;
+	    		//Calculate EA
+	    		if (instype == 0) {
+	    			//Direct Addressing
+	    			if (index == 0) {
+	    				//Get the value stored in insadd
+	    				ldx_ea = insadd;
+	    			}
+	    			else {
+	    				//Get the value stored in [ix] + insadd
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				ldx_ea = ixValue + insadd;
+	    			}
+	    		}
+	    		else {
+	    			//Indirect Addressing
+	    			if (index == 0) {
+	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				ldx_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    			else {
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				int buffer = ixValue + insadd;
+	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+	    				lda_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    		}
+	    		//creating 16 bit string of EA  
+	    		String lda_eaStr = Decode.IntegerTo16sBinary(lda_ea);
+	    		//fetching word from memory and converting to string - Getting value at the memory 
+	    		String lda_mValue = MainApp.myMemory.readFromMemory(lda_ea).convertToString();
+	    		//store address into MAR 
+	    		MainApp.myRegisters.writeToRegister("MAR", lda_eaStr, 16);
+	    		//Store value into MBR
+	    		MainApp.myRegisters.writeToRegister("MBR", lda_mValue, 16);
+	    		//Store address to GR register 
+	    		MainApp.myRegisters.writeToGR(ireg, lda_eaStr);
+	    		break; 
+	    		
+	    		    		 
+	    		 
+	    		 */
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
 	    		break;
 	    	case 34://STX x,address 
 	    		//Store the index Register value into the Memory Location
