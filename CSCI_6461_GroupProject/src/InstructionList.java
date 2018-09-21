@@ -47,4 +47,12 @@ public class InstructionList {
 	public int getFirstInsAddr() {
 		return addressList.get(0);
 	}
+	
+	public Vector<Integer> getAddrList() {
+		return addressList;
+	}
+	
+	public Map<Integer, Instruction> getInsList() {
+		return instructionList;
+	}
 }

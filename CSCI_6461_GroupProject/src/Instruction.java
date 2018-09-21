@@ -21,6 +21,9 @@ public class Instruction {
     	insadd = 0;
     }
     
+    public Word getValue() {
+    	return value;
+    }
     
 	public void assignValue(String val) {
     	for (int i = 0; i < 16; i++) {

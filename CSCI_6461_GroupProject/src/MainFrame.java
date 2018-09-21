@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,6 +35,8 @@ public class MainFrame extends JFrame{
 	JTextField x1Text;
 	JTextField x2Text;
 	JTextField x3Text;
+	DefaultListModel<String> instructionModel;
+	JList<String> instructionList;
 	
 	public MainFrame(String title) {
 		super(title);
@@ -58,8 +61,8 @@ public class MainFrame extends JFrame{
 		JScrollPane instructionPanel = new JScrollPane();
 		TitledBorder instructionBorder = new TitledBorder("Instructions");
 		instructionPanel.setBorder(instructionBorder);
-		DefaultListModel instructionModel = new DefaultListModel<String>();
-		JList instructionList = new JList<String>();
+		instructionModel = new DefaultListModel<String>();
+		instructionList = new JList<String>();
 		instructionList.setModel(instructionModel);
 		instructionPanel.setViewportView(instructionList);
 		return instructionPanel;
@@ -350,6 +353,14 @@ public class MainFrame extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			int index = MainApp.myInstructionList.getFirstInsAddr();
 			SetPC(String.valueOf(index));
+			Vector<Integer> addrList = MainApp.myInstructionList.getAddrList();
+			for (int i : addrList) {
+				Word val = MainApp.myInstructionList.getInsList().get(i).getValue();
+				String insValue = val.convertToString();
+				String ele = "Address: " + String.valueOf(i) + "     " + "Value: " + insValue;
+				instructionModel.addElement(ele);
+			}
+			instructionList.setModel(instructionModel);
 		}
 	};
 	
