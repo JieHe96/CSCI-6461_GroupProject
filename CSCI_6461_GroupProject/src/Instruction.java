@@ -90,10 +90,15 @@ public class Instruction {
 	    				ldr_ea = Decode.binaryToDecimal(tmp);
 	    			}
 	    		}
+	    		//creating 16 bit string of EA  
 	    		String ldr_eaStr = Decode.IntegerTo16sBinary(ldr_ea);
+	    		//fetching word from memory and converting to string - Getting value at the memory 
 	    		String ldr_mValue = MainApp.myMemory.readFromMemory(ldr_ea).convertToString();
+	    		//store address into MAR 
 	    		MainApp.myRegisters.writeToRegister("MAR", ldr_eaStr, 16);
+	    		//Store value into MBR
 	    		MainApp.myRegisters.writeToRegister("MBR", ldr_mValue, 16);
+	    		//Store to GR register 
 	    		MainApp.myRegisters.writeToGR(ireg, ldr_mValue);
 	    		break;
 	    	case 2: // STR r,x,address
@@ -130,6 +135,45 @@ public class Instruction {
 	    		MainApp.myMemory.writeToMemory(str_ea, str_rValue);
 	    		break;
 	    	case 3: // LDA r ,x,address 
+	    		
+	    		
+	    		/*
+	    		//LDR r, x, address[,I]
+	    			LDA R,X,I,ADDREss 
+	    		int lda_ea = 0;
+	    		//Calculate EA
+	    		if (instype == 0) {
+	    			//Direct Addressing
+	    			if (index == 0) {
+	    				//Get the value stored in insadd
+	    				lda_ea = insadd;
+	    			}
+	    			else {
+	    				//Get the value stored in [ix] + insadd
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				lda_ea = ixValue + insadd;
+	    			}
+	    		}
+	    		else {
+	    			//Indirect Addressing
+	    			if (index == 0) {
+	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				ldr_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    			else {
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				int buffer = ixValue + insadd;
+	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+	    				ldr_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    		}
+	    		String ldr_eaStr = Decode.IntegerTo16sBinary(ldr_ea);
+	    		String ldr_mValue = MainApp.myMemory.readFromMemory(ldr_ea).convertToString();
+	    		MainApp.myRegisters.writeToRegister("MAR", ldr_eaStr, 16);
+	    		MainApp.myRegisters.writeToRegister("MBR", ldr_mValue, 16);
+	    		MainApp.myRegisters.writeToGR(ireg, ldr_mValue);
+	    		break;
+	    		 */
 	    		//Load the register with the address (not the content) 
 	    		break;
 	    	case 33:// LDX x,address 
