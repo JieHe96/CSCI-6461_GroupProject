@@ -180,36 +180,21 @@ public class Instruction {
 	    	case 33:// LDX x,address 
 	    		//Load index register with contents of the  memory location
 	    		
-	    		
-	       		 int ldx_ea = 0;
+	    		int ldx_ea = 0;
 	    		//Calculate EA
 	    		if (instype == 0) {
 	    			//Direct Addressing
-	    			if (index == 0) {
-	    				//Get the value stored in insadd
+	    			//Get the value stored in insadd
 	    				ldx_ea = insadd;
 	    			}
-	    			else {
-	    				//Get the value stored in [ix] + insadd
-	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
-	    				ldx_ea = ixValue + insadd;
-	    			}
-	    		}
 	    		else {
 	    			//Indirect Addressing
-	    			if (index == 0) {
 	    			//temporary variable = string of address
 	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
 	    				// decimal value of address stores in EA
 	    				ldx_ea = Decode.binaryToDecimal(tmp);
 	    			}
-	    			else {
-	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
-	    				int buffer = ixValue + insadd;
-	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
-	    				ldx_ea = Decode.binaryToDecimal(tmp);
-	    			}
-	    		}
+	    		
 	    		//creating 16 bit string of EA  
 	    		String ldx_eaStr = Decode.IntegerTo16sBinary(ldx_ea);
 	    		//fetching word from memory and converting to string - Getting value at the memory 
@@ -227,7 +212,48 @@ public class Instruction {
 	    		
 	    	case 34://STX x,address 
 	    		//Store the index Register value into the Memory Location
+	    		
+	    		/*
+	    		 *int stx_ea = 0;
+	    		//Calculate EA
+	    		if (instype == 0) {
+	    			//Direct addressing
+	    			stx_ea = insadd;
+	    			}
+	    		else {
+	    			//Indirect addressing
+	    			if (index == 0) {
+	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				stx_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    			else {
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				int buffer = ixValue + insadd;
+	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+	    				stx_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    		}
+	    		//Set MAR = EA, MBR = [RR], then write to memory
+	    		String stx_eaStr = Decode.IntegerTo16sBinary(stx_ea);
+	    		String stx_rValue = MainApp.myRegisters.getGRValue(ireg);
+	    		MainApp.myRegisters.writeToRegister("MAR", stx_eaStr, 16);
+	    		MainApp.myRegisters.writeToRegister("MBR", stx_rValue, 16);
+	    		MainApp.myMemory.writeToMemory(stx_ea, stx_rValue);
 	    		break;
+	    		 */
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
 	    	case 8:// JZ r,x,address :- Jump if Zero
 	    			// if c(r)=0 -> PC=EA else PC=PC+1
 	    		break;
