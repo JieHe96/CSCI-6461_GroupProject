@@ -233,7 +233,9 @@ public class Instruction {
 	    		//Set MAR = EA, MBR = [RR], then write to memory
 	    		String stx_eaStr = Decode.IntegerTo16sBinary(stx_ea);
 	    		//String stx_rValue = MainApp.myRegisters.getGRValue(ireg);
+	    		//Fetching the value of Index Register
 	    		int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    		//Convert the value into 16 bit binary
 	    		String stx_ixValue=Decode.IntegerTo16sBinary(ixValue);
 	    		MainApp.myRegisters.writeToRegister("MAR", stx_eaStr, 16);
 	    		MainApp.myRegisters.writeToRegister("MBR", stx_ixValue, 16);
