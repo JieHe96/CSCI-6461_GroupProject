@@ -5,7 +5,7 @@ public class Decode
     /**
      * converts string type-data to integer
      *
-     * @param str
+     * @param str a string type data
      * @return integer of str
      */
 	public static int ToDecimal(String str) {
@@ -15,7 +15,7 @@ public class Decode
     /**
      * converts binary to decimal
      *
-     * @param str
+     * @param str a string type data
      * @return	decimal value of str
      */
     public static int binaryToDecimal(String str) {
@@ -23,20 +23,20 @@ public class Decode
 	}
 
     /**
-     * converts a int data-type to 16bits binary string
+     * converts a int data-type to 16 bits binary string
      *
-     * @param x
-     * @return	binary string of x
+     * @param x a int type data
+     * @return	16 bits binary string of x
      */
     public static String IntegerTo16sBinary(int x) {
     	return String.format("%16s", Integer.toBinaryString(x)).replace(" ", "0");
     }
 
     /**
-     * converts a int data-type to 12bits binary string
+     * converts a int data-type to 12 bits binary string
      *
-     * @param x
-     * @return	binary string of x
+     * @param x a int type data
+     * @return	12 bits binary string of x
      */
     public static String IntegerTo12sBinary(int x) {
     	return String.format("%12s", Integer.toBinaryString(x)).replace(" ", "0");

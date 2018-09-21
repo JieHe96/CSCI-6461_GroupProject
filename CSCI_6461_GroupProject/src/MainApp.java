@@ -7,7 +7,8 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class MainApp {
-	
+
+
 	public static MainFrame frame;
 
 	public static Memory myMemory;
