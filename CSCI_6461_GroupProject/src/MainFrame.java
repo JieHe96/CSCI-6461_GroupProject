@@ -23,6 +23,7 @@ public class MainFrame extends JFrame{
 	JTextField valueText;
 	JTextField pcText;
 	JButton singleRunButton;
+	JButton iplButton;
 	JTextField irText;
 	JTextField marText;
 	JTextField mbrText;
@@ -30,6 +31,9 @@ public class MainFrame extends JFrame{
 	JTextField r1Text;
 	JTextField r2Text;
 	JTextField r3Text;
+	JTextField x1Text;
+	JTextField x2Text;
+	JTextField x3Text;
 	
 	public MainFrame(String title) {
 		super(title);
@@ -128,7 +132,7 @@ public class MainFrame extends JFrame{
 		JPanel x1Panel = new JPanel(new BorderLayout());
 		JLabel x1Label = new JLabel("X1");
 		JButton x1Button = new JButton("Write");
-		JTextField x1Text = new JTextField();
+		x1Text = new JTextField();
 		x1Button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -143,7 +147,7 @@ public class MainFrame extends JFrame{
 		JPanel x2Panel = new JPanel(new BorderLayout());
 		JLabel x2Label = new JLabel("X2");
 		JButton x2Button = new JButton("Write");
-		JTextField x2Text = new JTextField();
+		x2Text = new JTextField();
 		x2Button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -158,7 +162,7 @@ public class MainFrame extends JFrame{
 		JPanel x3Panel = new JPanel(new BorderLayout());
 		JLabel x3Label = new JLabel("X3");
 		JButton x3Button = new JButton("Write");
-		JTextField x3Text = new JTextField();
+		x3Text = new JTextField();
 		x3Button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -272,11 +276,14 @@ public class MainFrame extends JFrame{
 		JPanel controlPanel = new JPanel(new FlowLayout());
 		TitledBorder controlBorder = new TitledBorder("Control");
 		controlPanel.setBorder(controlBorder);
+		iplButton = new JButton("IPL");
+		iplButton.addActionListener(iplButtonListener);
 		singleRunButton = new JButton("Single Run");
 		singleRunButton.addActionListener(singleRunButtonListener);
 		JButton loadButton = new JButton("Load");
 		JButton startButton = new JButton("Start");
 		JButton stopButton = new JButton("Stop");
+		controlPanel.add(iplButton);
 		controlPanel.add(singleRunButton);
 		controlPanel.add(loadButton);
 		controlPanel.add(startButton);
@@ -295,7 +302,7 @@ public class MainFrame extends JFrame{
 			System.out.println(index);
 			MainApp.myMemory.writeToMemory(index, value);
 			MainApp.myInstructionList.addToInstructionList(index, value);
-			SetPC(addr);
+			//SetPC(addr);
 		}
 	};
 	
@@ -312,6 +319,9 @@ public class MainFrame extends JFrame{
 			String r1 = MainApp.myRegisters.getRegister("R1", false);
 			String r2 = MainApp.myRegisters.getRegister("R2", false);
 			String r3 = MainApp.myRegisters.getRegister("R3", false);
+			String x1 = MainApp.myRegisters.getRegister("X1", true);
+			String x2 = MainApp.myRegisters.getRegister("X2", true);
+			String x3 = MainApp.myRegisters.getRegister("X3", true);
 			irText.setText(ir);
 			marText.setText(mar);
 			mbrText.setText(mbr);
@@ -319,7 +329,18 @@ public class MainFrame extends JFrame{
 			r1Text.setText(r1);
 			r2Text.setText(r2);
 			r3Text.setText(r3);
+			x1Text.setText(x1);
+			x2Text.setText(x2);
+			x3Text.setText(x3);
 			System.out.println(MainApp.myMemory.GetMemo().get(8).convertToString());
+		}
+	};
+	
+	private ActionListener iplButtonListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int index = MainApp.myInstructionList.getFirstInsAddr();
+			SetPC(String.valueOf(index));
 		}
 	};
 	
