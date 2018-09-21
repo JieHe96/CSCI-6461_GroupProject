@@ -66,15 +66,28 @@ public class Instruction {
 	    		int ldr_ea = 0;
 	    		//Calculate EA
 	    		if (instype == 0) {
-	    			if (index == 0) ldr_ea = insadd;
-	    			else ldr_ea = index + insadd;
-	    		}
-	    		else {
+	    			//Direct Addressing
 	    			if (index == 0) {
-	    				
+	    				//Get the value stored in insadd
+	    				ldr_ea = insadd;
 	    			}
 	    			else {
-	    				
+	    				//Get the value stored in [ix] + insadd
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				ldr_ea = ixValue + insadd;
+	    			}
+	    		}
+	    		else {
+	    			//Indirect Addressing
+	    			if (index == 0) {
+	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				ldr_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    			else {
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				int buffer = ixValue + insadd;
+	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+	    				ldr_ea = Decode.binaryToDecimal(tmp);
 	    			}
 	    		}
 	    		String ldr_eaStr = Decode.IntegerTo16sBinary(ldr_ea);
@@ -87,15 +100,26 @@ public class Instruction {
 	    		int str_ea = 0;
 	    		//Calculate EA
 	    		if (instype == 0) {
-	    			if (index == 0) str_ea = insadd;
-	    			else str_ea = index + insadd;
-	    		}
-	    		else {
+	    			//Direct addressing
 	    			if (index == 0) {
-	    				
+	    				str_ea = insadd;
 	    			}
 	    			else {
-	    				
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				str_ea = ixValue + insadd;
+	    			}
+	    		}
+	    		else {
+	    			//Indirect addressing
+	    			if (index == 0) {
+	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				str_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    			else {
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				int buffer = ixValue + insadd;
+	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+	    				str_ea = Decode.binaryToDecimal(tmp);
 	    			}
 	    		}
 	    		//Set MAR = EA, MBR = [RR], then write to memory

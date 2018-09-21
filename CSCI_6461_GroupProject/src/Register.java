@@ -94,4 +94,16 @@ public class Register {
 		}
 	}
 	
+	public String getIXValue(int num) {
+		switch (num) {
+		case 1:
+			return getRegister("X1", true);
+		case 2:
+			return getRegister("X2", true);
+		case 3:
+			return getRegister("X3", true);
+	}
+	return null;
+	}
+	
 }
