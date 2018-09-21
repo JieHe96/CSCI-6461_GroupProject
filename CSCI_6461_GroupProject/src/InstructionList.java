@@ -15,7 +15,7 @@ public class InstructionList {
 		addToInstructionList(6,"0000110000000001");  
 		addToInstructionList(7,"0000110100000010");
 		addToInstructionList(8,"0000111000000100");
-		addToInstructionList(9,"0000111100000100");
+		addToInstructionList(9,"0000111100001000");
 		
 	}
 	
@@ -34,7 +34,8 @@ public class InstructionList {
 			addressList.remove(addressList.indexOf(index));
 			//remove from instructionList
 			instructionList.remove(index);
-			MainApp.myRegisters.writeToRegister("PC", String.valueOf(addressList.get(0)), 12);
+			if (!addressList.isEmpty())
+				MainApp.myRegisters.writeToRegister("PC", String.valueOf(addressList.get(0)), 12);
 		}
 	}
 	
