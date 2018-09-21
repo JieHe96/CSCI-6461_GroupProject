@@ -26,7 +26,10 @@ public class MainFrame extends JFrame{
 	JTextField irText;
 	JTextField marText;
 	JTextField mbrText;
+	JTextField r0Text;
 	JTextField r1Text;
+	JTextField r2Text;
+	JTextField r3Text;
 	
 	public MainFrame(String title) {
 		super(title);
@@ -65,7 +68,7 @@ public class MainFrame extends JFrame{
 		JPanel r0Panel = new JPanel(new BorderLayout());
 		JLabel r0Label = new JLabel("R0");
 		JButton r0Button = new JButton("Write");
-		JTextField r0Text = new JTextField();
+		r0Text = new JTextField();
 		r0Button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -95,7 +98,7 @@ public class MainFrame extends JFrame{
 		JPanel r2Panel = new JPanel(new BorderLayout());
 		JLabel r2Label = new JLabel("R2");
 		JButton r2Button = new JButton("Write");
-		JTextField r2Text = new JTextField();
+		r2Text = new JTextField();
 		r2Button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -110,7 +113,7 @@ public class MainFrame extends JFrame{
 		JPanel r3Panel = new JPanel(new BorderLayout());
 		JLabel r3Label = new JLabel("R3");
 		JButton r3Button = new JButton("Write");
-		JTextField r3Text = new JTextField();
+		r3Text = new JTextField();
 		r3Button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -305,11 +308,17 @@ public class MainFrame extends JFrame{
 			String ir = MainApp.myRegisters.getRegister("IR", false);
 			String mar = MainApp.myRegisters.getRegister("MAR", true);
 			String mbr = MainApp.myRegisters.getRegister("MBR", false);
+			String r0 = MainApp.myRegisters.getRegister("R0", false);
 			String r1 = MainApp.myRegisters.getRegister("R1", false);
+			String r2 = MainApp.myRegisters.getRegister("R2", false);
+			String r3 = MainApp.myRegisters.getRegister("R3", false);
 			irText.setText(ir);
 			marText.setText(mar);
 			mbrText.setText(mbr);
+			r0Text.setText(r0);
 			r1Text.setText(r1);
+			r2Text.setText(r2);
+			r3Text.setText(r3);
 			System.out.println(MainApp.myMemory.GetMemo().get(8).convertToString());
 		}
 	};
