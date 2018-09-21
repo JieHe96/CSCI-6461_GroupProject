@@ -23,20 +23,20 @@ public class Decode
 	}
 
     /**
-     * converts a int data-type to 16bits binary string
+     * converts a int data-type to 16 bits binary string
      *
      * @param x
-     * @return	binary string of x
+     * @return	16 bits binary string of x
      */
     public static String IntegerTo16sBinary(int x) {
     	return String.format("%16s", Integer.toBinaryString(x)).replace(" ", "0");
     }
 
     /**
-     * converts a int data-type to 12bits binary string
+     * converts a int data-type to 12 bits binary string
      *
      * @param x
-     * @return	binary string of x
+     * @return	12 bits binary string of x
      */
     public static String IntegerTo12sBinary(int x) {
     	return String.format("%12s", Integer.toBinaryString(x)).replace(" ", "0");
