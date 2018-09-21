@@ -33,7 +33,7 @@ public class Register {
 	/** Used to write to the register in a 12/ 16 Format  bit*/
 	public void writeToRegister(String name, String value, int length) {
 		if (registerMap.containsKey(name)) {
-			if (name == "X1" || name == "X2" || name == "X3") {
+			if (name == "X1" || name == "X2" || name == "X3" || name == "PC") {
 				int decNum = Decode.ToDecimal(value);
 				String biNum = Decode.IntegerTo16sBinary(decNum);
 				value = biNum;

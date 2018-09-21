@@ -178,6 +178,13 @@ public class MainFrame extends JFrame{
 		JLabel pcLabel = new JLabel("PC");
 		JButton pcButton = new JButton("Write");
 		pcText = new JTextField();
+		pcButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainApp.myRegisters.writeToRegister("PC", pcText.getText(), 12);
+				System.out.println(MainApp.myRegisters.getRegister("PC", true));
+			}
+		});
 		pcPanel.add(pcLabel, BorderLayout.WEST);
 		pcPanel.add(pcText, BorderLayout.CENTER);
 		pcPanel.add(pcButton, BorderLayout.EAST);
