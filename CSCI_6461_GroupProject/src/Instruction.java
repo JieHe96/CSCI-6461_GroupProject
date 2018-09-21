@@ -181,8 +181,7 @@ public class Instruction {
 	    		//Load index register with contents of the  memory location
 	    		
 	    		
-	    		/*
-	    		 int ldx_ea = 0;
+	       		 int ldx_ea = 0;
 	    		//Calculate EA
 	    		if (instype == 0) {
 	    			//Direct Addressing
@@ -199,41 +198,33 @@ public class Instruction {
 	    		else {
 	    			//Indirect Addressing
 	    			if (index == 0) {
+	    			//temporary variable = string of address
 	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				// decimal value of address stores in EA
 	    				ldx_ea = Decode.binaryToDecimal(tmp);
 	    			}
 	    			else {
 	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
 	    				int buffer = ixValue + insadd;
 	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
-	    				lda_ea = Decode.binaryToDecimal(tmp);
+	    				ldx_ea = Decode.binaryToDecimal(tmp);
 	    			}
 	    		}
 	    		//creating 16 bit string of EA  
-	    		String lda_eaStr = Decode.IntegerTo16sBinary(lda_ea);
+	    		String ldx_eaStr = Decode.IntegerTo16sBinary(ldx_ea);
 	    		//fetching word from memory and converting to string - Getting value at the memory 
-	    		String lda_mValue = MainApp.myMemory.readFromMemory(lda_ea).convertToString();
+	    		String ldx_mValue = MainApp.myMemory.readFromMemory(ldx_ea).convertToString();
 	    		//store address into MAR 
-	    		MainApp.myRegisters.writeToRegister("MAR", lda_eaStr, 16);
+	    		MainApp.myRegisters.writeToRegister("MAR", ldx_eaStr, 16);
 	    		//Store value into MBR
-	    		MainApp.myRegisters.writeToRegister("MBR", lda_mValue, 16);
+	    		MainApp.myRegisters.writeToRegister("MBR", ldx_mValue, 16);
 	    		//Store address to GR register 
-	    		MainApp.myRegisters.writeToGR(ireg, lda_eaStr);
+	    		MainApp.myRegisters.writeToIX(index, ldx_mValue);
 	    		break; 
 	    		
 	    		    		 
-	    		 
-	    		 */
+	    		 		
 	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		
-	    		break;
 	    	case 34://STX x,address 
 	    		//Store the index Register value into the Memory Location
 	    		break;

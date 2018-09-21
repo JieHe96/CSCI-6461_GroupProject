@@ -30,7 +30,7 @@ public class Register {
 		registerMap.put("X2", new BitSet(16));
 		registerMap.put("X3", new BitSet(16));
 	}
-	
+	/** Used to write to the register in a 12/ 16 Format  bit*/
 	public void writeToRegister(String name, String value, int length) {
 		if (registerMap.containsKey(name)) {
 			if (name == "X1" || name == "X2" || name == "X3") {
@@ -46,7 +46,8 @@ public class Register {
 			registerMap.put(name, buffer);
 		}
 	}
-	
+	 /** This function is used to return 
+	  * the value of the register in string  format */
 	public String getRegister(String name, boolean isDecimal) {
 		char[] chars = new char[16];
 		Arrays.fill(chars, '0');
@@ -108,6 +109,20 @@ public class Register {
 			return getRegister("X3", true);
 	}
 	return null;
+	}
+	
+	public void writeToIX(int num, String value) {
+		switch (num) {
+			case 1:
+				writeToRegister("X1", value, 16); 
+				break;
+			case 2:
+				writeToRegister("X2", value, 16);
+				break;
+			case 3:
+				writeToRegister("X3", value, 16);
+				break;
+		}
 	}
 	
 }
