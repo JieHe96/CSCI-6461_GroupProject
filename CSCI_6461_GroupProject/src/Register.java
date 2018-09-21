@@ -85,12 +85,16 @@ public class Register {
 		switch (num) {
 			case 0:
 				writeToRegister("R0", value, 16); 
+				break;
 			case 1:
 				writeToRegister("R1", value, 16);
+				break;
 			case 2:
 				writeToRegister("R2", value, 16);
+				break;
 			case 3:
 				writeToRegister("R3", value, 16);
+				break;
 		}
 	}
 	
