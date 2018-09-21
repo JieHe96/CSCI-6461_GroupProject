@@ -329,6 +329,7 @@ public class MainFrame extends JFrame{
 			String x1 = MainApp.myRegisters.getRegister("X1", true);
 			String x2 = MainApp.myRegisters.getRegister("X2", true);
 			String x3 = MainApp.myRegisters.getRegister("X3", true);
+			String pc = MainApp.myRegisters.getRegister("PC", true);
 			irText.setText(ir);
 			marText.setText(mar);
 			mbrText.setText(mbr);
@@ -339,6 +340,7 @@ public class MainFrame extends JFrame{
 			x1Text.setText(x1);
 			x2Text.setText(x2);
 			x3Text.setText(x3);
+			pcText.setText(pc);
 			System.out.println(MainApp.myMemory.GetMemo().get(8).convertToString());
 		}
 	};

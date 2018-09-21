@@ -10,7 +10,7 @@ public class InstructionList {
 	public InstructionList() { // constructor 
 		instructionList = new HashMap<Integer, Instruction> ();
 		addressList = new Vector<Integer> ();
-		//Initialising Instructions for IPL
+		//Initializing Instructions for IPL
 		//LDA r with some address 
 		addToInstructionList(6,"0000110000000001");  
 		addToInstructionList(7,"0000110100000010");
@@ -34,7 +34,7 @@ public class InstructionList {
 			addressList.remove(addressList.indexOf(index));
 			//remove from instructionList
 			instructionList.remove(index);
-			
+			MainApp.myRegisters.writeToRegister("PC", String.valueOf(addressList.get(0)), 12);
 		}
 	}
 	

@@ -33,9 +33,14 @@ public class Register {
 	/** Used to write to the register in a 12/ 16 Format  bit*/
 	public void writeToRegister(String name, String value, int length) {
 		if (registerMap.containsKey(name)) {
-			if (name == "X1" || name == "X2" || name == "X3" || name == "PC") {
+			if (name == "X1" || name == "X2" || name == "X3") {
 				int decNum = Decode.ToDecimal(value);
 				String biNum = Decode.IntegerTo16sBinary(decNum);
+				value = biNum;
+			}
+			else if (name == "PC") {
+				int decNum = Decode.ToDecimal(value);
+				String biNum = Decode.IntegerTo12sBinary(decNum);
 				value = biNum;
 			}
 			BitSet buffer = new BitSet(length);
@@ -49,7 +54,12 @@ public class Register {
 	 /** This function is used to return 
 	  * the value of the register in string  format */
 	public String getRegister(String name, boolean isDecimal) {
-		char[] chars = new char[16];
+		char[] chars;
+		if (name == "PC") {
+			chars = new char[12];
+		}
+		else chars = new char[16];
+		
 		Arrays.fill(chars, '0');
 		for (int i = 0; i < registerMap.get(name).length(); i++) {
 			if (registerMap.get(name).get(i) == true) {

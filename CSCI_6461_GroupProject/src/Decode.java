@@ -22,5 +22,9 @@ public class Decode
     public static String IntegerTo16sBinary(int x) {
     	return String.format("%16s", Integer.toBinaryString(x)).replace(" ", "0");
     }
+    
+    public static String IntegerTo12sBinary(int x) {
+    	return String.format("%12s", Integer.toBinaryString(x)).replace(" ", "0");
+    }
 }
    
