@@ -1,12 +1,18 @@
 import java.util.*;
 
+/**
+ * Class that defines instruction list and runs instruction.
+ */
 public class InstructionList {
 	
 	//Map to store the instruction, using address as key, Instruction as value
 	private Map<Integer, Instruction> instructionList;
 	//Vector to track the order of the instructions
 	private Vector<Integer> addressList;
-	
+
+	/**
+	 * Initializes Instructions.
+	 */
   	public InstructionList() { // constructor 
 		instructionList = new HashMap<Integer, Instruction> ();
 		addressList = new Vector<Integer> ();
@@ -24,14 +30,28 @@ public class InstructionList {
 		addToInstructionList(15,"1000100001110100");
 		
 	}
-	
+
+	/**
+	 * Adds instruction to instruction list.
+	 *
+	 * @param index address of instruction
+	 * @param value value of instruction
+	 * @see #addressList
+	 */
 	public void addToInstructionList(int index, String value) {
 		Instruction newIns = new Instruction();
 		newIns.assignValue(value);
 		instructionList.put(index, newIns);
 		addressList.add(index);
 	}
-	
+
+	/**
+	 * Runs single instruction.
+	 *
+	 * @param index address of instruction in instruction list
+	 * @see Instruction#fetchInstruction()
+	 * @see Instruction#execute()
+	 */
 	public void runSingleInstruction(int index) {
 		if (instructionList.containsKey(index)) {
 			instructionList.get(index).fetchInstruction();
@@ -44,7 +64,13 @@ public class InstructionList {
 				MainApp.myRegisters.writeToRegister("PC", String.valueOf(addressList.get(0)), 12);
 		}
 	}
-	
+
+	/**
+	 * Runs the first Instruction.
+	 *
+	 * @see Instruction#fetchInstruction()
+	 * @see Instruction#execute()
+	 */
 	public void runFromStart() {
 		int index = addressList.get(0);
 		instructionList.get(index).fetchInstruction();

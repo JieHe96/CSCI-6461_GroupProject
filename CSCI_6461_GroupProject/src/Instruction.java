@@ -1,6 +1,6 @@
 import java.util.BitSet;
 
-/**Class that defines instruction objects  */ 
+/**Class that defines instruction objects and executes instruction. */
 
 public class Instruction {
 	
@@ -12,7 +12,9 @@ public class Instruction {
     private int instype;
     private int insadd;
 
-
+	/**
+	 * Initializes instruction.
+	 */
 	public Instruction() {
     	value = new Word();
     	opcode = 0;
@@ -21,16 +23,12 @@ public class Instruction {
     	instype = 0;
     	insadd = 0;
     }
-    
-    public Word getValue() {
+
+	public Word getValue() {
     	return value;
     }
 
-	/**
-	 *
-	 *
-	 * @param val
-	 */
+
 	public void assignValue(String val) {
     	for (int i = 0; i < 16; i++) {
     		if (val.charAt(i) == '1') value.set(i, true);
@@ -39,8 +37,18 @@ public class Instruction {
 	}
 
 	/**
-	 * fetches instruction from input screen and divides to  specific part
+	 * Fetches instruction from input screen and divides to specific part.
 	 *
+	 * <pre>
+	 * Opcode[0,6]
+	 * R[6,8]
+	 * IX[8,10]
+	 * I[10]
+	 * Address[11,16]
+	 * </pre>
+	 *
+	 * @see Decode#binaryToDecimal(String)
+	 * @see Register#writeToRegister(String, String, int)
 	 */
 	public void fetchInstruction() {
 
@@ -72,8 +80,28 @@ public class Instruction {
         System.out.println(insadd);
         MainApp.myRegisters.writeToRegister("IR", ins, 16);
     }
-    
-    public void execute() {
+
+	/**
+	 * Executes instruction.
+	 *
+	 * <pre>
+	 * LDR : Load register with value from the address
+	 * STR : Store Address location with the contents of general register
+	 * LDA : Load register with the address
+	 * LDX : Load Index Register with Contents of Address
+	 * STX : Store contents of the Index Register at the Address location
+	 * </pre>
+	 *
+	 * @see Decode#binaryToDecimal(String)
+	 * @see Decode#IntegerTo16sBinary(int)
+	 * @see Register#writeToRegister(String, String, int)
+	 * @see Register#getIXValue(int)
+	 * @see Register#getGRValue(int)
+	 * @see Register#writeToRegister(String, String, int)
+	 * @see Register#writeToGR(int, String)
+	 * @see Register#writeToIX(int, String)
+	 */
+	public void execute() {
     	switch (opcode) {
 	    	case 1://LDR r, x, address[,I]
 	    		int ldr_ea = 0;

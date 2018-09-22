@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.stream.IntStream;
 
+/**
+ * Class that loads frame, memory, instruction list, registers and runs this program.
+ */
 public class MainApp {
 
 
@@ -19,6 +22,7 @@ public class MainApp {
 	public static void main (final String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 
+			/** Creates mainframe and set size. */
 			public void run() {
 				frame = new MainFrame("Computer Simulator");
 				frame.setSize(800, 500);
