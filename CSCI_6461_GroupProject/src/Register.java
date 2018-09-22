@@ -1,6 +1,9 @@
 import java.util.*;
 import java.util.stream.IntStream;
 
+/**
+ * Class that defines registers and write and get register contents
+ */
 public class Register {
 	/**
 	 * {"R0:", "R1:", "R2:", "R3:", "PC:", "CC:", "IR:", 
@@ -77,7 +80,13 @@ public class Register {
 	public Map<String, BitSet> getRegisterMap() {
 		return registerMap;
 	}
-	
+
+	/**
+	 * get the value of general purpose registers
+	 *
+	 * @param num the serial number of general registers
+	 * @return
+	 */
 	public String getGRValue(int num) {
 		switch (num) {
 			case 0:
@@ -91,7 +100,13 @@ public class Register {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Write to general purpose registers
+	 *
+	 * @param num the serial number of general registers
+	 * @param value the value of general registers
+	 */
 	public void writeToGR(int num, String value) {
 		switch (num) {
 			case 0:
@@ -108,6 +123,7 @@ public class Register {
 				break;
 		}
 	}
+
 	
 	public String getIXValue(int num) {
 		switch (num) {

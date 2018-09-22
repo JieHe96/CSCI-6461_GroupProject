@@ -11,8 +11,9 @@ public class Instruction {
     private int index;
     private int instype;
     private int insadd;
-    
-    public Instruction() {
+
+
+	public Instruction() {
     	value = new Word();
     	opcode = 0;
     	ireg = 0;
@@ -24,15 +25,24 @@ public class Instruction {
     public Word getValue() {
     	return value;
     }
-    
+
+	/**
+	 *
+	 *
+	 * @param val
+	 */
 	public void assignValue(String val) {
     	for (int i = 0; i < 16; i++) {
     		if (val.charAt(i) == '1') value.set(i, true);
     		else value.set(i, false);
     	}
 	}
-    
-    public void fetchInstruction() {
+
+	/**
+	 * fetches instruction from input screen and divides to  specific part
+	 *
+	 */
+	public void fetchInstruction() {
 
     	String ins = value.convertToString();
     	

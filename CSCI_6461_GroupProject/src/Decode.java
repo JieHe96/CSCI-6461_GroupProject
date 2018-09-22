@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+/**Class that convert data type and hexadecimal conversion  */
+
 public class Decode 
 {
 
