@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 /**
- * Class that defines registers and write and get register contents
+ * Class that defines registers and write and get register value
  */
 public class Register {
 	/**
@@ -10,7 +10,7 @@ public class Register {
 	 * "MAR:", "MBR:", "MSR:", "MFR:", "X1:", "X2:", "X3:"};
 	 */
 	private Map<String, BitSet> registerMap;
-	
+	/** Initializes register */
 	public Register() {
 		init();
 	}
@@ -82,7 +82,7 @@ public class Register {
 	}
 
 	/**
-	 * get the value of general purpose registers
+	 * Get the value of general purpose registers
 	 *
 	 * @param num the serial number of general registers
 	 * @return
@@ -124,7 +124,12 @@ public class Register {
 		}
 	}
 
-	
+	/**
+	 * Get the value of index registers
+	 *
+	 * @param num the serial number of index registers
+	 * @return
+	 */
 	public String getIXValue(int num) {
 		switch (num) {
 		case 1:
@@ -136,7 +141,13 @@ public class Register {
 	}
 	return null;
 	}
-	
+
+	/**
+	 * Write to index registers
+	 *
+	 * @param num the serial number of index registers
+	 * @param value the value of general registers
+	 */
 	public void writeToIX(int num, String value) {
 		switch (num) {
 			case 1:
