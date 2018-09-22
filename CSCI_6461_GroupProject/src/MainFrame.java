@@ -272,6 +272,7 @@ public class MainFrame extends JFrame{
 		
 		JPanel rwPanel = new JPanel(new GridLayout(1,2));
 		JButton readButton = new JButton("Read");
+		readButton.setEnabled(false);
 		JButton writeButton = new JButton("Write");
 		writeButton.addActionListener(writeButtonListener);
 		rwPanel.add(readButton);
@@ -291,8 +292,11 @@ public class MainFrame extends JFrame{
 		singleRunButton = new JButton("Single Run");
 		singleRunButton.addActionListener(singleRunButtonListener);
 		JButton loadButton = new JButton("Load");
+		loadButton.setEnabled(false);
 		JButton startButton = new JButton("Start");
+		startButton.setEnabled(false);
 		JButton stopButton = new JButton("Stop");
+		stopButton.setEnabled(false);
 		controlPanel.add(iplButton);
 		controlPanel.add(singleRunButton);
 		controlPanel.add(loadButton);
@@ -312,6 +316,9 @@ public class MainFrame extends JFrame{
 			System.out.println(index);
 			MainApp.myMemory.writeToMemory(index, value);
 			MainApp.myInstructionList.addToInstructionList(index, value);
+			String ele = "Address: " + addr + "     " + "Value: " + value;
+			instructionModel.addElement(ele);
+			instructionList.setModel(instructionModel);
 			//SetPC(addr);
 		}
 	};
@@ -345,12 +352,17 @@ public class MainFrame extends JFrame{
 			x3Text.setText(x3);
 			pcText.setText(pc);
 			System.out.println(MainApp.myMemory.GetMemo().get(8).convertToString());
+			if(instructionModel.getSize() != 0) {
+				instructionModel.removeElementAt(0);
+				instructionList.setModel(instructionModel);
+			}
 		}
 	};
 	
 	private ActionListener iplButtonListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			MainApp.myInstructionList.initProgram();
 			int index = MainApp.myInstructionList.getFirstInsAddr();
 			SetPC(String.valueOf(index));
 			Vector<Integer> addrList = MainApp.myInstructionList.getAddrList();

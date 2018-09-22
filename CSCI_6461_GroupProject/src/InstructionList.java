@@ -16,6 +16,10 @@ public class InstructionList {
   	public InstructionList() { // constructor 
 		instructionList = new HashMap<Integer, Instruction> ();
 		addressList = new Vector<Integer> ();
+		//initProgram();
+	}
+  	
+  	public void initProgram() {
 		//Initializing Instructions for IPL
 		//LDA r with some address 
 		addToInstructionList(6,"0000110000011001");  
@@ -28,8 +32,7 @@ public class InstructionList {
 		addToInstructionList(13,"0000011000110100");
 		addToInstructionList(14,"0000101001110001");
 		addToInstructionList(15,"1000100001110100");
-		
-	}
+  	}
 
 	/**
 	 * Adds instruction to instruction list.
