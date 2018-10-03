@@ -77,7 +77,7 @@ public class InstructionList {
 	public void runFromStart() {
 		int index = addressList.get(0);
 		instructionList.get(index).fetchInstruction();
-		instructionList.get(index).execute();
+		//instructionList.get(index).execute();
 	}
 	
 	public int getFirstInsAddr() {

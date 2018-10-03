@@ -79,6 +79,19 @@ public class Instruction {
         System.out.println(instype);
         System.out.println(insadd);
         MainApp.myRegisters.writeToRegister("IR", ins, 16);
+        
+        if (opcode == 1 || opcode == 2 || opcode == 3 ||
+        	opcode == 33 || opcode == 34) {
+        	execute();
+        }
+        
+        else if (opcode == 8 || opcode == 9 || opcode == 10) {
+        	execTransfer();
+        }
+        
+        else if () {
+        	execArithmetic();
+        }
     }
 
 	/**
@@ -279,15 +292,7 @@ public class Instruction {
 	    		break;
 	    		 	
 	    		
-	    	case 8:// JZ r,x,address :- Jump if Zero
-	    			// if c(r)=0 -> PC=EA else PC=PC+1
-	    		break;
-	    	case 9: //JNE r,x,address : Jump if not equal
-	    		// if c(r)!=0 -> PC=EA else PC=PC+1
-	    		break;
-	    	case 10: // JCC cc,x,address : Jump if Condition Code 
-	    		// if cc bit=1 , PC=EA else PC=PC+1
-	    		break;
+
     	}	
     }
 
