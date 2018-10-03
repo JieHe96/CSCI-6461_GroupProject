@@ -1,0 +1,33 @@
+Design and implement the modules for enhanced memory and cache operations
+Implement all instructions except for CHK and Floating Point/Vector operations
+Extend the user interface.
+Demonstrate 1st program running on your simulator.
+The cache is just a vector having a format similar to that described in the lecture notes.
+It should be a fully associative, unified cache.
+
+What do you need to do?
+a. What are the fields of the cache line?
+b. Use a simple FIFO algorithm to replace cache lines.
+c. How many cache lines? With 2048 words, probably 16 cache lines is enough.
+d. Need to think about how to demonstrate caching works.
+
+HINT: When you run your simulator, you may want to write a trace file of things that are happening inside your simulator. You can use this to help debug your simulator.
+
+
+TO DO 
+
+1. Trap - for first 5 locations
+2. HALT instruction
+3. Transfer (jump + subroutine)  Instructions
+4. Arthematic , Logical, SHift , I/O Instructions
+5. Program 1 execution
+
+
+
+
+Program 1: A program that reads 20 numbers (integers) from the keyboard, prints the numbers to the console printer,
+ requests a number from the user, and searches the 20 numbers read in for the
+  number closest to the number entered by the user.
+   Print the number entered by the user and the number closest to that number. Your numbers should not be 1…10, but distributed over the range of 0 … 65,535. Therefore, as you read a character in, you need to check it is a digit, convert it to a number, and assemble the integer.
+
+
