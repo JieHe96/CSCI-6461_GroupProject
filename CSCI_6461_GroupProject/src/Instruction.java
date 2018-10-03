@@ -233,7 +233,7 @@ public class Instruction {
 	    				ldx_ea = insadd;
 	    		}
 	    		else {
-	    			//Indirect Addressing
+	    			//Indirect Addressing - 
 	    			//temporary variable = string of address
 	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
 	    				// decimal value of address stores in EA
