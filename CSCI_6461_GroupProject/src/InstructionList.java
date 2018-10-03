@@ -10,12 +10,19 @@ public class InstructionList {
 	//Vector to track the order of the instructions
 	private Vector<Integer> addressList;
 
+    public int[] logicInstructionArray;
+    public int[] arithmeticInstructionArray;
+    public int[] transferInstructionArray;
+	
 	/**
 	 * Initializes Instructions.
 	 */
   	public InstructionList() { // constructor 
 		instructionList = new HashMap<Integer, Instruction> ();
 		addressList = new Vector<Integer> ();
+		logicInstructionArray = new int[] {1, 2, 3, 33, 34};
+		arithmeticInstructionArray = new int[] {};
+		transferInstructionArray = new int[] {};
 		//initProgram();
 	}
   	
@@ -77,7 +84,7 @@ public class InstructionList {
 	public void runFromStart() {
 		int index = addressList.get(0);
 		instructionList.get(index).fetchInstruction();
-		//instructionList.get(index).execute();
+		instructionList.get(index).run();
 	}
 	
 	public int getFirstInsAddr() {

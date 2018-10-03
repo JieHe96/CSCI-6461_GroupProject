@@ -1,4 +1,5 @@
 import java.util.BitSet;
+import java.util.stream.IntStream;
 
 /**Class that defines instruction objects and executes instruction. */
 
@@ -80,19 +81,24 @@ public class Instruction {
         System.out.println(insadd);
         MainApp.myRegisters.writeToRegister("IR", ins, 16);
         
-        if (opcode == 1 || opcode == 2 || opcode == 3 ||
-        	opcode == 33 || opcode == 34) {
+    }
+	
+	public void run() {
+        if (IntStream.of(MainApp.myInstructionList.arithmeticInstructionArray)
+        		.anyMatch(x -> x == opcode)) {
         	execute();
         }
         
-        else if (opcode == 8 || opcode == 9 || opcode == 10) {
+        else if (IntStream.of(MainApp.myInstructionList.transferInstructionArray)
+        		.anyMatch(x -> x == opcode)) {
         	execTransfer();
         }
         
-        else if () {
+        else if (IntStream.of(MainApp.myInstructionList.logicInstructionArray)
+        		.anyMatch(x -> x == opcode)) {
         	execArithmetic();
         }
-    }
+	}
 
 	/**
 	 * Executes instruction.
