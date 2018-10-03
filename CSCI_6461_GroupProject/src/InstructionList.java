@@ -21,6 +21,7 @@ public class InstructionList {
 		instructionList = new HashMap<Integer, Instruction> ();
 		addressList = new Vector<Integer> ();
 		logicInstructionArray = new int[] {1, 2, 3, 33, 34};
+		//change when you implement the instruction
 		arithmeticInstructionArray = new int[] {};
 		transferInstructionArray = new int[] {};
 		//initProgram();
