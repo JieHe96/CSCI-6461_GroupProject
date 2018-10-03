@@ -291,4 +291,10 @@ public class Instruction {
     	}	
     }
 
+	public void execArithmetic() {
+		//Arithmetic instruction here
+	}
+	public void execTransfer() {
+		//Transfer instruction here
+	}
 }
