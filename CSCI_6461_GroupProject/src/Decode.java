@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 /**Class that convert data type and hexadecimal conversion  */
 
@@ -43,6 +44,28 @@ public class Decode
      */
     public static String IntegerTo12sBinary(int x) {
     	return String.format("%12s", Integer.toBinaryString(x)).replace(" ", "0");
+    }
+    
+    public static int decodeType(String str) {
+    	String opbinary = str.substring(0,6);
+        int opcode = Decode.binaryToDecimal(opbinary);// decimal op
+        
+        if (IntStream.of(MainApp.myInstructionList.arithmeticInstructionArray)
+        		.anyMatch(x -> x == opcode)) {
+        	return 1;
+        }
+        
+        else if (IntStream.of(MainApp.myInstructionList.transferInstructionArray)
+        		.anyMatch(x -> x == opcode)) {
+        	return 2;
+        }
+        
+        else if (IntStream.of(MainApp.myInstructionList.logicInstructionArray)
+        		.anyMatch(x -> x == opcode)) {
+        	return 3;
+        }
+        
+        return 0;
     }
 }
    

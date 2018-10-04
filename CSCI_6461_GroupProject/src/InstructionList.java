@@ -49,10 +49,29 @@ public class InstructionList {
 	 * @see #addressList
 	 */
 	public void addToInstructionList(int index, String value) {
-		Instruction newIns = new Instruction();
-		newIns.assignValue(value);
-		instructionList.put(index, newIns);
-		addressList.add(index);
+		int type = Decode.decodeType(value);
+		switch (type) {
+			case 1:
+				ArithmeticInstruction newArithIns = new ArithmeticInstruction();
+				newArithIns.assignValue(value);
+				instructionList.put(index, newArithIns);
+				addressList.add(index);
+				break;
+			case 2:
+				TransferInstruction newTransIns = new TransferInstruction();
+				newTransIns.assignValue(value);
+				instructionList.put(index, newTransIns);
+				addressList.add(index);
+				break;
+			case 3:
+				LogicInstruction newLogicIns = new LogicInstruction();
+				newLogicIns.assignValue(value);
+				instructionList.put(index, newLogicIns);
+				addressList.add(index);
+				break;
+		}
+		//Instruction newIns = new Instruction();
+
 	}
 
 	/**
@@ -84,7 +103,7 @@ public class InstructionList {
 	public void runFromStart() {
 		int index = addressList.get(0);
 		instructionList.get(index).fetchInstruction();
-		instructionList.get(index).run();
+		instructionList.get(index).execute();
 	}
 	
 	public int getFirstInsAddr() {
