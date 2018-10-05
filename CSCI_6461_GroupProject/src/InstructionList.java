@@ -22,7 +22,7 @@ public class InstructionList {
 		addressList = new Vector<Integer> ();
 		logicInstructionArray = new int[] {1, 2, 3, 33, 34};
 		arithmeticInstructionArray = new int[] {};
-		transferInstructionArray = new int[] {};
+		transferInstructionArray = new int[] {10, 11, 12, 13, 14, 15, 16, 17};
 		//initProgram();
 	}
   	

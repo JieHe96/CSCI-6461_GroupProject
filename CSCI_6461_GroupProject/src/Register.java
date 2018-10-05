@@ -110,7 +110,7 @@ public class Register {
 	public void writeToGR(int num, String value) {
 		switch (num) {
 			case 0:
-				writeToRegister("R0", value, 16); 
+				writeToRegister("R0", value, 16);
 				break;
 			case 1:
 				writeToRegister("R1", value, 16);
@@ -161,5 +161,9 @@ public class Register {
 				break;
 		}
 	}
-	
+
+	public void writeToPC(String value) {
+		writeToRegister("PC", value, 12);
+		}
+
 }
