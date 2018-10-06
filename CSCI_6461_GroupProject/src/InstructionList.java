@@ -21,10 +21,11 @@ public class InstructionList {
 		instructionList = new HashMap<Integer, Instruction> ();
 		addressList = new Vector<Integer> ();
 		logicInstructionArray = new int[] {1, 2, 3, 33, 34};
-		arithmeticInstructionArray = new int[] {};
-		transferInstructionArray = new int[] {10, 11, 12, 13, 14, 15, 16, 17};
+		arithmeticInstructionArray = new int[] {4,5,6,7,16,17,18,19,20,21,25,26,49,50,51};
+		transferInstructionArray = new int[] {8,9,10,11,12,13,14,15};
 		//initProgram();
-	}
+		
+			}
   	
   	public void initProgram() {
 		//Initializing Instructions for IPL
