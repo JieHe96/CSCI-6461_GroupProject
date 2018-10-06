@@ -95,7 +95,7 @@ public class TransferInstruction extends Instruction{
 	//execute the instruction by switch case
 	public void execute() {
 		switch (opcode) {
-			case 10://JZ r, x, address[,I]
+			case 8://JZ r, x, address[,I]
 				if(Integer.parseInt(MainApp.myRegisters.getGRValue(ireg)) == 0) {
 					int tra_ea = 0;
 					//Calculate EA
@@ -128,7 +128,7 @@ public class TransferInstruction extends Instruction{
 				break;
 
 
-			case 11://JNE r, x, address[,I]
+			case 9://JNE r, x, address[,I]
 				if(Integer.parseInt(MainApp.myRegisters.getGRValue(ireg)) != 0) {
 					int tra_ea = 0;
 					//Calculate EA
@@ -161,33 +161,33 @@ public class TransferInstruction extends Instruction{
 				break;
 
 
-			case 12://JCC cc, x, address[,I]
+			case 10://JCC cc, x, address[,I]
 
 
 				break;
 
 
-			case 13://JMA x, address[,I]
+			case 11://JMA x, address[,I]
 
 				break;
 
 
-			case 14://JSR x, address[,I]
+			case 12://JSR x, address[,I]
 
 				break;
 
 
-			case 15://RFS Immed
+			case 13://RFS Immed
 
 				break;
 
 
-			case 16://SOB r, x, address[,I]
+			case 14://SOB r, x, address[,I]
 
 				break;
 
 
-			case 17://JGE r,x, address[,I]
+			case 15://JGE r,x, address[,I]
 
 				break;
 
