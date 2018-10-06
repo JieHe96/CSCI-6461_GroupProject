@@ -96,7 +96,7 @@ public class ArithmeticInstruction extends Instruction{
 		 //4,5,6,7,16,17,18,19,20,21,25,26,49,50,51
 		
 		case 4: //AMR r, x, address[,I] :- r <- c(r) + c(EA)
-			String tmp,result,amr_mValue;
+			String tmp=null,result,amr_mValue;
 			
 			int arth_ea = 0;
 				//Calculate EA
