@@ -92,6 +92,9 @@ public class InstructionList {
 			instructionList.remove(index);
 			if (!addressList.isEmpty())
 				MainApp.myRegisters.writeToRegister("PC", String.valueOf(addressList.get(0)), 12);
+			else {
+				MainApp.myClock.setFlag(false);
+			}
 		}
 	}
 

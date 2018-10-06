@@ -17,7 +17,7 @@ public class MainApp {
 	public static Memory myMemory;
 	public static InstructionList myInstructionList;
 	public static Register myRegisters;
-	
+	public static Clock myClock;
 	
 	public static void main (final String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -39,6 +39,7 @@ public class MainApp {
 		myMemory = new Memory();
 		myInstructionList = new InstructionList();
 		myRegisters = new Register();
+		myClock = new Clock();
 	}
 	
 }

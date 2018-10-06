@@ -7,11 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.DefaultListModel;
+import java.util.List;
 
 
 /** The Mainframe class extends the JFrame class to create the layout of the UI and the various panes 
@@ -25,6 +27,7 @@ public class MainFrame extends JFrame{
 	JTextField pcText;
 	JButton singleRunButton;
 	JButton iplButton;
+	JButton startButton;
 	JTextField irText;
 	JTextField marText;
 	JTextField mbrText;
@@ -293,10 +296,12 @@ public class MainFrame extends JFrame{
 		singleRunButton.addActionListener(singleRunButtonListener);
 		JButton loadButton = new JButton("Load");
 		loadButton.setEnabled(false);
-		JButton startButton = new JButton("Start");
-		startButton.setEnabled(false);
+		startButton = new JButton("Start");
+		//startButton.setEnabled(false);
+		startButton.addActionListener(startButtonListener);
 		JButton stopButton = new JButton("Stop");
 		stopButton.setEnabled(false);
+		stopButton.addActionListener(stopButtonListener);
 		controlPanel.add(iplButton);
 		controlPanel.add(singleRunButton);
 		controlPanel.add(loadButton);
@@ -328,34 +333,9 @@ public class MainFrame extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			String pcNum = pcText.getText();
 			int index = Decode.ToDecimal(pcNum);
-			MainApp.myInstructionList.runSingleInstruction(index);
-			String ir = MainApp.myRegisters.getRegister("IR", false);
-			String mar = MainApp.myRegisters.getRegister("MAR", true);
-			String mbr = MainApp.myRegisters.getRegister("MBR", false);
-			String r0 = MainApp.myRegisters.getRegister("R0", false);
-			String r1 = MainApp.myRegisters.getRegister("R1", false);
-			String r2 = MainApp.myRegisters.getRegister("R2", false);
-			String r3 = MainApp.myRegisters.getRegister("R3", false);
-			String x1 = MainApp.myRegisters.getRegister("X1", true);
-			String x2 = MainApp.myRegisters.getRegister("X2", true);
-			String x3 = MainApp.myRegisters.getRegister("X3", true);
-			String pc = MainApp.myRegisters.getRegister("PC", true);
-			irText.setText(ir);
-			marText.setText(mar);
-			mbrText.setText(mbr);
-			r0Text.setText(r0);
-			r1Text.setText(r1);
-			r2Text.setText(r2);
-			r3Text.setText(r3);
-			x1Text.setText(x1);
-			x2Text.setText(x2);
-			x3Text.setText(x3);
-			pcText.setText(pc);
-			System.out.println(MainApp.myMemory.GetMemo().get(8).convertToString());
-			if(instructionModel.getSize() != 0) {
-				instructionModel.removeElementAt(0);
-				instructionList.setModel(instructionModel);
-			}
+			//MainApp.myInstructionList.runSingleInstruction(index);
+			MainApp.myClock.singleRun(index);
+			updateUI();
 		}
 	};
 	
@@ -373,6 +353,22 @@ public class MainFrame extends JFrame{
 				instructionModel.addElement(ele);
 			}
 			instructionList.setModel(instructionModel);
+			MainApp.myClock.setFlag(true);
+		}
+	};
+	
+	private ActionListener startButtonListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			MainApp.myClock.resume();
+			startThread();
+		}
+	};
+	
+	private ActionListener stopButtonListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			MainApp.myClock.setFlag(false);
 		}
 	};
 	
@@ -382,5 +378,59 @@ public class MainFrame extends JFrame{
 			pcText.setText(value);
 		//}
 	}
+	
+	public void updateUI() {
+		String ir = MainApp.myRegisters.getRegister("IR", false);
+		String mar = MainApp.myRegisters.getRegister("MAR", true);
+		String mbr = MainApp.myRegisters.getRegister("MBR", false);
+		String r0 = MainApp.myRegisters.getRegister("R0", false);
+		String r1 = MainApp.myRegisters.getRegister("R1", false);
+		String r2 = MainApp.myRegisters.getRegister("R2", false);
+		String r3 = MainApp.myRegisters.getRegister("R3", false);
+		String x1 = MainApp.myRegisters.getRegister("X1", true);
+		String x2 = MainApp.myRegisters.getRegister("X2", true);
+		String x3 = MainApp.myRegisters.getRegister("X3", true);
+		String pc = MainApp.myRegisters.getRegister("PC", true);
+		irText.setText(ir);
+		marText.setText(mar);
+		mbrText.setText(mbr);
+		r0Text.setText(r0);
+		r1Text.setText(r1);
+		r2Text.setText(r2);
+		r3Text.setText(r3);
+		x1Text.setText(x1);
+		x2Text.setText(x2);
+		x3Text.setText(x3);
+		pcText.setText(pc);
+		if(instructionModel.getSize() != 0) {
+			instructionModel.removeElementAt(0);
+			instructionList.setModel(instructionModel);
+		}
+	}
+	
+	private void startThread() { 
+		SwingWorker sw1 = new SwingWorker() {
+
+			@Override
+			protected Object doInBackground() throws Exception {
+				// TODO Auto-generated method stub
+				while (MainApp.myClock.isReady()) {
+					String pcNum = pcText.getText();
+					int index = Decode.ToDecimal(pcNum);
+					MainApp.myClock.singleRun(index);
+					Thread.sleep(1000);
+					publish(index);
+				}
+				return null;
+			} 
+			
+			@Override
+			protected void process(List chunks) {
+				updateUI();
+			}
+		}; 
+		// executes the swingworker on worker thread 
+		sw1.execute();  
+	} 
 	
 }
