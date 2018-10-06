@@ -301,7 +301,7 @@ public class MainFrame extends JFrame{
 		startButton.addActionListener(startButtonListener);
 		JButton stopButton = new JButton("Stop");
 		stopButton.setEnabled(false);
-		stopButton.addActionListener(stopButtonListener);
+		//stopButton.addActionListener(stopButtonListener);
 		controlPanel.add(iplButton);
 		controlPanel.add(singleRunButton);
 		controlPanel.add(loadButton);
