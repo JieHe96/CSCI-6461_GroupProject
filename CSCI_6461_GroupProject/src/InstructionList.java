@@ -25,7 +25,7 @@ public class InstructionList {
 		transferInstructionArray = new int[] {8,9,10,11,12,13,14,15};
 		//initProgram();
 		
-			}
+	}
   	
   	public void initProgram() {
 		//Initializing Instructions for IPL

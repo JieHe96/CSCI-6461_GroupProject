@@ -7,10 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.SwingWorker;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.DefaultListModel;
 import java.util.List;
@@ -48,7 +50,7 @@ public class MainFrame extends JFrame{
 		JPanel top = new JPanel(new GridLayout(1,2));
 		
 		//Instruction Section
-		JScrollPane instructionPanel = initInstructionPanel();
+		JTabbedPane instructionPanel = initOutputPanel();
 		top.add(instructionPanel);
 		//Register Section
 		JPanel registerPanel = initRPanel();
@@ -60,15 +62,31 @@ public class MainFrame extends JFrame{
 	}
 	
 	// creating instruction pane on the UI
-	private JScrollPane initInstructionPanel() {
+	private JTabbedPane initOutputPanel() {
+		JTabbedPane outputTabbedPane = new JTabbedPane();
 		JScrollPane instructionPanel = new JScrollPane();
-		TitledBorder instructionBorder = new TitledBorder("Instructions");
-		instructionPanel.setBorder(instructionBorder);
 		instructionModel = new DefaultListModel<String>();
 		instructionList = new JList<String>();
 		instructionList.setModel(instructionModel);
 		instructionPanel.setViewportView(instructionList);
-		return instructionPanel;
+		
+		JPanel devicePanel = new JPanel(new BorderLayout(5, 5));
+		JPanel keyboardPanel = new JPanel(new BorderLayout(5, 5));
+		JLabel keyboardLabel = new JLabel("Keyboard: ");
+		JTextField keyboardField = new JTextField();
+		keyboardPanel.add(keyboardLabel, BorderLayout.LINE_START);
+		keyboardPanel.add(keyboardField, BorderLayout.CENTER);
+		
+		JTextPane printerPane = new JTextPane();
+		TitledBorder printerBorder = new TitledBorder("Printer");
+		printerPane.setBorder(printerBorder);
+		printerPane.setEditable(false);
+		devicePanel.add(keyboardPanel, BorderLayout.PAGE_START);
+		devicePanel.add(printerPane, BorderLayout.CENTER);
+		
+		outputTabbedPane.addTab("Instruction", instructionPanel);
+		outputTabbedPane.addTab("Device", devicePanel);
+		return outputTabbedPane;
 	}
 
 	
@@ -419,7 +437,7 @@ public class MainFrame extends JFrame{
 					int index = Decode.ToDecimal(pcNum);
 					MainApp.myClock.singleRun(index);
 					Thread.sleep(1000);
-					publish(index);
+					publish("run");
 				}
 				return null;
 			} 
