@@ -13,6 +13,7 @@ public class InstructionList {
     public int[] logicInstructionArray;
     public int[] arithmeticInstructionArray;
     public int[] transferInstructionArray;
+    public int[] ioInstructionArray;
 	
 	/**
 	 * Initializes Instructions.
@@ -23,6 +24,7 @@ public class InstructionList {
 		logicInstructionArray = new int[] {1, 2, 3, 33, 34};
 		arithmeticInstructionArray = new int[] {4,5,6,7,16,17,18,19,20,21,25,26,49,50,51};
 		transferInstructionArray = new int[] {8,9,10,11,12,13,14,15};
+		ioInstructionArray = new int[] {61, 62};
 		//initProgram();
 		
 	}
@@ -68,6 +70,12 @@ public class InstructionList {
 				LogicInstruction newLogicIns = new LogicInstruction();
 				newLogicIns.assignValue(value);
 				instructionList.put(index, newLogicIns);
+				addressList.add(index);
+				break;
+			case 4:
+				IOInstruction newIOIns = new IOInstruction();
+				newIOIns.assignValue(value);
+				instructionList.put(index, newIOIns);
 				addressList.add(index);
 				break;
 		}

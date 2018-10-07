@@ -11,6 +11,8 @@ public class Clock {
 	public int getClockCycle() { return cycle; };
 	
 	public void singleRun(int index) {
+		if (!MainApp.myInstructionList.getAddrList().isEmpty()) flag = true;
+		
 		if (flag) {
 			MainApp.myInstructionList.runSingleInstruction(index);
 			cycle++;

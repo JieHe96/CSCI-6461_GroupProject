@@ -42,6 +42,9 @@ public class MainFrame extends JFrame{
 	JTextField x3Text;
 	DefaultListModel<String> instructionModel;
 	JList<String> instructionList;
+	JTextField keyboardField;
+	DefaultListModel<String> printerModel;
+	JList<String> printerList;
 	
 	public MainFrame(String title) {
 		super(title);
@@ -73,22 +76,32 @@ public class MainFrame extends JFrame{
 		JPanel devicePanel = new JPanel(new BorderLayout(5, 5));
 		JPanel keyboardPanel = new JPanel(new BorderLayout(5, 5));
 		JLabel keyboardLabel = new JLabel("Keyboard: ");
-		JTextField keyboardField = new JTextField();
+		keyboardField = new JTextField();
 		keyboardPanel.add(keyboardLabel, BorderLayout.LINE_START);
 		keyboardPanel.add(keyboardField, BorderLayout.CENTER);
 		
-		JTextPane printerPane = new JTextPane();
-		TitledBorder printerBorder = new TitledBorder("Printer");
-		printerPane.setBorder(printerBorder);
-		printerPane.setEditable(false);
+		printerModel = new DefaultListModel<String>();
+		printerList = new JList<String>();
+		printerList.setModel(printerModel);
+		instructionPanel.setViewportView(printerList);
+		TitledBorder printerBorder = new TitledBorder("Console");
+		printerList.setBorder(printerBorder);
 		devicePanel.add(keyboardPanel, BorderLayout.PAGE_START);
-		devicePanel.add(printerPane, BorderLayout.CENTER);
+		devicePanel.add(printerList, BorderLayout.CENTER);
 		
 		outputTabbedPane.addTab("Instruction", instructionPanel);
-		outputTabbedPane.addTab("Device", devicePanel);
+		outputTabbedPane.addTab("I/O Panel", devicePanel);
 		return outputTabbedPane;
 	}
+	
+	public String getKeyboardStr() {
+		return keyboardField.getText();
+	}
 
+	public void setPrinter(String str) {
+		printerModel.addElement("$Simulator: " + str);
+		printerList.setModel(printerModel);
+	}
 	
 	private JPanel initRPanel() {
 		JPanel registerPanel = new JPanel(new GridLayout(14, 1));
