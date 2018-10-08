@@ -284,12 +284,12 @@ public class MainFrame extends JFrame{
 	}
 	
 	private JPanel initUIPanel () {
-		JPanel bottom = new JPanel(new GridLayout(2,1));
+		JPanel bottom = new JPanel(new GridLayout(3,1));
 		
-		//Input Section
-		JPanel inputPanel = new JPanel(new GridLayout(1,3));
-		TitledBorder inputBorder = new TitledBorder("Input");
-		inputPanel.setBorder(inputBorder);
+		//Memory Section
+		JPanel memoryPanel = new JPanel(new GridLayout(1,3));
+		TitledBorder memoryBorder = new TitledBorder("Memory");
+		memoryPanel.setBorder(memoryBorder);
 		
 		JPanel valuePanel = new JPanel(new BorderLayout());
 		JLabel valueLabel = new JLabel("Value: ");
@@ -310,11 +310,38 @@ public class MainFrame extends JFrame{
 		writeButton.addActionListener(writeButtonListener);
 		rwPanel.add(readButton);
 		rwPanel.add(writeButton);
+		memoryPanel.add(valuePanel, BorderLayout.WEST);
+		memoryPanel.add(addrPanel, BorderLayout.CENTER);
+		memoryPanel.add(rwPanel, BorderLayout.EAST);
+		bottom.add(memoryPanel);
 		
-		inputPanel.add(valuePanel, BorderLayout.WEST);
-		inputPanel.add(addrPanel, BorderLayout.CENTER);
-		inputPanel.add(rwPanel, BorderLayout.EAST);
-		bottom.add(inputPanel);
+		//Memory Section
+		JPanel cachePanel = new JPanel(new GridLayout(1,3));
+		TitledBorder cacheBorder = new TitledBorder("Cache");
+		cachePanel.setBorder(cacheBorder);
+				
+		JPanel cacheValuePanel = new JPanel(new BorderLayout());
+		JLabel cacheValueLabel = new JLabel("Value: ");
+		JTextField cacheValueText = new JTextField();
+		cacheValuePanel.add(cacheValueLabel, BorderLayout.WEST);
+		cacheValuePanel.add(cacheValueText, BorderLayout.CENTER);
+		
+		JPanel cacheAddrPanel = new JPanel(new BorderLayout());
+		JLabel cacheAddrLabel = new JLabel("Address: ");
+		JTextField cacheAddrText = new JTextField();
+		cacheAddrPanel.add(cacheAddrLabel, BorderLayout.WEST);
+		cacheAddrPanel.add(cacheAddrText, BorderLayout.CENTER);
+				
+		JPanel cacheRWPanel = new JPanel(new GridLayout(1,2));
+		JButton cacheReadButton = new JButton("Read");
+		cacheReadButton.setEnabled(false);
+		JButton cacheWriteButton = new JButton("Write");
+		cacheRWPanel.add(cacheReadButton);
+		cacheRWPanel.add(cacheWriteButton);
+		cachePanel.add(cacheValuePanel, BorderLayout.WEST);
+		cachePanel.add(cacheAddrPanel, BorderLayout.CENTER);
+		cachePanel.add(cacheRWPanel, BorderLayout.EAST);
+		bottom.add(cachePanel);
 				
 		//Control Section
 		JPanel controlPanel = new JPanel(new FlowLayout());
