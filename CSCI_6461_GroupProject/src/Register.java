@@ -162,6 +162,11 @@ public class Register {
 		}
 	}
 
+
+    public String getPCValue() {
+  	    return getRegister("PC", true);
+	}
+
 	public void writeToPC(String value) {
 		writeToRegister("PC", value, 12);
 		}
