@@ -83,7 +83,6 @@ public class MainFrame extends JFrame{
 		printerModel = new DefaultListModel<String>();
 		printerList = new JList<String>();
 		printerList.setModel(printerModel);
-		instructionPanel.setViewportView(printerList);
 		TitledBorder printerBorder = new TitledBorder("Console");
 		printerList.setBorder(printerBorder);
 		devicePanel.add(keyboardPanel, BorderLayout.PAGE_START);
