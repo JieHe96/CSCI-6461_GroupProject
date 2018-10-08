@@ -45,6 +45,9 @@ public class MainFrame extends JFrame{
 	JTextField keyboardField;
 	DefaultListModel<String> printerModel;
 	JList<String> printerList;
+	JTextField cacheValueText;
+	JTextField cacheAddrText;
+	JButton cacheReadButton;
 	
 	public MainFrame(String title) {
 		super(title);
@@ -322,19 +325,20 @@ public class MainFrame extends JFrame{
 				
 		JPanel cacheValuePanel = new JPanel(new BorderLayout());
 		JLabel cacheValueLabel = new JLabel("Value: ");
-		JTextField cacheValueText = new JTextField();
+		cacheValueText = new JTextField();
 		cacheValuePanel.add(cacheValueLabel, BorderLayout.WEST);
 		cacheValuePanel.add(cacheValueText, BorderLayout.CENTER);
 		
 		JPanel cacheAddrPanel = new JPanel(new BorderLayout());
 		JLabel cacheAddrLabel = new JLabel("Address: ");
-		JTextField cacheAddrText = new JTextField();
+		cacheAddrText = new JTextField();
 		cacheAddrPanel.add(cacheAddrLabel, BorderLayout.WEST);
 		cacheAddrPanel.add(cacheAddrText, BorderLayout.CENTER);
 				
 		JPanel cacheRWPanel = new JPanel(new GridLayout(1,2));
-		JButton cacheReadButton = new JButton("Read");
-		cacheReadButton.setEnabled(false);
+		cacheReadButton = new JButton("Read");
+		//cacheReadButton.setEnabled(false);
+		cacheReadButton.addActionListener(cacheReadListener);
 		JButton cacheWriteButton = new JButton("Write");
 		cacheRWPanel.add(cacheReadButton);
 		cacheRWPanel.add(cacheWriteButton);
@@ -368,6 +372,15 @@ public class MainFrame extends JFrame{
 		return bottom;
 		
 	}
+	
+	private ActionListener cacheReadListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int address = Integer.parseInt(cacheAddrText.getText());
+			String data = MainApp.myCache.read(address);
+			cacheValueText.setText(data);
+		}
+	};
 	
 	private ActionListener writeButtonListener = new ActionListener() {
 		@Override

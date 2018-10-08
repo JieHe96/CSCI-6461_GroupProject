@@ -19,6 +19,7 @@ public class MainApp {
 	public static Register myRegisters;
 	public static Clock myClock;
 	public static Device myDevice;
+	public static Cache myCache;
 	
 	public static void main (final String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -42,6 +43,7 @@ public class MainApp {
 		myRegisters = new Register();
 		myClock = new Clock();
 		myDevice = new Device();
+		myCache = new Cache();
 	}
 	
 }
