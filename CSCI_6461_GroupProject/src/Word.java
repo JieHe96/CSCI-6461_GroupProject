@@ -22,4 +22,11 @@ public class Word extends BitSet{
 		String str = new String(chars);
 		return str;
 	}
+	
+	public void write(String value) {
+		for (int i = 0; i < 16; i++) {
+    		if (value.charAt(i) == '1') this.set(i, true);
+    		else this.set(i, false);
+    	}
+	}
 }

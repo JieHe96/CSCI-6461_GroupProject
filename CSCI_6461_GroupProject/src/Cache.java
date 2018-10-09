@@ -34,8 +34,21 @@ public class Cache {
 		}
 	}
 	
-	public void write() {
-		
+	public void write(int address, String data) {
+		int offset = isHit(address);
+		//cache hit, return data copy from cache
+		if (offset != -1) {
+			System.out.print("found");
+			cacheData.get(address-offset).writeToData(offset, data);
+			MainApp.myMemory.writeToMemory(address, data);
+		}
+		else {
+			System.out.print("Not found");
+			CacheLine newCL = new CacheLine();
+			newCL.updateCacheLine(address);
+			replace(address, newCL);
+			write(address, data);
+		}
 	}
 	
 	private int isHit(int address) {

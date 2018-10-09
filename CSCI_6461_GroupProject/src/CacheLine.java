@@ -23,4 +23,8 @@ public class CacheLine {
 	public Word getData(int offset) {
 		return block.get(offset);
 	}
+	
+	public void writeToData(int offset, String value) {
+		block.get(offset).write(value);
+	}
 }

@@ -48,6 +48,7 @@ public class MainFrame extends JFrame{
 	JTextField cacheValueText;
 	JTextField cacheAddrText;
 	JButton cacheReadButton;
+	JButton cacheWriteButton;
 	
 	public MainFrame(String title) {
 		super(title);
@@ -339,7 +340,8 @@ public class MainFrame extends JFrame{
 		cacheReadButton = new JButton("Read");
 		//cacheReadButton.setEnabled(false);
 		cacheReadButton.addActionListener(cacheReadListener);
-		JButton cacheWriteButton = new JButton("Write");
+		cacheWriteButton = new JButton("Write");
+		cacheWriteButton.addActionListener(cacheWriteListener);
 		cacheRWPanel.add(cacheReadButton);
 		cacheRWPanel.add(cacheWriteButton);
 		cachePanel.add(cacheValuePanel, BorderLayout.WEST);
@@ -379,6 +381,15 @@ public class MainFrame extends JFrame{
 			int address = Integer.parseInt(cacheAddrText.getText());
 			String data = MainApp.myCache.read(address);
 			cacheValueText.setText(data);
+		}
+	};
+	
+	private ActionListener cacheWriteListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int address = Integer.parseInt(cacheAddrText.getText());
+			String data = cacheValueText.getText();
+			MainApp.myCache.write(address, data);
 		}
 	};
 	
