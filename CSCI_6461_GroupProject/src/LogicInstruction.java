@@ -261,11 +261,26 @@ public class LogicInstruction extends Instruction{
 	    		MainApp.myRegisters.writeToRegister("MBR", stx_ixValue, 16);
 	    		MainApp.myMemory.writeToMemory(stx_ea, stx_ixValue);
 	    		break;
-	    		 	
+	    	
+	    	case 18: // TRR
+				break;
+			case 19: // AND
+				break;
+			case 20:
+				break;
+			case 21:
+				break;
+			case 25:
+				break;
+			case 26:
+				break;
+		
 	    		
 
     	}	
     }
+	
+	
 
 	public void execArithmetic() {
 		//Arithmetic instruction here

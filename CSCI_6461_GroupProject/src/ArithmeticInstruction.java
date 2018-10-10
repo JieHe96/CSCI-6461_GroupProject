@@ -87,8 +87,8 @@ public class ArithmeticInstruction extends Instruction{
 	}
 	*/
 
-		
 	
+		
 	//execute the instruction by switch case
 	public void execute() {
 		switch (opcode)
@@ -96,7 +96,11 @@ public class ArithmeticInstruction extends Instruction{
 		 //4,5,6,7,16,17,18,19,20,21,25,26,49,50,51
 		
 		case 4: //AMR r, x, address[,I] :- r <- c(r) + c(EA)
-			String tmp=null,result,amr_mValue;
+				
+			
+			 //LONG METHOD - MAY OR O MAYNOT USE 
+			  String tmp=null,result,amr_mValue;
+			 
 			
 			int arth_ea = 0;
 				//Calculate EA
@@ -127,37 +131,69 @@ public class ArithmeticInstruction extends Instruction{
 				// Add contents of register to contents of art_ea and store in register
 				 result = addBinary( tmp , amr_mValue ); // ?? EERROR HEREEEE
 						 
-					
-				 
+								 
 				 //store result in register
 				 MainApp.myRegisters.writeToGR(ireg,result);
 
-				
+			 	
 			break; // end of case 4 
 		
 		case 5: // SMR r, x, address[,I] :- r<- c(r) – c(EA)
+			
+			int arth_ea = 0;
+			//Calculate EA
+			if (instype == 0) {
+				//Direct addressing
+				if (index == 0) {
+					arth_ea = insadd;
+				}
+				else {
+					int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+					arth_ea = ixValue + insadd;
+				}
+			}
+			else {
+				//Indirect addressing
+				if (index == 0) {
+					tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+					arth_ea = Decode.binaryToDecimal(tmp);
+				}
+				else {
+					int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+					int buffer = ixValue + insadd;
+					tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+					arth_ea = Decode.binaryToDecimal(tmp);
+				}
+			}
+				amr_mValue = MainApp.myMemory.readFromMemory(arth_ea).convertToString();
+			// Subtract contents of register to contents of art_ea and store in register
+				//Get value of GR 	
+	    		String str_rValue = MainApp.myRegisters.getGRValue(ireg);
+	    		//GP value in decimal
+	    		int regvalue=Decode.binaryToDecimal(str_rValue);
+	    		//Effective address value in decimal
+	    		int effvalue=Decode.binaryToDecimal(amr_mValue);
+	    		//Subtraction in Decimal
+	    		int result=regvalue-effvalue;
+	    		//Convert into String
+	    		String strResult=Decode.IntegerTo16sBinary(result);
+				//store result in register
+	    		MainApp.myRegisters.writeToGR(ireg,result);
+
+		 	
+			
 			break;
 		case 6:// AIR
 			break;
 		case 7: // SIR 
 			break;
 		case 16: // MLT
+			
+			
 			break;
 		case 17: //DVD
 			break;
-		case 18: // TRR
-			break;
-		case 19: // AND
-			break;
-		case 20:
-			break;
-		case 21:
-			break;
-		case 25:
-			break;
-		case 26:
-			break;
-		case 49: // IN 
+			case 49: // IN 
 			break;
 		case 50://OUT
 			break;
