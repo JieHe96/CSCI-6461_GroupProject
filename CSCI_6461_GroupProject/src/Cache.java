@@ -34,20 +34,38 @@ public class Cache {
 		}
 	}
 	
-	public void write(int address, String data) {
+	public void writeThrough(int address, String data) {
 		int offset = isHit(address);
-		//cache hit, return data copy from cache
+		//cache hit, write to cache and memory
 		if (offset != -1) {
 			System.out.print("found");
 			cacheData.get(address-offset).writeToData(offset, data);
 			MainApp.myMemory.writeToMemory(address, data);
 		}
+		//cache miss, replace cache
 		else {
 			System.out.print("Not found");
 			CacheLine newCL = new CacheLine();
 			newCL.updateCacheLine(address);
 			replace(address, newCL);
-			write(address, data);
+			writeThrough(address, data);
+		}
+	}
+	
+	public void writeBack(int address, String data) {
+		int offset = isHit(address);
+		//cache hit, only write to cache
+		if (offset != -1) {
+			System.out.print("found");
+			cacheData.get(address-offset).writeToData(offset, data);
+		}
+		//cache miss, replace cache and write to memory
+		else {
+			System.out.print("Not found");
+			CacheLine newCL = new CacheLine();
+			newCL.updateCacheLine(address);
+			replaceAndUpdate(address, newCL);
+			writeBack(address, data);
 		}
 	}
 	
@@ -67,6 +85,25 @@ public class Cache {
 		else {
 			int oldAddr = cacheAddress.poll();
 			if (cacheData.containsKey(oldAddr)) cacheData.remove(oldAddr);
+		}
+		cacheAddress.add(newAddr);
+		cacheData.put(newAddr, newCL);
+	}
+	
+	private void replaceAndUpdate(int newAddr, CacheLine newCL) {
+		//map not yet full, don't need to replace
+		if (cacheAddress.size() < BLOCK_SIZE) {
+			System.out.println("in");
+		}
+		//full, replace by FIFO and update lower level
+		else {
+			int oldAddr = cacheAddress.poll();
+			if (cacheData.containsKey(oldAddr)) {
+				CacheLine oldBlock = cacheData.get(oldAddr);
+				for (int i = 0; i < oldBlock.getBlock().size(); i++) {
+					MainApp.myMemory.writeToMemory(oldAddr+i, oldBlock.getBlock().get(i).convertToString());
+				}
+			}
 		}
 		cacheAddress.add(newAddr);
 		cacheData.put(newAddr, newCL);

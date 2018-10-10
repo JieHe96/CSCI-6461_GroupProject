@@ -389,7 +389,8 @@ public class MainFrame extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			int address = Integer.parseInt(cacheAddrText.getText());
 			String data = cacheValueText.getText();
-			MainApp.myCache.write(address, data);
+			MainApp.myCache.writeThrough(address, data);
+			//MainApp.myCache.writeBack(address, data);
 		}
 	};
 	
