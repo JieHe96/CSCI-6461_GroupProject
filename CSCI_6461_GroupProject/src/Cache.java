@@ -95,7 +95,7 @@ public class Cache {
 		if (cacheAddress.size() < BLOCK_SIZE) {
 			System.out.println("in");
 		}
-		//full, replace by FIFO and update lower level
+		//full, replace by FIFO and write to lower level
 		else {
 			int oldAddr = cacheAddress.poll();
 			if (cacheData.containsKey(oldAddr)) {
