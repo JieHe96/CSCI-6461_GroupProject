@@ -224,9 +224,9 @@ public class ArithmeticInstruction extends Instruction{
 			break;
 		case 7: // SIR ( r <- c(r) - Immed )
 			//Get value of GR 	
-    		String str_rValue11 = MainApp.myRegisters.getGRValue(ireg);
+    		String str_rValue3 = MainApp.myRegisters.getGRValue(ireg);
     		//GP value in decimal
-    		int regvalue2=Decode.binaryToDecimal(str_rValue11);
+    		int regvalue2=Decode.binaryToDecimal(str_rValue3);
     		// Add value of Register with Immediate value=insadd
 			int result3 = regvalue2 - insadd;
 			//Convert into String

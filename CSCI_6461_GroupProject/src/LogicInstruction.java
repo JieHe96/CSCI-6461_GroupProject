@@ -322,14 +322,53 @@ public class LogicInstruction extends Instruction{
 	    		
 				break;
 			case 19: // AND
-				
-				
-				break;
+				//Get value of Rx 	
+	    		String str_rxValue = MainApp.myRegisters.getGRValue(rx1);
+	    		//Rx value in decimal
+	    		int regxvalue=Decode.binaryToDecimal(str_rxValue);
+	    		
+	    		//Get value of RY
+	    		String str_ryValue = MainApp.myRegisters.getGRValue(ry1);
+	    		//Ry value in decimal
+	    		int regyvalue=Decode.binaryToDecimal(str_ryValue);
+	    		//Bitwise AND
+	    		int resultAnd= regxvalue & regyvalue;
+	    		//Convert into String
+	    		String strResult2=Decode.IntegerTo16sBinary(resultAnd);
+	    		//store result in Rx
+	    		MainApp.myRegisters.writeToGR(rx1,strResult2);
+	    		break;
 			case 20:// ORR
-				
+				//Get value of Rx 	
+	    		String str_rxValue1 = MainApp.myRegisters.getGRValue(rx1);
+	    		//Rx value in decimal
+	    		int regxvalue1=Decode.binaryToDecimal(str_rxValue1);
+	    		
+	    		//Get value of RY
+	    		String str_ryValue1 = MainApp.myRegisters.getGRValue(ry1);
+	    		//Ry value in decimal
+	    		int regyvalue1=Decode.binaryToDecimal(str_ryValue1);
+	    		//Bitwise AND
+	    		int resultOR= regxvalue1 | regyvalue1;
+	    		//Convert into String
+	    		String strResult3=Decode.IntegerTo16sBinary(resultOR);
+	    		//store result in Rx
+	    		MainApp.myRegisters.writeToGR(rx1,strResult3);
+	    		
 				
 				break;
 			case 21:// NOT
+				
+				String str_rxValue2 = MainApp.myRegisters.getGRValue(rx1);
+	    		//Rx value in decimal
+	    		int regxvalue2=Decode.binaryToDecimal(str_rxValue2);
+	    		//Bitwise NOT
+	    		int resultNot= ~regxvalue2;
+	    		//Convert into String
+	    		String strResult4=Decode.IntegerTo16sBinary(resultNot);
+	    		//store result in Rx
+	    		MainApp.myRegisters.writeToGR(rx1,strResult4);
+	    		
 				break;
 			case 25:// SRC
 				break;
