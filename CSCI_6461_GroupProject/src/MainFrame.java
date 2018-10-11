@@ -40,6 +40,7 @@ public class MainFrame extends JFrame{
 	JTextField x1Text;
 	JTextField x2Text;
 	JTextField x3Text;
+	JTextField ccText;
 	DefaultListModel<String> instructionModel;
 	JList<String> instructionList;
 	JTextField keyboardField;
@@ -253,7 +254,7 @@ public class MainFrame extends JFrame{
 		
 		JPanel ccPanel = new JPanel(new BorderLayout());
 		JLabel ccLabel = new JLabel("CC");
-		JTextField ccText = new JTextField();
+		ccText = new JTextField();
 		ccPanel.add(ccLabel, BorderLayout.WEST);
 		ccPanel.add(ccText, BorderLayout.CENTER);
 		
@@ -473,6 +474,7 @@ public class MainFrame extends JFrame{
 		String x2 = MainApp.myRegisters.getRegister("X2", true);
 		String x3 = MainApp.myRegisters.getRegister("X3", true);
 		String pc = MainApp.myRegisters.getRegister("PC", true);
+		String cc = MainApp.myRegisters.getRegister("CC", false);
 		irText.setText(ir);
 		marText.setText(mar);
 		mbrText.setText(mbr);
@@ -484,6 +486,7 @@ public class MainFrame extends JFrame{
 		x2Text.setText(x2);
 		x3Text.setText(x3);
 		pcText.setText(pc);
+		ccText.setText(cc);
 		if(instructionModel.getSize() != 0) {
 			instructionModel.removeElementAt(0);
 			instructionList.setModel(instructionModel);
