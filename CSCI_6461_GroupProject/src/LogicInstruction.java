@@ -413,7 +413,7 @@ public class LogicInstruction extends Instruction{
 				//logic rotate
 				if (type == 1) {
 					String asStr = MainApp.myRegisters.getGRValue(ireg);
-					//right
+					//right rotate
 					if (side == 0) {
 						String asSubStr = asStr.substring(0, asStr.length()-count);
 						String roSubStr = asStr.substring(asStr.length()-count, asStr.length());
