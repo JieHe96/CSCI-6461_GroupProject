@@ -44,7 +44,7 @@ public class ArithmeticInstruction extends Instruction{
 		String opbinary = ins.substring(0,6);
 		opcode = Decode.binaryToDecimal(opbinary);// decimal op
 		
-		if( opcode == 4 || 5 || 6 || 7)
+		if( opcode == 4 ||opcode ==  5 ||opcode ==  6 ||opcode ==  7)
 		{
 		String iregister = ins.substring(6,8);//r
 		String iindex = ins.substring(8,10);//ix
@@ -64,13 +64,13 @@ public class ArithmeticInstruction extends Instruction{
 		System.out.println(insadd);
 		
 		}
-		else if (opcode == 16 || 17 || 18 || 19 || 20 || 21)
+		else if (opcode == 16 ||opcode ==  17 ||opcode ==  18 || opcode == 19 ||opcode ==  20 ||opcode ==  21)
 		{
 			String str_rx = ins.substring(6, 8); // Rx
 			String str_ry = ins.substring(8, 10); // Rx
 			
 			rx = Decode.binaryToDecimal(str_rx);//decimal RX
-			ry = Decode.binaryToDecimal(str_ry));// decial RY
+			ry = Decode.binaryToDecimal(str_ry);// decial RY
 			
 			System.out.println(opcode);
 			System.out.println(rx);
@@ -185,7 +185,7 @@ public class ArithmeticInstruction extends Instruction{
 				}
 					amr_mValue = MainApp.myMemory.readFromMemory(arth_ea).convertToString();
 				// Add contents of register to contents of art_ea and store in register
-				 result = addBinary( tmp , amr_mValue ); // ?? EERROR HEREEEE
+				 result = addBinary( tmp , amr_mValue ); //
 						 
 								 
 				 //store result in register
@@ -262,10 +262,6 @@ public class ArithmeticInstruction extends Instruction{
     		String strResult2=Decode.IntegerTo16sBinary(result3);
 			//store result in register
     		MainApp.myRegisters.writeToGR(ireg,strResult2);
-			
-			
-			
-
 			break;
 		case 16: // MLT
 			

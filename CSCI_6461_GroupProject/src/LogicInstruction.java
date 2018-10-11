@@ -6,6 +6,8 @@ public class LogicInstruction extends Instruction{
     private int index;
     private int instype;
     private int insadd;
+	private int rx1;
+	private int ry1;
 
 	/**
 	 * Initializes instruction.
@@ -17,6 +19,8 @@ public class LogicInstruction extends Instruction{
     	index = 0;
     	instype = 0;
     	insadd = 0;
+    	rx1 = 0;
+		ry1 = 0;
     }
 
 	/**
@@ -44,13 +48,18 @@ public class LogicInstruction extends Instruction{
         //operand part of the instruction
     	
         String opbinary = ins.substring(0,6);
+        opcode = Decode.binaryToDecimal(opbinary);// decimal op
+        
+        
+        if(opcode == 1 ||opcode ==  2 || opcode == 3|| opcode == 33 ||opcode ==  34 )
+        {
+        
         String iregister = ins.substring(6,8);//r
         String iindex = ins.substring(8,10);//ix
         char temp = ins.charAt(10);
         String itype = new StringBuilder().append("").append(temp).toString();
         String iaddress = ins.substring(11,16);//ad
         	
-        opcode = Decode.binaryToDecimal(opbinary);// decimal op
         ireg = Decode.binaryToDecimal(iregister);//decimal r
         index = Decode.binaryToDecimal(iindex);// decial ix
         instype = Decode.binaryToDecimal(itype);//decimal i
@@ -61,6 +70,19 @@ public class LogicInstruction extends Instruction{
         System.out.println(index);
         System.out.println(instype);
         System.out.println(insadd);
+        }
+        else if(opcode == 18 ||opcode ==  19 ||opcode ==  20 ||opcode ==  21 ||opcode ==  25 || opcode == 26)
+        {
+        	String str_rx = ins.substring(6, 8); // Rx
+			String str_ry = ins.substring(8, 10); // Rx
+			
+			rx1 = Decode.binaryToDecimal(str_rx);//decimal RX
+			ry1 = Decode.binaryToDecimal(str_ry);// decial RY
+			
+			System.out.println(opcode);
+			System.out.println(rx1);
+			System.out.println(ry1);
+        }
         MainApp.myRegisters.writeToRegister("IR", ins, 16);
         
     }
@@ -263,6 +285,8 @@ public class LogicInstruction extends Instruction{
 	    		break;
 	    	
 	    	case 18: // TRR
+	    		
+	    		
 				break;
 			case 19: // AND
 				break;
