@@ -402,7 +402,7 @@ public class LogicInstruction extends Instruction{
 					//left
 					else if (side == 1) {
 						String asSubStr = asStr.substring(count, asStr.length());
-						System.out.println("logic " + asSubStr);
+						//System.out.println("logic " + asSubStr);
 						for (int i = 0; i < count; i++) asSubStr = asSubStr+'0';
 						MainApp.myRegisters.writeToGR(ireg ,asSubStr);
 					}
@@ -416,16 +416,15 @@ public class LogicInstruction extends Instruction{
 					//right
 					if (side == 0) {
 						String asSubStr = asStr.substring(0, asStr.length()-count);
-						//String roSubStr = asStr.substring();
-						for (int i = 0; i < count; i++) asSubStr = '0'+asSubStr;
-						MainApp.myRegisters.writeToGR(ireg ,asSubStr);
+						String roSubStr = asStr.substring(asStr.length()-count, asStr.length());
+						MainApp.myRegisters.writeToGR(ireg ,roSubStr+asSubStr);
 					}
 					//left
 					else if (side == 1) {
 						String asSubStr = asStr.substring(count, asStr.length());
-						System.out.println("logic " + asSubStr);
-						for (int i = 0; i < count; i++) asSubStr = asSubStr+'0';
-						MainApp.myRegisters.writeToGR(ireg ,asSubStr);
+						//System.out.println("logic " + asSubStr);
+						String roSubStr = asStr.substring(0, count+1);
+						MainApp.myRegisters.writeToGR(ireg ,asSubStr+roSubStr);
 					}
 				}
 				break;
