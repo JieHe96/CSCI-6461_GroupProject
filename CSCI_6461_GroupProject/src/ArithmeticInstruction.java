@@ -240,14 +240,8 @@ public class ArithmeticInstruction extends Instruction{
 			break;
 		case 17: //DVD
 			break;
-			case 49: // IN 
-			break;
-		case 50://OUT
-			break;
-			
-	/*	case 51://CHK
-			break;	
-	*/	
+		
+
 		}// switch case closed
 		
 	}
