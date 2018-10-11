@@ -8,6 +8,9 @@ public class LogicInstruction extends Instruction{
     private int insadd;
 	private int rx1;
 	private int ry1;
+	private int type;
+	private int count;
+	private int side;
 
 	/**
 	 * Initializes instruction.
@@ -21,6 +24,10 @@ public class LogicInstruction extends Instruction{
     	insadd = 0;
     	rx1 = 0;
 		ry1 = 0;
+		type = 0;
+		count = 0;
+		side = 0;
+		
     }
 
 	/**
@@ -71,7 +78,7 @@ public class LogicInstruction extends Instruction{
         System.out.println(instype);
         System.out.println(insadd);
         }
-        else if(opcode == 18 ||opcode ==  19 ||opcode ==  20 ||opcode ==  21 ||opcode ==  25 || opcode == 26)
+        else if(opcode == 18 ||opcode ==  19 ||opcode ==  20 ||opcode ==  21)
         {
         	String str_rx = ins.substring(6, 8); // Rx
 			String str_ry = ins.substring(8, 10); // Rx
@@ -83,9 +90,35 @@ public class LogicInstruction extends Instruction{
 			System.out.println(rx1);
 			System.out.println(ry1);
         }
+        else if(opcode== 25 || opcode== 26 )
+    			// shift instructions
+    		{
+    			String str_r = ins.substring(6, 8);
+    			char temp = ins.charAt(8);
+    			String str_type = new StringBuilder().append("").append(temp).toString();
+    			char temp1 = ins.charAt(9);
+    			String str_side = new StringBuilder().append("").append(temp1).toString();
+    			String str_count = ins.substring(12,16);//Count
+    			
+    			ireg = Decode.binaryToDecimal(str_r);//decimal R
+    			type = Decode.binaryToDecimal(str_type);//decimal Type
+    			count  = Decode.binaryToDecimal(str_count);//decimal Type
+    			side = Decode.binaryToDecimal(str_side);//decimal Type
+    			
+    			
+    			System.out.println(opcode);
+    			System.out.println(ireg);
+    			System.out.println(type);
+    			System.out.println(side);
+    			System.out.println(count);
+    			
+    			
+    			
+    		}
+    	
         MainApp.myRegisters.writeToRegister("IR", ins, 16);
-        
-    }
+	}
+    
 	
 	/**
 	 * Executes instruction.
@@ -289,14 +322,18 @@ public class LogicInstruction extends Instruction{
 	    		
 				break;
 			case 19: // AND
+				
+				
 				break;
-			case 20:
+			case 20:// ORR
+				
+				
 				break;
-			case 21:
+			case 21:// NOT
 				break;
-			case 25:
+			case 25:// SRC
 				break;
-			case 26:
+			case 26: //RRC 
 				break;
 		
 	    		
