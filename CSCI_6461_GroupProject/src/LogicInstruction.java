@@ -90,31 +90,28 @@ public class LogicInstruction extends Instruction{
 			System.out.println(rx1);
 			System.out.println(ry1);
         }
+        // shift instructions
         else if(opcode== 25 || opcode== 26 )
-    			// shift instructions
-    		{
-    			String str_r = ins.substring(6, 8);
-    			char temp = ins.charAt(8);
-    			String str_type = new StringBuilder().append("").append(temp).toString();
-    			char temp1 = ins.charAt(9);
-    			String str_side = new StringBuilder().append("").append(temp1).toString();
-    			String str_count = ins.substring(12,16);//Count
-    			
-    			ireg = Decode.binaryToDecimal(str_r);//decimal R
-    			type = Decode.binaryToDecimal(str_type);//decimal Type
-    			count  = Decode.binaryToDecimal(str_count);//decimal Type
-    			side = Decode.binaryToDecimal(str_side);//decimal Type
-    			
-    			
-    			System.out.println(opcode);
-    			System.out.println(ireg);
-    			System.out.println(type);
-    			System.out.println(side);
-    			System.out.println(count);
-    			
-    			
-    			
-    		}
+    	{
+    		String str_r = ins.substring(6, 8);
+    		char temp = ins.charAt(8);
+    		String str_type = new StringBuilder().append("").append(temp).toString();
+    		char temp1 = ins.charAt(9);
+    		String str_side = new StringBuilder().append("").append(temp1).toString();
+    		String str_count = ins.substring(12,16);//Count
+    		
+    		ireg = Decode.binaryToDecimal(str_r);//decimal R
+    		type = Decode.binaryToDecimal(str_type);//decimal Type
+    		count  = Decode.binaryToDecimal(str_count);//decimal Type
+    		side = Decode.binaryToDecimal(str_side);//decimal Type
+    		
+    		
+    		System.out.println(opcode);
+    		System.out.println(ireg);
+    		System.out.println(type);
+    		System.out.println(side);
+    		System.out.println(count);	
+    	}
     	
         MainApp.myRegisters.writeToRegister("IR", ins, 16);
 	}
@@ -371,8 +368,66 @@ public class LogicInstruction extends Instruction{
 	    		
 				break;
 			case 25:// SRC
+				//arithmetic shift
+				if (type == 0) {
+					String asStr = MainApp.myRegisters.getGRValue(ireg);
+					//right
+					if (side == 0) {
+						char msb = asStr.charAt(0);
+						String asSubStr = asStr.substring(0, asStr.length()-count);
+						for (int i = 0; i < count; i++) asSubStr = '0'+asSubStr;
+						char[] newCharArr = asSubStr.toCharArray();
+						newCharArr[0] = msb;
+						String newStr = String.valueOf(newCharArr);
+						MainApp.myRegisters.writeToGR(ireg ,newStr);
+					}
+					//left
+					else if (side == 1) {
+						String asSubStr = asStr.substring(count, asStr.length());
+						System.out.println("logic " + asSubStr);
+						for (int i = 0; i < count; i++) asSubStr = asSubStr+'0';
+						MainApp.myRegisters.writeToGR(ireg ,asSubStr);
+					}
+					
+				}
+				//logic shift
+				else if (type == 1) {
+					String asStr = MainApp.myRegisters.getGRValue(ireg);
+					//right
+					if (side == 0) {
+						String asSubStr = asStr.substring(0, asStr.length()-count);
+						for (int i = 0; i < count; i++) asSubStr = '0'+asSubStr;
+						MainApp.myRegisters.writeToGR(ireg ,asSubStr);
+					}
+					//left
+					else if (side == 1) {
+						String asSubStr = asStr.substring(count, asStr.length());
+						System.out.println("logic " + asSubStr);
+						for (int i = 0; i < count; i++) asSubStr = asSubStr+'0';
+						MainApp.myRegisters.writeToGR(ireg ,asSubStr);
+					}
+				}
+				
 				break;
-			case 26: //RRC 
+			case 26: //RRC
+				//logic rotate
+				if (type == 1) {
+					String asStr = MainApp.myRegisters.getGRValue(ireg);
+					//right
+					if (side == 0) {
+						String asSubStr = asStr.substring(0, asStr.length()-count);
+						//String roSubStr = asStr.substring();
+						for (int i = 0; i < count; i++) asSubStr = '0'+asSubStr;
+						MainApp.myRegisters.writeToGR(ireg ,asSubStr);
+					}
+					//left
+					else if (side == 1) {
+						String asSubStr = asStr.substring(count, asStr.length());
+						System.out.println("logic " + asSubStr);
+						for (int i = 0; i < count; i++) asSubStr = asSubStr+'0';
+						MainApp.myRegisters.writeToGR(ireg ,asSubStr);
+					}
+				}
 				break;
 		
 	    		
