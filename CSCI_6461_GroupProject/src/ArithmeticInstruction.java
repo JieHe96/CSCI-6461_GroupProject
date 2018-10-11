@@ -196,32 +196,32 @@ public class ArithmeticInstruction extends Instruction{
 		
 		case 5: // SMR r, x, address[,I] :- r<- c(r) – c(EA)
 			
-			int arth_ea = 0;
+			int arth_ea1 = 0;
 			//Calculate EA
 			if (instype == 0) {
 				//Direct addressing
 				if (index == 0) {
-					arth_ea = insadd;
+					arth_ea1 = insadd;
 				}
 				else {
 					int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
-					arth_ea = ixValue + insadd;
+					arth_ea1 = ixValue + insadd;
 				}
 			}
 			else {
 				//Indirect addressing
 				if (index == 0) {
 					tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
-					arth_ea = Decode.binaryToDecimal(tmp);
+					arth_ea1 = Decode.binaryToDecimal(tmp);
 				}
 				else {
 					int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
 					int buffer = ixValue + insadd;
 					tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
-					arth_ea = Decode.binaryToDecimal(tmp);
+					arth_ea1 = Decode.binaryToDecimal(tmp);
 				}
 			}
-				amr_mValue = MainApp.myMemory.readFromMemory(arth_ea).convertToString();
+				amr_mValue = MainApp.myMemory.readFromMemory(arth_ea1).convertToString();
 			// Subtract contents of register to contents of art_ea and store in register
 				//Get value of GR 	
 	    		String str_rValue = MainApp.myRegisters.getGRValue(ireg);
@@ -230,31 +230,30 @@ public class ArithmeticInstruction extends Instruction{
 	    		//Effective address value in decimal
 	    		int effvalue=Decode.binaryToDecimal(amr_mValue);
 	    		//Subtraction in Decimal
-	    		int result=regvalue-effvalue;
+	    		int result1=regvalue-effvalue;
 	    		//Convert into String
-	    		String strResult=Decode.IntegerTo16sBinary(result);
+	    		String strResult=Decode.IntegerTo16sBinary(result1);
 				//store result in register
-	    		MainApp.myRegisters.writeToGR(ireg,result);
+	    		MainApp.myRegisters.writeToGR(ireg,strResult);
 
 		 				
 			break;
 		case 6:// AIR
 			
 			//Get value of GR 	
-    		String str_rValue = MainApp.myRegisters.getGRValue(ireg);
+    		String str_rValue1 = MainApp.myRegisters.getGRValue(ireg);
     		//GP value in decimal
-    		int regvalue=Decode.binaryToDecimal(str_rValue);
+    		int regvalue1=Decode.binaryToDecimal(str_rValue1);
     		// Add value of Register with Immediate value=insadd
-			int result = regvalue + insadd;
+			int result2 = regvalue1 + insadd;
 			//Convert into String
-    		String strResult=Decode.IntegerTo16sBinary(result);
+    		String strResult1=Decode.IntegerTo16sBinary(result2);
 			//store result in register
-    		MainApp.myRegisters.writeToGR(ireg,result);
+    		MainApp.myRegisters.writeToGR(ireg,strResult1);
 					
 			break;
 		case 7: // SIR 
 
-			
 			break;
 		case 16: // MLT
 			
