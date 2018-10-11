@@ -316,8 +316,6 @@ public class TransferInstruction extends Instruction{
                         MainApp.myRegisters.writeToPC(String.valueOf(tra_ea));
                     }
                     break;
-
-
             }
         }
 
