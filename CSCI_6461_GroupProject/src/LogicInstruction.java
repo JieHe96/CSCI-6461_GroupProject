@@ -6,6 +6,11 @@ public class LogicInstruction extends Instruction{
     private int index;
     private int instype;
     private int insadd;
+	private int rx1;
+	private int ry1;
+	private int type;
+	private int count;
+	private int side;
 
 	/**
 	 * Initializes instruction.
@@ -17,6 +22,12 @@ public class LogicInstruction extends Instruction{
     	index = 0;
     	instype = 0;
     	insadd = 0;
+    	rx1 = 0;
+		ry1 = 0;
+		type = 0;
+		count = 0;
+		side = 0;
+		
     }
 
 	/**
@@ -44,13 +55,18 @@ public class LogicInstruction extends Instruction{
         //operand part of the instruction
     	
         String opbinary = ins.substring(0,6);
+        opcode = Decode.binaryToDecimal(opbinary);// decimal op
+        
+        
+        if(opcode == 1 ||opcode ==  2 || opcode == 3|| opcode == 33 ||opcode ==  34 )
+        {
+        
         String iregister = ins.substring(6,8);//r
         String iindex = ins.substring(8,10);//ix
         char temp = ins.charAt(10);
         String itype = new StringBuilder().append("").append(temp).toString();
         String iaddress = ins.substring(11,16);//ad
         	
-        opcode = Decode.binaryToDecimal(opbinary);// decimal op
         ireg = Decode.binaryToDecimal(iregister);//decimal r
         index = Decode.binaryToDecimal(iindex);// decial ix
         instype = Decode.binaryToDecimal(itype);//decimal i
@@ -61,9 +77,48 @@ public class LogicInstruction extends Instruction{
         System.out.println(index);
         System.out.println(instype);
         System.out.println(insadd);
+        }
+        else if(opcode == 18 ||opcode ==  19 ||opcode ==  20 ||opcode ==  21)
+        {
+        	String str_rx = ins.substring(6, 8); // Rx
+			String str_ry = ins.substring(8, 10); // Rx
+			
+			rx1 = Decode.binaryToDecimal(str_rx);//decimal RX
+			ry1 = Decode.binaryToDecimal(str_ry);// decial RY
+			
+			System.out.println(opcode);
+			System.out.println(rx1);
+			System.out.println(ry1);
+        }
+        else if(opcode== 25 || opcode== 26 )
+    			// shift instructions
+    		{
+    			String str_r = ins.substring(6, 8);
+    			char temp = ins.charAt(8);
+    			String str_type = new StringBuilder().append("").append(temp).toString();
+    			char temp1 = ins.charAt(9);
+    			String str_side = new StringBuilder().append("").append(temp1).toString();
+    			String str_count = ins.substring(12,16);//Count
+    			
+    			ireg = Decode.binaryToDecimal(str_r);//decimal R
+    			type = Decode.binaryToDecimal(str_type);//decimal Type
+    			count  = Decode.binaryToDecimal(str_count);//decimal Type
+    			side = Decode.binaryToDecimal(str_side);//decimal Type
+    			
+    			
+    			System.out.println(opcode);
+    			System.out.println(ireg);
+    			System.out.println(type);
+    			System.out.println(side);
+    			System.out.println(count);
+    			
+    			
+    			
+    		}
+    	
         MainApp.myRegisters.writeToRegister("IR", ins, 16);
-        
-    }
+	}
+    
 	
 	/**
 	 * Executes instruction.
@@ -261,11 +316,71 @@ public class LogicInstruction extends Instruction{
 	    		MainApp.myRegisters.writeToRegister("MBR", stx_ixValue, 16);
 	    		MainApp.myMemory.writeToMemory(stx_ea, stx_ixValue);
 	    		break;
-	    		 	
+	    	
+	    	case 18: // TRR
+	    		
+	    		
+				break;
+			case 19: // AND
+				//Get value of Rx 	
+	    		String str_rxValue = MainApp.myRegisters.getGRValue(rx1);
+	    		//Rx value in decimal
+	    		int regxvalue=Decode.binaryToDecimal(str_rxValue);
+	    		
+	    		//Get value of RY
+	    		String str_ryValue = MainApp.myRegisters.getGRValue(ry1);
+	    		//Ry value in decimal
+	    		int regyvalue=Decode.binaryToDecimal(str_ryValue);
+	    		//Bitwise AND
+	    		int resultAnd= regxvalue & regyvalue;
+	    		//Convert into String
+	    		String strResult2=Decode.IntegerTo16sBinary(resultAnd);
+	    		//store result in Rx
+	    		MainApp.myRegisters.writeToGR(rx1,strResult2);
+	    		break;
+			case 20:// ORR
+				//Get value of Rx 	
+	    		String str_rxValue1 = MainApp.myRegisters.getGRValue(rx1);
+	    		//Rx value in decimal
+	    		int regxvalue1=Decode.binaryToDecimal(str_rxValue1);
+	    		
+	    		//Get value of RY
+	    		String str_ryValue1 = MainApp.myRegisters.getGRValue(ry1);
+	    		//Ry value in decimal
+	    		int regyvalue1=Decode.binaryToDecimal(str_ryValue1);
+	    		//Bitwise AND
+	    		int resultOR= regxvalue1 | regyvalue1;
+	    		//Convert into String
+	    		String strResult3=Decode.IntegerTo16sBinary(resultOR);
+	    		//store result in Rx
+	    		MainApp.myRegisters.writeToGR(rx1,strResult3);
+	    		
+				
+				break;
+			case 21:// NOT
+				
+				String str_rxValue2 = MainApp.myRegisters.getGRValue(rx1);
+	    		//Rx value in decimal
+	    		int regxvalue2=Decode.binaryToDecimal(str_rxValue2);
+	    		//Bitwise NOT
+	    		int resultNot= ~regxvalue2;
+	    		//Convert into String
+	    		String strResult4=Decode.IntegerTo16sBinary(resultNot);
+	    		//store result in Rx
+	    		MainApp.myRegisters.writeToGR(rx1,strResult4);
+	    		
+				break;
+			case 25:// SRC
+				break;
+			case 26: //RRC 
+				break;
+		
 	    		
 
     	}	
     }
+	
+	
 
 	public void execArithmetic() {
 		//Arithmetic instruction here
