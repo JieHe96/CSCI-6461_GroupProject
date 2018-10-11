@@ -315,21 +315,43 @@ public class LogicInstruction extends Instruction{
 	    		break;
 	    	
 	    	case 18: // TRR
-	    		
-	    		
+	    		//Get value of Rx 	
+ 	    		String str_rxValue = MainApp.myRegisters.getGRValue(rx1);
+				//Rx value in decimal
+				int regxvalue=Decode.binaryToDecimal(str_rxValue);
+								//Get value of RY
+				String str_ryValue = MainApp.myRegisters.getGRValue(ry1);
+				//Ry value in decimal
+				// Check for equivalence
+				int regyvalue=Decode.binaryToDecimal(str_ryValue);
+				String res=MainApp.myRegisters.getRegister("CC",false);
+				if(regxvalue==regyvalue)
+				{
+					res=res.substring(0,3)+ "1";
+					MainApp.myRegisters.writeToRegister("CC",res,4);
+				}
+				else
+				{
+					res=res.substring(0,3)+ "0";
+					MainApp.myRegisters.writeToRegister("CC",res,4);
+				}	
+				//store result in Rx
+				//MainApp.myRegisters.writeToGR(rx1,strResult2);
+
+			    		
 				break;
 			case 19: // AND
 				//Get value of Rx 	
-	    		String str_rxValue = MainApp.myRegisters.getGRValue(rx1);
+	    		String str_rxValue5 = MainApp.myRegisters.getGRValue(rx1);
 	    		//Rx value in decimal
-	    		int regxvalue=Decode.binaryToDecimal(str_rxValue);
+	    		int regxvalue5=Decode.binaryToDecimal(str_rxValue5);
 	    		
 	    		//Get value of RY
-	    		String str_ryValue = MainApp.myRegisters.getGRValue(ry1);
+	    		String str_ryValue5 = MainApp.myRegisters.getGRValue(ry1);
 	    		//Ry value in decimal
-	    		int regyvalue=Decode.binaryToDecimal(str_ryValue);
+	    		int regyvalue5=Decode.binaryToDecimal(str_ryValue5);
 	    		//Bitwise AND
-	    		int resultAnd= regxvalue & regyvalue;
+	    		int resultAnd= regxvalue5 & regyvalue5;
 	    		//Convert into String
 	    		String strResult2=Decode.IntegerTo16sBinary(resultAnd);
 	    		//store result in Rx
