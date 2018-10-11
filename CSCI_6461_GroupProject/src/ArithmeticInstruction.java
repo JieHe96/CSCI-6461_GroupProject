@@ -235,10 +235,9 @@ public class ArithmeticInstruction extends Instruction{
 	    		String strResult=Decode.IntegerTo16sBinary(result1);
 				//store result in register
 	    		MainApp.myRegisters.writeToGR(ireg,strResult);
-
-		 				
+	 				
 			break;
-		case 6:// AIR
+		case 6:// AIR  ( r <- c(r) + Immed )
 			
 			//Get value of GR 	
     		String str_rValue1 = MainApp.myRegisters.getGRValue(ireg);
@@ -252,7 +251,20 @@ public class ArithmeticInstruction extends Instruction{
     		MainApp.myRegisters.writeToGR(ireg,strResult1);
 					
 			break;
-		case 7: // SIR 
+		case 7: // SIR ( r <- c(r) - Immed )
+			//Get value of GR 	
+    		String str_rValue11 = MainApp.myRegisters.getGRValue(ireg);
+    		//GP value in decimal
+    		int regvalue2=Decode.binaryToDecimal(str_rValue11);
+    		// Add value of Register with Immediate value=insadd
+			int result3 = regvalue2 - insadd;
+			//Convert into String
+    		String strResult2=Decode.IntegerTo16sBinary(result3);
+			//store result in register
+    		MainApp.myRegisters.writeToGR(ireg,strResult2);
+			
+			
+			
 
 			break;
 		case 16: // MLT
