@@ -7,8 +7,8 @@ public class ArithmeticInstruction extends Instruction{
 	private int index;
 	private int instype;
 	private int insadd;
-	private int rx;
-	private int ry;
+	private int rx1;
+	private int ry1;
 	
 	
 	
@@ -19,8 +19,8 @@ public class ArithmeticInstruction extends Instruction{
 		ireg = 0;
 		index = 0;
 		instype = 0;
-		rx = 0;
-		ry = 0;
+		rx1 = 0;
+		ry1 = 0;
 		insadd = 0;
 		
     }
@@ -65,12 +65,12 @@ public class ArithmeticInstruction extends Instruction{
 			String str_rx = ins.substring(6, 8); // Rx
 			String str_ry = ins.substring(8, 10); // Rx
 			
-			rx = Decode.binaryToDecimal(str_rx);//decimal RX
-			ry = Decode.binaryToDecimal(str_ry);// decial RY
+			rx1 = Decode.binaryToDecimal(str_rx);//decimal RX
+			ry1 = Decode.binaryToDecimal(str_ry);// decial RY
 			
 			System.out.println(opcode);
-			System.out.println(rx);
-			System.out.println(ry);
+			System.out.println(rx1);
+			System.out.println(ry1);
 			
 		}
 			
@@ -280,10 +280,59 @@ public class ArithmeticInstruction extends Instruction{
     		MainApp.myRegisters.writeToGR(ireg,strResult2);
 			break;
 		case 16: // MLT
-			
+			//Get value of Rx 	
+    		String str_rxValue1 = MainApp.myRegisters.getGRValue(rx1);
+    		//Rx value in decimal
+    		int regxvalue1=Decode.binaryToDecimal(str_rxValue1);
+    		
+    		//Get value of RY
+    		String str_ryValue1 = MainApp.myRegisters.getGRValue(ry1);
+    		//Ry value in decimal
+    		int regyvalue1=Decode.binaryToDecimal(str_ryValue1);
+    		
+    		//Multiply
+    		int resultMult= regxvalue1 * regyvalue1;
+    		//Convert into String
+    		String strResult3=Integer.toBinaryString(resultMult);
+    		
+    		if(strResult3.length()>16)
+    		{
+    			int length= strResult3.length();
+    			int offset= length-16;
+    			String loworder=strResult3.substring(offset);
+    			MainApp.myRegisters.writeToGR(rx1+1,loworder);
+    			String highorder=String.format("%16s",strResult3.substring(0,offset)).replace(" ", "0");
+    			MainApp.myRegisters.writeToGR(rx1,highorder);
+    			
+    		}
+    		else
+    		{
+    			MainApp.myRegisters.writeToGR(rx1,String.format("%16s",strResult3).replace(" ", "0"));
+    		}
 			
 			break;
 		case 17: //DVD
+			//Get value of Rx 	
+    		int number = MainApp.myRegisters.getGRValue(rx1);
+    		//Rx value in decimal
+    		int divisor =Decode.binaryToDecimal(str_rxValue1);
+    		
+    		//Get value of RY
+    		 str_ryValue1 = MainApp.myRegisters.getGRValue(ry1);
+    		//Ry value in decimal
+    		regyvalue1=Decode.binaryToDecimal(str_ryValue1);
+    		
+    		//Divide
+    		int quotient  = number/divisor;
+    		int remainder = number % divisor;
+    		
+    		//Convert into String
+    		String str_quo = Integer.toBinaryString(quotient);
+    		String str_rem = Integer.toBinaryString(remainder);
+    		
+    		MainApp.myRegisters.writeToGR(rx1,String.format("%16s",str_quo).replace(" ", "0"));
+    		MainApp.myRegisters.writeToGR(rx1+1,String.format("%16s",str_rem).replace(" ", "0"));
+			
 			break;
 		
 
