@@ -77,8 +77,8 @@ public class TransferInstruction extends Instruction{
                 cc = ;
                 break;
 
-        }
-        */
+        }*/
+        
 	}
 
 

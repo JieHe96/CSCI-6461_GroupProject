@@ -69,6 +69,10 @@ public class Register {
 		if (name == "PC") {
 			chars = new char[12];
 		}
+		else if(name == "CC")
+		{
+			chars = new char[4];
+		}
 		else chars = new char[16];
 		
 		Arrays.fill(chars, '0');

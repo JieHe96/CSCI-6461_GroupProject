@@ -53,6 +53,7 @@ public class InstructionList {
 	 */
 	public void addToInstructionList(int index, String value) {
 		int type = Decode.decodeType(value);
+		System.out.println("type " + type);
 		switch (type) {
 			case 1:
 				ArithmeticInstruction newArithIns = new ArithmeticInstruction();
