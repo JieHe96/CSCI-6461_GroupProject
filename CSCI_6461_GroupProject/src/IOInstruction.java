@@ -45,7 +45,7 @@ public class IOInstruction extends Instruction{
 	public void execute() {
 		System.out.print(opcode);
 		switch (opcode) {
-			case 61:
+			case 49:
 				if (deviceID == 0) {
 					String keyboardStr = MainApp.frame.getKeyboardStr();
 					MainApp.myDevice.setKeyboard(keyboardStr);
@@ -53,7 +53,7 @@ public class IOInstruction extends Instruction{
 					MainApp.myRegisters.writeToGR(ireg, buffStr);
 				}
 				break;
-			case 62:
+			case 50:
 				String buff = MainApp.myRegisters.getGRValue(ireg);
 				MainApp.myDevice.setPrinter(buff);
 				MainApp.frame.setPrinter(buff);
