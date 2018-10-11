@@ -110,7 +110,7 @@ public class TransferInstruction extends Instruction{
                             }
                         }
                         //PC <-- EA
-                        MainApp.myRegisters.writeToPC(String.valueOf(tra_ea));
+                        MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
                     }
                     break;
 
@@ -140,7 +140,7 @@ public class TransferInstruction extends Instruction{
                             }
                         }
                         //PC <-- EA
-                        MainApp.myRegisters.writeToPC(String.valueOf(tra_ea));
+                        MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
                     }
                     break;
 
@@ -174,7 +174,7 @@ public class TransferInstruction extends Instruction{
                                 }
                             }
                             //PC <-- EA
-                            MainApp.myRegisters.writeToPC(String.valueOf(tra_ea));
+                            MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
                         }
                     }
                     break;
@@ -205,14 +205,16 @@ public class TransferInstruction extends Instruction{
                         }
                     }
                     //PC <-- EA
-                    MainApp.myRegisters.writeToPC(String.valueOf(tra_ea));
+                    MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
                 }
                 break;
 
 
                 case 12://JSR x, address[,I]  R3 <- PC+1     PC<-EA
                     //R3 <- PC+1
-                    MainApp.myRegisters.writeToGR(3, MainApp.myRegisters.getPCValue() + 1);
+                    int buff = Integer.parseInt(MainApp.myRegisters.getRegister("PC", true)) + 1;
+                    String buffStr = Decode.IntegerTo16sBinary(buff);
+                    MainApp.myRegisters.writeToGR(3, buffStr);
                 {
                     int tra_ea = 0;
                     //PC <- EA
@@ -238,25 +240,27 @@ public class TransferInstruction extends Instruction{
                         }
                     }
                     //PC <-- EA
-                    MainApp.myRegisters.writeToPC(String.valueOf(tra_ea));
+                    MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
                 }
                 break;
 
 
                 case 13://RFS Immed
                     //R0 <- Immed;
-                    MainApp.myRegisters.writeToGR(0, MainApp.myRegisters.getRegister("IR", true).substring(11, 16));
+                    int rfsBuff = Integer.parseInt(MainApp.myRegisters.getRegister("IR", false).substring(11, 16));
+                    String rfsBuffStr = Decode.IntegerTo16sBinary(rfsBuff);
+                    MainApp.myRegisters.writeToGR(0, rfsBuffStr);
 
                     //PC <- c(R3)
-                    MainApp.myRegisters.writeToPC(MainApp.myRegisters.getGRValue(3));
+                    MainApp.myRegisters.writeToRegister("PC", MainApp.myRegisters.getGRValue(3),12);
                     break;
 
 
                 case 14://SOB r, x, address[,I]
                     //r <- c(r)-1
-                    MainApp.myRegisters.writeToGR(ireg, MainApp.myRegisters.getGRValue(ireg - 1));
-
-
+                    int sobBuff = Integer.parseInt(MainApp.myRegisters.getGRValue(ireg)) - 1;
+                    String sobBuffStr = Decode.IntegerTo16sBinary(sobBuff);
+                    MainApp.myRegisters.writeToGR(3, sobBuffStr);
                     //if c(r)>0, PC <- EA
                     if (Integer.parseInt(MainApp.myRegisters.getGRValue(ireg)) > 0) {
                         int tra_ea = 0;
@@ -282,7 +286,7 @@ public class TransferInstruction extends Instruction{
                             }
                         }
                         //PC <-- EA
-                        MainApp.myRegisters.writeToPC(String.valueOf(tra_ea));
+                        MainApp.myRegisters.writeToRegister("PC", String.valueOf(tra_ea), 12);
                     }
                     break;
 
@@ -313,7 +317,7 @@ public class TransferInstruction extends Instruction{
                             }
                         }
                         //PC <-- EA
-                        MainApp.myRegisters.writeToPC(String.valueOf(tra_ea));
+                        MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
                     }
                     break;
             }
