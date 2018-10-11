@@ -49,7 +49,6 @@ public class Decode
     public static int decodeType(String str) {
     	String opbinary = str.substring(0,6);
         int opcode = Decode.binaryToDecimal(opbinary);// decimal op
-        
         if (IntStream.of(MainApp.myInstructionList.arithmeticInstructionArray)
         		.anyMatch(x -> x == opcode)) {
         	return 1;

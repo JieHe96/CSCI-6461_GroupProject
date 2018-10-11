@@ -10,6 +10,7 @@ public class Register {
 	 * "MAR:", "MBR:", "MSR:", "MFR:", "X1:", "X2:", "X3:"};
 	 */
 	private Map<String, BitSet> registerMap;
+	private Map<String, Integer> checkCharMap;
 	/** Initializes register */
 	public Register() {
 		init();
@@ -32,6 +33,13 @@ public class Register {
 		registerMap.put("X1", new BitSet(16));
 		registerMap.put("X2", new BitSet(16));
 		registerMap.put("X3", new BitSet(16));
+		
+		//use to check if data in register is character
+		checkCharMap = new HashMap<String, Integer> ();
+		checkCharMap.put("R0", 0);
+		checkCharMap.put("R1", 0);
+		checkCharMap.put("R2", 0);
+		checkCharMap.put("R3", 0);
 	}
 	/** Used to write to the register in a 12/ 16 Format  bit*/
 	public void writeToRegister(String name, String value, int length) {
@@ -169,6 +177,37 @@ public class Register {
 
 	public void writeToPC(String value) {
 		writeToRegister("PC", value, 12);
+	}
+	
+	public void setCharMap(int num, int flag) {
+		switch (num) {
+			case 0:
+				checkCharMap.put("R0", flag);
+				break;
+			case 1:
+				checkCharMap.put("R1", flag);
+				break;
+			case 2:
+				checkCharMap.put("R2", flag);
+				break;
+			case 3:
+				checkCharMap.put("R3", flag);
+				break;
 		}
+	}
+	
+	public int checkIsChar(int num) {
+		switch (num) {
+		case 0:
+			return checkCharMap.get("R0");
+		case 1:
+			return checkCharMap.get("R1");
+		case 2:
+			return checkCharMap.get("R2");
+		case 3:
+			return checkCharMap.get("R3");
+		}
+		return 0;
+	}
 
 }

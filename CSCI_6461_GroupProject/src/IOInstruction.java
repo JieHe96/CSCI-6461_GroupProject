@@ -49,12 +49,34 @@ public class IOInstruction extends Instruction{
 				if (deviceID == 0) {
 					String keyboardStr = MainApp.frame.getKeyboardStr();
 					MainApp.myDevice.setKeyboard(keyboardStr);
-					String buffStr = String.format("%16s", keyboardStr).replace(" ", "0");
+					String buffStr = null;
+					try { 
+						// checking valid integer using parseInt() method 
+				        int buff = Integer.parseInt(keyboardStr); 
+				        //buffStr = String.format("%16s", keyboardStr).replace(" ", "0");
+				        buffStr = Decode.IntegerTo16sBinary(buff);
+				        MainApp.myRegisters.setCharMap(ireg, 0);
+				    }  
+				    catch (NumberFormatException e) { 
+				    	char buff = keyboardStr.charAt(0);
+				    	int buffInt = buff;
+				    	buffStr = Decode.IntegerTo16sBinary(buffInt);
+				    	MainApp.myRegisters.setCharMap(ireg, 1);
+				    } 
+					//String buffStr = String.format("%16s", keyboardStr).replace(" ", "0");
 					MainApp.myRegisters.writeToGR(ireg, buffStr);
+					
 				}
 				break;
 			case 50:
 				String buff = MainApp.myRegisters.getGRValue(ireg);
+				if (MainApp.myRegisters.checkIsChar(ireg) == 1) {
+					int buffInt = Decode.binaryToDecimal(buff);
+					buff = Character.toString((char) buffInt);
+				}
+				else {
+					buff = Integer.toString(Decode.binaryToDecimal(buff));
+				}
 				MainApp.myDevice.setPrinter(buff);
 				MainApp.frame.setPrinter(buff);
 				break;

@@ -7,6 +7,8 @@ import java.util.BitSet;
  * Word class extends the BitSet type
  */
 public class Word extends BitSet{
+	private boolean isChar = false;
+	
 	public Word() {
 		super(16);
 	}
