@@ -256,7 +256,7 @@ public class TransferInstruction extends Instruction{
                     break;
 
 
-                case 14://SOB r, x, address[,I]
+                case 14://SOB r, x, address[,I] //error
                     //r <- c(r)-1
                     int sobBuff = Integer.parseInt(MainApp.myRegisters.getGRValue(ireg)) - 1;
                     String sobBuffStr = Decode.IntegerTo16sBinary(sobBuff);

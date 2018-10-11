@@ -36,7 +36,7 @@ public class InstructionList {
 		addToInstructionList(7,"0000100000010100");
 		addToInstructionList(8,"0000110000000011");
 		addToInstructionList(9,"0000100000011110");
-		addToInstructionList(10,"1000010001011110"); 
+		addToInstructionList(10,"1000010001011110");
 		addToInstructionList(11,"0000111100011101");
 		addToInstructionList(12,"0000101101010110");
 		addToInstructionList(13,"0000011000110100");
