@@ -7,6 +7,13 @@ public class ArithmeticInstruction extends Instruction{
 	private int index;
 	private int instype;
 	private int insadd;
+	private int rx;
+	private int ry;
+	private int count;
+	private int side;
+	private int type;
+	
+	
 	//constructor
 	public ArithmeticInstruction() {
 		super.value = new Word();
@@ -14,7 +21,12 @@ public class ArithmeticInstruction extends Instruction{
 		ireg = 0;
 		index = 0;
 		instype = 0;
+		rx = 0;
+		ry = 0;
 		insadd = 0;
+		type = 0;
+		side = 0;
+		count = 0;
     }
 	
 	//fetch the instruction and decode
@@ -30,13 +42,16 @@ public class ArithmeticInstruction extends Instruction{
 		//operand part of the instruction
 
 		String opbinary = ins.substring(0,6);
+		opcode = Decode.binaryToDecimal(opbinary);// decimal op
+		
+		if( opcode == 4 || 5 || 6 || 7)
+		{
 		String iregister = ins.substring(6,8);//r
 		String iindex = ins.substring(8,10);//ix
 		char temp = ins.charAt(10);
 		String itype = new StringBuilder().append("").append(temp).toString();
 		String iaddress = ins.substring(11,16);//ad
-
-		opcode = Decode.binaryToDecimal(opbinary);// decimal op
+		
 		ireg = Decode.binaryToDecimal(iregister);//decimal r
 		index = Decode.binaryToDecimal(iindex);// decial ix
 		instype = Decode.binaryToDecimal(itype);//decimal i
@@ -47,8 +62,49 @@ public class ArithmeticInstruction extends Instruction{
 		System.out.println(index);
 		System.out.println(instype);
 		System.out.println(insadd);
+		
+		}
+		else if (opcode == 16 || 17 || 18 || 19 || 20 || 21)
+		{
+			String str_rx = ins.substring(6, 8); // Rx
+			String str_ry = ins.substring(8, 10); // Rx
+			
+			rx = Decode.binaryToDecimal(str_rx);//decimal RX
+			ry = Decode.binaryToDecimal(str_ry));// decial RY
+			
+			System.out.println(opcode);
+			System.out.println(rx);
+			System.out.println(ry);
+			
+		}
+		else
+			// shift instructions
+		{
+			String str_r = ins.substring(6, 8);
+			char temp = ins.charAt(8);
+			String str_type = new StringBuilder().append("").append(temp).toString();
+			char temp1 = ins.charAt(9);
+			String str_side = new StringBuilder().append("").append(temp1).toString();
+			String str_count = ins.substring(12,16);//Count
+			
+			ireg = Decode.binaryToDecimal(str_r);//decimal R
+			type = Decode.binaryToDecimal(str_type);//decimal Type
+			count  = Decode.binaryToDecimal(str_count);//decimal Type
+			side = Decode.binaryToDecimal(str_side);//decimal Type
+			
+			
+			System.out.println(opcode);
+			System.out.println(ireg);
+			System.out.println(type);
+			System.out.println(side);
+			System.out.println(count);
+			
+			
+			
+		}
+		
+		//Printing to IR 
 		MainApp.myRegisters.writeToRegister("IR", ins, 16);
-
 	}
 
 	/*
@@ -180,12 +236,25 @@ public class ArithmeticInstruction extends Instruction{
 				//store result in register
 	    		MainApp.myRegisters.writeToGR(ireg,result);
 
-		 	
-			
+		 				
 			break;
 		case 6:// AIR
+			
+			//Get value of GR 	
+    		String str_rValue = MainApp.myRegisters.getGRValue(ireg);
+    		//GP value in decimal
+    		int regvalue=Decode.binaryToDecimal(str_rValue);
+    		// Add value of Register with Immediate value=insadd
+			int result = regvalue + insadd;
+			//Convert into String
+    		String strResult=Decode.IntegerTo16sBinary(result);
+			//store result in register
+    		MainApp.myRegisters.writeToGR(ireg,result);
+					
 			break;
 		case 7: // SIR 
+
+			
 			break;
 		case 16: // MLT
 			
