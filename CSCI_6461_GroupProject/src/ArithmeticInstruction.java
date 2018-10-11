@@ -46,7 +46,7 @@ public class ArithmeticInstruction extends Instruction{
 		String iindex = ins.substring(8,10);//ix
 		char temp = ins.charAt(10);
 		String itype = new StringBuilder().append("").append(temp).toString();
-		String iaddress = ins.substring(11,16);//ad
+		String iaddress = ins.substring(11,16);//address
 		
 		ireg = Decode.binaryToDecimal(iregister);//decimal r
 		index = Decode.binaryToDecimal(iindex);// decial ix
@@ -118,15 +118,59 @@ public class ArithmeticInstruction extends Instruction{
 		
 	//execute the instruction by switch case
 	public void execute() {
+		
 		switch (opcode)
 		{
 		 //4,5,6,7,16,17,18,19,20,21,25,26,49,50,51
 		
 		case 4: //AMR r, x, address[,I] :- r <- c(r) + c(EA)
-				
-			
-			 //LONG METHOD - MAY OR O MAYNOT USE 
+			 
 			  String tmp=null,result,amr_mValue;
+			  
+			int arth_ea = 0;
+			//Calculate EA
+			if (instype == 0) {
+				//Direct addressing
+				if (index == 0) {
+					arth_ea = insadd;
+				}
+				else {
+					int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+					arth_ea = ixValue + insadd;
+				}
+			}
+			else {
+				//Indirect addressing
+				if (index == 0) {
+					tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+					arth_ea = Decode.binaryToDecimal(tmp);
+				}
+				else {
+					int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+					int buffer = ixValue + insadd;
+					tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+					arth_ea = Decode.binaryToDecimal(tmp);
+				}
+			}
+				amr_mValue = MainApp.myMemory.readFromMemory(arth_ea).convertToString();
+			// Subtract contents of register to contents of art_ea and store in register
+				//Get value of GR 	
+	    		String str_rValue = MainApp.myRegisters.getGRValue(ireg);
+	    		//GP value in decimal
+	    		int regvalue=Decode.binaryToDecimal(str_rValue);
+	    		//Effective address value in decimal
+	    		int effvalue=Decode.binaryToDecimal(amr_mValue);
+	    		//Subtraction in Decimal
+	    		int result1=regvalue+effvalue;
+	    		//Convert into String
+	    		String strResult=Decode.IntegerTo16sBinary(result1);
+				//store result in register
+	    		MainApp.myRegisters.writeToGR(ireg,strResult);
+	 					
+			
+			
+			
+/*			 //LONG METHOD - MAY OR O MAYNOT USE
 			 
 			
 			int arth_ea = 0;
@@ -162,8 +206,9 @@ public class ArithmeticInstruction extends Instruction{
 				 //store result in register
 				 MainApp.myRegisters.writeToGR(ireg,result);
 
-			 	
+			*/	 	
 			break; // end of case 4 
+		
 		
 		case 5: // SMR r, x, address[,I] :- r<- c(r) – c(EA)
 			
@@ -195,31 +240,31 @@ public class ArithmeticInstruction extends Instruction{
 				amr_mValue = MainApp.myMemory.readFromMemory(arth_ea1).convertToString();
 			// Subtract contents of register to contents of art_ea and store in register
 				//Get value of GR 	
-	    		String str_rValue = MainApp.myRegisters.getGRValue(ireg);
+	    		String str_rValue1 = MainApp.myRegisters.getGRValue(ireg);
 	    		//GP value in decimal
-	    		int regvalue=Decode.binaryToDecimal(str_rValue);
+	    		int regvalue1=Decode.binaryToDecimal(str_rValue1);
 	    		//Effective address value in decimal
-	    		int effvalue=Decode.binaryToDecimal(amr_mValue);
+	    		int effvalue1=Decode.binaryToDecimal(amr_mValue);
 	    		//Subtraction in Decimal
-	    		int result1=regvalue-effvalue;
+	    		int result11=regvalue1-effvalue1;
 	    		//Convert into String
-	    		String strResult=Decode.IntegerTo16sBinary(result1);
+	    		String strResult1=Decode.IntegerTo16sBinary(result11);
 				//store result in register
-	    		MainApp.myRegisters.writeToGR(ireg,strResult);
+	    		MainApp.myRegisters.writeToGR(ireg,strResult1);
 	 				
 			break;
 		case 6:// AIR  ( r <- c(r) + Immed )
 			
 			//Get value of GR 	
-    		String str_rValue1 = MainApp.myRegisters.getGRValue(ireg);
+    		String str_rValue11 = MainApp.myRegisters.getGRValue(ireg);
     		//GP value in decimal
-    		int regvalue1=Decode.binaryToDecimal(str_rValue1);
+    		int regvalue11=Decode.binaryToDecimal(str_rValue11);
     		// Add value of Register with Immediate value=insadd
-			int result2 = regvalue1 + insadd;
+			int result2 = regvalue11 + insadd;
 			//Convert into String
-    		String strResult1=Decode.IntegerTo16sBinary(result2);
+    		String strResult11=Decode.IntegerTo16sBinary(result2);
 			//store result in register
-    		MainApp.myRegisters.writeToGR(ireg,strResult1);
+    		MainApp.myRegisters.writeToGR(ireg,strResult11);
 					
 			break;
 		case 7: // SIR ( r <- c(r) - Immed )
@@ -245,6 +290,8 @@ public class ArithmeticInstruction extends Instruction{
 		}// switch case closed
 		
 	}
+	
+	/*
 	// method for addition of two binary strings 	 
 	public String addBinary(String s1, String s2) {
     StringBuilder sb = new StringBuilder();
@@ -259,6 +306,6 @@ public class ArithmeticInstruction extends Instruction{
     if (carry != 0) sb.append(carry);
     return sb.reverse().toString();
 }
-	
+	*/
 	
 }
