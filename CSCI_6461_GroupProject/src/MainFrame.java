@@ -16,6 +16,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.DefaultListModel;
 import java.util.List;
+import java.util.Random;
 
 
 /** The Mainframe class extends the JFrame class to create the layout of the UI and the various panes 
@@ -359,7 +360,8 @@ public class MainFrame extends JFrame{
 		singleRunButton = new JButton("Single Run");
 		singleRunButton.addActionListener(singleRunButtonListener);
 		JButton loadButton = new JButton("Load");
-		loadButton.setEnabled(false);
+		loadButton.addActionListener(loadButtonListener);
+		//loadButton.setEnabled(false);
 		startButton = new JButton("Start");
 		//startButton.setEnabled(false);
 		startButton.addActionListener(startButtonListener);
@@ -440,6 +442,14 @@ public class MainFrame extends JFrame{
 		}
 	};
 	
+	private ActionListener loadButtonListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			MainApp.myClock.resume();
+			startProgram1();
+		}
+	};
+	
 	private ActionListener startButtonListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -516,6 +526,34 @@ public class MainFrame extends JFrame{
 		}; 
 		// executes the swingworker on worker thread 
 		sw1.execute();  
-	} 
+	}
+	
+	private void startProgram1() {
+		SwingWorker sw1 = new SwingWorker() {
+
+			@Override
+			protected Object doInBackground() throws Exception {
+				// TODO Auto-generated method stub
+				while (MainApp.myClock.isReady()) {
+					String pcNum = pcText.getText();
+					int index = Decode.ToDecimal(pcNum);
+					Random rand = new Random();
+					int n = rand.nextInt(65535);
+					keyboardField.setText(Integer.toString(n));
+					MainApp.myClock.singleRun(index);
+					Thread.sleep(1000);
+					publish("run");
+				}
+				return null;
+			} 
+			
+			@Override
+			protected void process(List chunks) {
+				updateUI();
+			}
+		}; 
+		// executes the swingworker on worker thread 
+		sw1.execute();
+	}
 	
 }

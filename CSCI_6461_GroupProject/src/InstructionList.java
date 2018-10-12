@@ -32,16 +32,31 @@ public class InstructionList {
   	public void initProgram() {
 		//Initializing Instructions for IPL
 		//LDA r with some address 
-		addToInstructionList(6,"0000110000011001");  
-		addToInstructionList(7,"0000100000010100");
-		addToInstructionList(8,"0000110000000011");
-		addToInstructionList(9,"0000100000011110");
-		addToInstructionList(10,"1000010001011110");
-		addToInstructionList(11,"0000111100011101");
-		addToInstructionList(12,"0000101101010110");
-		addToInstructionList(13,"0000011000110100");
-		addToInstructionList(14,"0000101001110001");
-		addToInstructionList(15,"1000100001110100");
+//		addToInstructionList(6,"0000110000011001");  
+//		addToInstructionList(7,"0000100000010100");
+//		addToInstructionList(8,"0000110000000011");
+//		addToInstructionList(9,"0000100000011110");
+//		addToInstructionList(10,"1000010001011110");
+//		addToInstructionList(11,"0000111100011101");
+//		addToInstructionList(12,"0000101101010110");
+//		addToInstructionList(13,"0000011000110100");
+//		addToInstructionList(14,"0000101001110001");
+//		addToInstructionList(15,"1000100001110100");
+  		addToInstructionList(100, "1100010000000000");
+  		addToInstructionList(101, "0000100000001010");
+  		addToInstructionList(102, "1100100000000000");
+  		
+  		addToInstructionList(103, "1100010000000000");
+  		addToInstructionList(104, "0000100000001011");
+  		addToInstructionList(105, "1100100000000000");
+  		
+  		addToInstructionList(106, "1100010000000000");
+  		addToInstructionList(107, "0000100000001100");
+  		addToInstructionList(108, "1100100000000000");
+  		
+  		addToInstructionList(109, "1100010000000000");
+  		addToInstructionList(110, "0000100000001101");
+  		addToInstructionList(111, "1100100000000000");
   	}
 
 	/**
