@@ -55,9 +55,12 @@ public class TransferInstruction extends Instruction{
 
 
 	//get condition code
-	public void getCC() {
-        String ctemp = value.convertToString();
-        String icc = ctemp.substring(6, 8);//condition code
+	private void getCC() {
+        String cValue = MainApp.myRegisters.getRegister("CC", false);
+        if (cValue.equals("0000")|cValue.equals("0001")|cValue.equals("0010")|cValue.equals("0011")){
+            cc = true;
+        }
+
 /*
         switch (icc){
             case "00":
@@ -86,7 +89,7 @@ public class TransferInstruction extends Instruction{
         public void execute() {
             switch (opcode) {
                 case 8://JZ If c(r) = 0, then PC <- EA
-                    if (Integer.parseInt(MainApp.myRegisters.getGRValue(ireg)) == 0) {
+                    if (Decode.binaryToDecimal(MainApp.myRegisters.getGRValue(ireg)) == 0) {
                         int tra_ea = 0;
                         //Calculate EA
                         if (instype == 0) {
@@ -116,7 +119,7 @@ public class TransferInstruction extends Instruction{
 
 
                 case 9://JNE If c(r) != 0, then PC <- EA
-                    if (Integer.parseInt(MainApp.myRegisters.getGRValue(ireg)) != 0) {
+                    if (Decode.binaryToDecimal(MainApp.myRegisters.getGRValue(ireg)) != 0) {
                         int tra_ea = 0;
                         //Calculate EA
                         if (instype == 0) {
@@ -212,7 +215,7 @@ public class TransferInstruction extends Instruction{
 
                 case 12://JSR x, address[,I]  R3 <- PC+1     PC<-EA
                     //R3 <- PC+1
-                    int buff = Integer.parseInt(MainApp.myRegisters.getRegister("PC", true)) + 1;
+                    int buff = Decode.binaryToDecimal(MainApp.myRegisters.getRegister("PC", false)) + 1;
                     String buffStr = Decode.IntegerTo16sBinary(buff);
                     MainApp.myRegisters.writeToGR(3, buffStr);
                 {
@@ -247,22 +250,24 @@ public class TransferInstruction extends Instruction{
 
                 case 13://RFS Immed
                     //R0 <- Immed;
-                    int rfsBuff = Integer.parseInt(MainApp.myRegisters.getRegister("IR", false).substring(11, 16));
+                    int rfsBuff = insadd;
                     String rfsBuffStr = Decode.IntegerTo16sBinary(rfsBuff);
                     MainApp.myRegisters.writeToGR(0, rfsBuffStr);
 
                     //PC <- c(R3)
-                    MainApp.myRegisters.writeToRegister("PC", MainApp.myRegisters.getGRValue(3),12);
+                    int cR = Decode.binaryToDecimal(MainApp.myRegisters.getGRValue(3));
+                    String cRstr = String.valueOf(cR);
+                    MainApp.myRegisters.writeToRegister("PC", cRstr,12);
                     break;
 
 
-                case 14://SOB r, x, address[,I] //error
+                case 14://SOB r, x, address[,I]
                     //r <- c(r)-1
-                    int sobBuff = Integer.parseInt(MainApp.myRegisters.getGRValue(ireg)) - 1;
+                    int sobBuff = Decode.binaryToDecimal(MainApp.myRegisters.getGRValue(ireg)) - 1;
                     String sobBuffStr = Decode.IntegerTo16sBinary(sobBuff);
-                    MainApp.myRegisters.writeToGR(3, sobBuffStr);
+                    MainApp.myRegisters.writeToGR(ireg, sobBuffStr);
                     //if c(r)>0, PC <- EA
-                    if (Integer.parseInt(MainApp.myRegisters.getGRValue(ireg)) > 0) {
+                    if (Decode.binaryToDecimal(MainApp.myRegisters.getGRValue(ireg)) > 0) {
                         int tra_ea = 0;
                         //Calculate EA
                         if (instype == 0) {
@@ -293,7 +298,7 @@ public class TransferInstruction extends Instruction{
 
                 case 15://JGE r,x, address[,I]
                     //if c(r) >= 0, PC <- EA
-                    if (Integer.parseInt(MainApp.myRegisters.getGRValue(ireg)) >= 0) {
+                    if (Decode.binaryToDecimal(MainApp.myRegisters.getGRValue(ireg)) >= 0) {
                         int tra_ea = 0;
                         //Calculate EA
                         if (instype == 0) {
