@@ -246,7 +246,11 @@ public class ArithmeticInstruction extends Instruction{
 	    		//Effective address value in decimal
 	    		int effvalue1=Decode.binaryToDecimal(amr_mValue);
 	    		//Subtraction in Decimal
-	    		int result11=regvalue1-effvalue1;
+	    		int result11=0;
+	    		if (regvalue1 >= effvalue1)
+	    		result11 = regvalue1 - effvalue1;
+	    		else 
+	    		result11 = effvalue1 - regvalue1;
 	    		//Convert into String
 	    		String strResult1=Decode.IntegerTo16sBinary(result11);
 				//store result in register
@@ -274,7 +278,7 @@ public class ArithmeticInstruction extends Instruction{
     		int regvalue2=Decode.binaryToDecimal(str_rValue3);
     		// sub value of Register with Immediate value=insadd
     		int result3=0;
-    		if (regvalue2 > insadd)
+    		if (regvalue2 >= insadd)
 			result3 = regvalue2 - insadd;
     		else
     		result3= insadd-regvalue2;
@@ -300,7 +304,7 @@ public class ArithmeticInstruction extends Instruction{
     		//Convert into String
     		String strResult3=Integer.toBinaryString(resultMult);
     		
-    		if(strResult3.length()>16)
+    		if(strResult3.length()>16) // overflow
     		{
     			int length= strResult3.length();
     			int offset= length-16;
@@ -310,7 +314,7 @@ public class ArithmeticInstruction extends Instruction{
     			MainApp.myRegisters.writeToGR(rx1,highorder);
     			
     		}
-    		else
+    		else // regular case mutiplication
     		{
     			MainApp.myRegisters.writeToGR(rx1,String.format("%16s",strResult3).replace(" ", "0"));
     		}
