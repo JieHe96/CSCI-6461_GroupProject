@@ -312,7 +312,9 @@ public class ArithmeticInstruction extends Instruction{
     			MainApp.myRegisters.writeToGR(rx1+1,loworder);
     			String highorder=String.format("%16s",strResult3.substring(0,offset)).replace(" ", "0");
     			MainApp.myRegisters.writeToGR(rx1,highorder);
-    			
+				String res=MainApp.myRegisters.getRegister("CC",false);
+				res="1" + res.substring(1,4);
+				MainApp.myRegisters.writeToRegister("CC",res,4);
     		}
     		else // regular case mutiplication
     		{
@@ -331,16 +333,27 @@ public class ArithmeticInstruction extends Instruction{
 			//Ry value in decimal
 			int divisor = Decode.binaryToDecimal(str_ryValue1);
 
-			//Divide
-    		int quotient  = number/divisor;
-    		int remainder = number % divisor;
-    		
-    		//Convert into String
-    		String str_quo = Integer.toBinaryString(quotient);
-    		String str_rem = Integer.toBinaryString(remainder);
-    		
-    		MainApp.myRegisters.writeToGR(rx1,String.format("%16s",str_quo).replace(" ", "0"));
-    		MainApp.myRegisters.writeToGR(rx1+1,String.format("%16s",str_rem).replace(" ", "0"));
+
+			//If c(ry) = 0, set DIVZERO flag
+			if(divisor == 0)
+			{
+				String res=MainApp.myRegisters.getRegister("CC",false);
+				res=res.substring(0,2)+ "1" + res.substring(3,4);
+				MainApp.myRegisters.writeToRegister("CC",res,4);
+			}
+			else {
+
+				//Divide
+				int quotient = number / divisor;
+				int remainder = number % divisor;
+
+				//Convert into String
+				String str_quo = Integer.toBinaryString(quotient);
+				String str_rem = Integer.toBinaryString(remainder);
+
+				MainApp.myRegisters.writeToGR(rx1, String.format("%16s", str_quo).replace(" ", "0"));
+				MainApp.myRegisters.writeToGR(rx1 + 1, String.format("%16s", str_rem).replace(" ", "0"));
+			}
 			break;
 		
 
