@@ -312,17 +312,17 @@ public class ArithmeticInstruction extends Instruction{
 			
 			break;
 		case 17: //DVD
-			//Get value of Rx 	
-    		int number = MainApp.myRegisters.getGRValue(rx1);
-    		//Rx value in decimal
-    		int divisor =Decode.binaryToDecimal(str_rxValue1);
-    		
+			//Get value of Rx
+			str_rxValue1 = MainApp.myRegisters.getGRValue(rx1);
+			//Rx value in decimal
+    		int number = Decode.binaryToDecimal(str_rxValue1);
+
     		//Get value of RY
     		 str_ryValue1 = MainApp.myRegisters.getGRValue(ry1);
-    		//Ry value in decimal
-    		regyvalue1=Decode.binaryToDecimal(str_ryValue1);
-    		
-    		//Divide
+			//Ry value in decimal
+			int divisor = Decode.binaryToDecimal(str_ryValue1);
+
+			//Divide
     		int quotient  = number/divisor;
     		int remainder = number % divisor;
     		
@@ -332,7 +332,6 @@ public class ArithmeticInstruction extends Instruction{
     		
     		MainApp.myRegisters.writeToGR(rx1,String.format("%16s",str_quo).replace(" ", "0"));
     		MainApp.myRegisters.writeToGR(rx1+1,String.format("%16s",str_rem).replace(" ", "0"));
-			
 			break;
 		
 
