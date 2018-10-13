@@ -56,8 +56,8 @@ public class TransferInstruction extends Instruction{
 
 	//get condition code
 	private void getCC() {
-        String cValue = MainApp.myRegisters.getRegister("CC", false);
-        if (cValue.equals("0000")|cValue.equals("0001")|cValue.equals("0010")|cValue.equals("0011")){
+        int cValue = Integer.parseInt(MainApp.myRegisters.getRegister("CC", false));
+        if (cValue != 0){
             cc = true;
         }
 
