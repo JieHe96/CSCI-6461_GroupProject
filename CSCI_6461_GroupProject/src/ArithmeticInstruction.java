@@ -125,7 +125,7 @@ public class ArithmeticInstruction extends Instruction{
 		
 		case 4: //AMR r, x, address[,I] :- r <- c(r) + c(EA)
 			 
-			  String tmp=null,result,amr_mValue;
+			  String tmp=null,amr_mValue;
 			  
 			int arth_ea = 0;
 			//Calculate EA
@@ -272,8 +272,13 @@ public class ArithmeticInstruction extends Instruction{
     		String str_rValue3 = MainApp.myRegisters.getGRValue(ireg);
     		//GP value in decimal
     		int regvalue2=Decode.binaryToDecimal(str_rValue3);
-    		// Add value of Register with Immediate value=insadd
-			int result3 = regvalue2 - insadd;
+    		// sub value of Register with Immediate value=insadd
+    		int result3=0;
+    		if (regvalue2 > insadd)
+			result3 = regvalue2 - insadd;
+    		else
+    		result3= insadd-regvalue2;
+    		
 			//Convert into String
     		String strResult2=Decode.IntegerTo16sBinary(result3);
 			//store result in register
