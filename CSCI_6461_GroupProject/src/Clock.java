@@ -11,7 +11,7 @@ public class Clock {
 	public int getClockCycle() { return cycle; };
 	
 	public void singleRun(int index) {
-		if (!MainApp.myInstructionList.getAddrList().isEmpty()) flag = true;
+		if (!MainApp.myInstructionList.isLast()) flag = true;
 		
 		if (flag) {
 			MainApp.myInstructionList.runSingleInstruction(index);
@@ -39,10 +39,11 @@ public class Clock {
 	}
 	
 	public boolean isReady() {
+		System.out.println("IS READY: " + flag);
 		return flag;
 	}
 	
 	public void resume() {
-		if (!MainApp.myInstructionList.getAddrList().isEmpty()) flag = true;
+		if (!MainApp.myInstructionList.isLast()) flag = true;
 	}
 }

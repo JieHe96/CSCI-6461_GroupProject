@@ -446,6 +446,7 @@ public class MainFrame extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			MainApp.myClock.resume();
+			//MainApp.myRegisters.writeToGR(2, "0000000000010100");
 			startProgram1();
 		}
 	};
@@ -497,10 +498,10 @@ public class MainFrame extends JFrame{
 		x3Text.setText(x3);
 		pcText.setText(pc);
 		ccText.setText(cc);
-		if(instructionModel.getSize() != 0) {
-			instructionModel.removeElementAt(0);
-			instructionList.setModel(instructionModel);
-		}
+		//if(instructionModel.getSize() != 0) {
+		//	instructionModel.removeElementAt(0);
+		//	instructionList.setModel(instructionModel);
+		//}
 	}
 	
 	private void startThread() { 
@@ -534,8 +535,9 @@ public class MainFrame extends JFrame{
 			@Override
 			protected Object doInBackground() throws Exception {
 				// TODO Auto-generated method stub
-				while (MainApp.myClock.isReady()) {
+				while (true) {
 					String pcNum = pcText.getText();
+					System.out.println("PC: " + pcNum);
 					int index = Decode.ToDecimal(pcNum);
 					Random rand = new Random();
 					int n = rand.nextInt(65535);
@@ -544,7 +546,7 @@ public class MainFrame extends JFrame{
 					Thread.sleep(1000);
 					publish("run");
 				}
-				return null;
+				//return null;
 			} 
 			
 			@Override

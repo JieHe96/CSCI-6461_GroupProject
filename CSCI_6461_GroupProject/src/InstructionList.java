@@ -14,6 +14,8 @@ public class InstructionList {
     public int[] arithmeticInstructionArray;
     public int[] transferInstructionArray;
     public int[] ioInstructionArray;
+    private int pointer;
+    private boolean jump;
 	
 	/**
 	 * Initializes Instructions.
@@ -25,6 +27,8 @@ public class InstructionList {
 		arithmeticInstructionArray = new int[] {4,5,6,7,16,17};
 		transferInstructionArray = new int[] {8,9,10,11,12,13,14,15};
 		ioInstructionArray = new int[] {49, 50};
+		pointer = 0;
+		jump = false;
 		//initProgram();
 		
 	}
@@ -42,21 +46,15 @@ public class InstructionList {
 //		addToInstructionList(13,"0000011000110100");
 //		addToInstructionList(14,"0000101001110001");
 //		addToInstructionList(15,"1000100001110100");
-  		addToInstructionList(100, "1100010000000000");
-  		addToInstructionList(101, "0000100000001010");
-  		addToInstructionList(102, "1100100000000000");
+  		addToInstructionList(10, "0000110100010100");
+  		addToInstructionList(11, "1100010000000000");
+  		addToInstructionList(12, "0000100000010000");
+  		addToInstructionList(13, "1100100000000000");
+  		addToInstructionList(14, "0001110100000001");
+  		addToInstructionList(15, "0010010100001011");
+  		addToInstructionList(16, "0010010100001011");
   		
-  		addToInstructionList(103, "1100010000000000");
-  		addToInstructionList(104, "0000100000001011");
-  		addToInstructionList(105, "1100100000000000");
   		
-  		addToInstructionList(106, "1100010000000000");
-  		addToInstructionList(107, "0000100000001100");
-  		addToInstructionList(108, "1100100000000000");
-  		
-  		addToInstructionList(109, "1100010000000000");
-  		addToInstructionList(110, "0000100000001101");
-  		addToInstructionList(111, "1100100000000000");
   	}
 
 	/**
@@ -108,17 +106,28 @@ public class InstructionList {
 	 */
 	public void runSingleInstruction(int index) {
 		if (instructionList.containsKey(index)) {
+			pointer = addressList.indexOf(index);
 			instructionList.get(index).fetchInstruction();
 			instructionList.get(index).execute();
+			
 			//remove from addressList
-			addressList.remove(addressList.indexOf(index));
+			//addressList.remove(addressList.indexOf(index));
 			//remove from instructionList
-			instructionList.remove(index);
-			if (!addressList.isEmpty())
-				MainApp.myRegisters.writeToRegister("PC", String.valueOf(addressList.get(0)), 12);
+			//instructionList.remove(index);
+			
+			
+			if (pointer <= addressList.size() && !jump) {
+				int buff = addressList.indexOf(index);
+				MainApp.myRegisters.writeToRegister("PC", String.valueOf(addressList.get(buff+1)), 12);
+			}
+			else if (jump) {
+				jump = false;
+			}
 			else {
 				MainApp.myClock.setFlag(false);
 			}
+			pointer++;
+			System.out.println("POINTER: " + pointer);
 		}
 	}
 
@@ -145,4 +154,10 @@ public class InstructionList {
 	public Map<Integer, Instruction> getInsList() {
 		return instructionList;
 	}
+	
+	public boolean isLast() {
+		return pointer >= addressList.size();
+	}
+	
+	public void setJump(boolean isJump) { jump = isJump; };
 }

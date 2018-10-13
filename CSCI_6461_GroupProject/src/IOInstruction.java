@@ -35,9 +35,9 @@ public class IOInstruction extends Instruction{
         ireg = Decode.binaryToDecimal(iregister);//decimal r
         deviceID = Decode.binaryToDecimal(ideciveID);//decimal address
         
-        System.out.println(opcode);
-        System.out.println(ireg);
-        System.out.println(deviceID);
+        //System.out.println(opcode);
+        //System.out.println(ireg);
+        //System.out.println(deviceID);
         MainApp.myRegisters.writeToRegister("IR", ins, 16);
         
     }

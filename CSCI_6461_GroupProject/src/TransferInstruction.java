@@ -44,11 +44,11 @@ public class TransferInstruction extends Instruction{
 		instype = Decode.binaryToDecimal(itype);//decimal i
 		insadd = Decode.binaryToDecimal(iaddress);//decimal address
 
-		System.out.println(opcode);
-		System.out.println(ireg);
-		System.out.println(index);
-		System.out.println(instype);
-		System.out.println(insadd);
+		//System.out.println(opcode);
+		//System.out.println(ireg);
+		//System.out.println(index);
+		//System.out.println(instype);
+		//System.out.println(insadd);
 		MainApp.myRegisters.writeToRegister("IR", ins, 16);
 
 	}
@@ -114,6 +114,7 @@ public class TransferInstruction extends Instruction{
                         }
                         //PC <-- EA
                         MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
+                        MainApp.myInstructionList.setJump(true);
                     }
                     break;
 
@@ -143,7 +144,10 @@ public class TransferInstruction extends Instruction{
                             }
                         }
                         //PC <-- EA
+                        System.out.println("tra:" + String.valueOf(tra_ea));
+                        
                         MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
+                        MainApp.myInstructionList.setJump(true);
                     }
                     break;
 
@@ -178,6 +182,7 @@ public class TransferInstruction extends Instruction{
                             }
                             //PC <-- EA
                             MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
+                            MainApp.myInstructionList.setJump(true);
                         }
                     }
                     break;
@@ -209,6 +214,7 @@ public class TransferInstruction extends Instruction{
                     }
                     //PC <-- EA
                     MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
+                    MainApp.myInstructionList.setJump(true);
                 }
                 break;
 
@@ -244,6 +250,7 @@ public class TransferInstruction extends Instruction{
                     }
                     //PC <-- EA
                     MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
+                    MainApp.myInstructionList.setJump(true);
                 }
                 break;
 
@@ -292,6 +299,7 @@ public class TransferInstruction extends Instruction{
                         }
                         //PC <-- EA
                         MainApp.myRegisters.writeToRegister("PC", String.valueOf(tra_ea), 12);
+                        MainApp.myInstructionList.setJump(true);
                     }
                     break;
 
@@ -323,6 +331,7 @@ public class TransferInstruction extends Instruction{
                         }
                         //PC <-- EA
                         MainApp.myRegisters.writeToRegister( "PC", String.valueOf(tra_ea), 12);
+                        MainApp.myInstructionList.setJump(true);
                     }
                     break;
             }

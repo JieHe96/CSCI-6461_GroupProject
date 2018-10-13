@@ -72,11 +72,11 @@ public class LogicInstruction extends Instruction{
         instype = Decode.binaryToDecimal(itype);//decimal i
         insadd = Decode.binaryToDecimal(iaddress);//decimal address
         
-        System.out.println(opcode);
-        System.out.println(ireg);
-        System.out.println(index);
-        System.out.println(instype);
-        System.out.println(insadd);
+        //System.out.println(opcode);
+        //System.out.println(ireg);
+        //System.out.println(index);
+        //System.out.println(instype);
+        //System.out.println(insadd);
         }
         else if(opcode == 18 ||opcode ==  19 ||opcode ==  20 ||opcode ==  21)
         {
@@ -86,9 +86,9 @@ public class LogicInstruction extends Instruction{
 			rx1 = Decode.binaryToDecimal(str_rx);//decimal RX
 			ry1 = Decode.binaryToDecimal(str_ry);// decial RY
 			
-			System.out.println(opcode);
-			System.out.println(rx1);
-			System.out.println(ry1);
+			//System.out.println(opcode);
+			//System.out.println(rx1);
+			//System.out.println(ry1);
         }
         // shift instructions
         else if(opcode== 25 || opcode== 26 )
@@ -106,11 +106,11 @@ public class LogicInstruction extends Instruction{
     		side = Decode.binaryToDecimal(str_side);//decimal Type
     		
     		
-    		System.out.println(opcode);
-    		System.out.println(ireg);
-    		System.out.println(type);
-    		System.out.println(side);
-    		System.out.println(count);	
+    		//System.out.println(opcode);
+    		//System.out.println(ireg);
+    		//System.out.println(type);
+    		//System.out.println(side);
+    		//System.out.println(count);	
     	}
     	
         MainApp.myRegisters.writeToRegister("IR", ins, 16);

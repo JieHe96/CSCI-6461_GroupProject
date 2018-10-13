@@ -53,11 +53,11 @@ public class ArithmeticInstruction extends Instruction{
 		instype = Decode.binaryToDecimal(itype);//decimal i
 		insadd = Decode.binaryToDecimal(iaddress);//decimal address
 
-		System.out.println(opcode);
-		System.out.println(ireg);
-		System.out.println(index);
-		System.out.println(instype);
-		System.out.println(insadd);
+		//System.out.println(opcode);
+		//System.out.println(ireg);
+		//System.out.println(index);
+		//System.out.println(instype);
+		//System.out.println(insadd);
 		
 		}
 		else if (opcode == 16 ||opcode ==  17 )
@@ -68,9 +68,9 @@ public class ArithmeticInstruction extends Instruction{
 			rx1 = Decode.binaryToDecimal(str_rx);//decimal RX
 			ry1 = Decode.binaryToDecimal(str_ry);// decial RY
 			
-			System.out.println(opcode);
-			System.out.println(rx1);
-			System.out.println(ry1);
+			//System.out.println(opcode);
+			//System.out.println(rx1);
+			//System.out.println(ry1);
 			
 		}
 			
@@ -210,7 +210,7 @@ public class ArithmeticInstruction extends Instruction{
 			break; // end of case 4 
 		
 		
-		case 5: // SMR r, x, address[,I] :- r<- c(r) – c(EA)
+		case 5: // SMR r, x, address[,I] :- r<- c(r) ï¿½ c(EA)
 			
 			int arth_ea1 = 0;
 			//Calculate EA
