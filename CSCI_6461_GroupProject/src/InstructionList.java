@@ -144,6 +144,7 @@ public class InstructionList {
   		addToInstructionList(103, "1100101000000001");
   		//JNE R1, 11
   		addToInstructionList(106, "0010010100001011");
+  		//finish
   		
   	}
   	
