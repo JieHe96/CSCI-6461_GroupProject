@@ -23,7 +23,7 @@ public class InstructionList {
   	public InstructionList() { // constructor 
 		instructionList = new HashMap<Integer, Instruction> ();
 		addressList = new Vector<Integer> ();
-		logicInstructionArray = new int[] {1, 2, 3, 33, 34,18,19,20,21,25,26};
+		logicInstructionArray = new int[] {0, 1, 2, 3, 33, 34,18,19,20,21,25,26};
 		arithmeticInstructionArray = new int[] {4,5,6,7,16,17};
 		transferInstructionArray = new int[] {8,9,10,11,12,13,14,15};
 		ioInstructionArray = new int[] {49, 50};
@@ -46,15 +46,108 @@ public class InstructionList {
 //		addToInstructionList(13,"0000011000110100");
 //		addToInstructionList(14,"0000101001110001");
 //		addToInstructionList(15,"1000100001110100");
-  		addToInstructionList(10, "0000110100010100");
-  		addToInstructionList(11, "1100010000000000");
-  		addToInstructionList(12, "0000100000010000");
-  		addToInstructionList(13, "1100100000000000");
-  		addToInstructionList(14, "0001110100000001");
-  		addToInstructionList(15, "0010010100001011");
-  		addToInstructionList(16, "0010010100001011");
+  		
+  		//LDA R0, 31
+  		addToInstructionList(62, "0000110000011111");
+  		//AIR R0, 1
+  		addToInstructionList(63, "0001100000000001");
+  		//STR R0 26
+  		addToInstructionList(64, "0000100000011010");
+  		//LDX R0, X1, 26
+  		addToInstructionList(65, "1000010001011010");
+  		//LDA R1 20
+  		addToInstructionList(66, "0000110100010100");
+  		//LDA R2, X1, 1
+  		addToInstructionList(67, "0000111001000001");
+  		//IN RO, KEY
+  		addToInstructionList(10, "1100010000000000");
+  		//OUT R0, CON
+  		addToInstructionList(69, "1100100000000000");
+  		//STR R2, X1, 0
+  		addToInstructionList(70, "0000101001000000");
+  		//STR R0, X1, 1, 0
+  		addToInstructionList(71, "0000100001100000");
+  		//AIR R2, 1
+  		addToInstructionList(72, "0001101000000001");
+  		//SIR R1, 1
+  		addToInstructionList(73, "0001110100000001");
+  		//JNE
+  		addToInstructionList(74, "0010010100001010");
+
+  		
+  		//STR R3, X1, 23
+  		addToInstructionList(75, "0000101101010111");
+  		//LDA R1, X0, 0
+  		addToInstructionList(76, "0000110100000000");
+  		//STR R1, X1, 24
+  		addToInstructionList(77, "0000100101011000");
+  		//STR R1, X1, 25
+  		addToInstructionList(78, "0000100101011001");
+  		//STR R1, X1, 26
+  		addToInstructionList(79, "0000100101011010");
+  		//STR R1, X1, 27
+  		addToInstructionList(80, "0000100101011011");
+  		//LDA R1, X1, 0, 0
+  		addToInstructionList(81, "0000110101000000");
+  		//STR R1, X1, 27
+  		addToInstructionList(82, "0000100101011011");
+  		//LDA R0, X0, 0, 20
+  		addToInstructionList(83, "0000110000010100");
+  		//STR R0, X1, 0,28
+  		addToInstructionList(84, "0000100001011100");
+  		//HLT
+  		addToInstructionList(12, "0000000000000000");
+  		//IN R0, key
+  		addToInstructionList(86, "1100010000000000");
+  		//STR R0, X1, 0, 25
+  		addToInstructionList(87, "0000100001011001");
+  		  
   		
   		
+  		//LDR R2, X1, 28
+  		addToInstructionList(11, "0000011001011100");
+  		//SIR R2, 1
+  		addToInstructionList(89, "0001111000000001");
+  		//STR R2, X1, 28
+  		addToInstructionList(90, "0000101001011100");
+  		//LDR R3, X1, 27
+  		addToInstructionList(91, "0000011101011011");
+  		//AIR R3, 1
+  		addToInstructionList(92, "0001101100000001");
+  		//STR R3, X1, 27
+  		addToInstructionList(93, "0000101101011011");
+  		//LDR R0, X1, 25
+  		addToInstructionList(107, "0000010001011001");
+  		//SMR R0, X1, 1, 27
+  		addToInstructionList(94, "0001010001111011");
+  		//STR R0, X1, 26
+  		addToInstructionList(95, "0000100001011010");
+  		//LDR R2, X1, 23
+  		addToInstructionList(96, "0000011001010111");
+  		//DVD R0, R2
+  		addToInstructionList(97, "0100010010000000");
+  		//JNE R0, 11
+  		addToInstructionList(98, "0010010000001011");
+  		//LDR R2, X1, 26
+  		addToInstructionList(99, "0000011001011010");
+  		//STR R2, X1, 23
+  		addToInstructionList(100, "0000101001010111");
+  		//LDR R2, X1, 1, 27
+  		addToInstructionList(101, "0000011001111011");
+  		//STR R2, X1, 24
+  		addToInstructionList(102, "0000101001011000");
+  		//OUT 
+  		addToInstructionList(103, "1100101000000001");
+  		//LDR R1, X1, 28
+  		addToInstructionList(104, "0000010101011100");
+  		//JZ R1, 12
+  		addToInstructionList(105,  "0010000100001100");
+  		//JNE R1, 11
+  		addToInstructionList(106, "0010010100001011");
+  	}
+  	
+  	public void startSearching() {
+
   	}
 
 	/**
@@ -115,8 +208,8 @@ public class InstructionList {
 			//remove from instructionList
 			//instructionList.remove(index);
 			
-			
-			if (pointer <= addressList.size() && !jump) {
+			pointer++;
+			if (pointer < addressList.size() && !jump) {
 				int buff = addressList.indexOf(index);
 				MainApp.myRegisters.writeToRegister("PC", String.valueOf(addressList.get(buff+1)), 12);
 			}
@@ -126,7 +219,7 @@ public class InstructionList {
 			else {
 				MainApp.myClock.setFlag(false);
 			}
-			pointer++;
+			
 			System.out.println("POINTER: " + pointer);
 		}
 	}

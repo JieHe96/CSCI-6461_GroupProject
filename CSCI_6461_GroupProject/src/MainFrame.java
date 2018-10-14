@@ -86,13 +86,15 @@ public class MainFrame extends JFrame{
 		keyboardPanel.add(keyboardLabel, BorderLayout.LINE_START);
 		keyboardPanel.add(keyboardField, BorderLayout.CENTER);
 		
+		JScrollPane printerPanel = new JScrollPane();
 		printerModel = new DefaultListModel<String>();
 		printerList = new JList<String>();
 		printerList.setModel(printerModel);
+		printerPanel.setViewportView(printerList);
 		TitledBorder printerBorder = new TitledBorder("Console");
-		printerList.setBorder(printerBorder);
+		printerPanel.setBorder(printerBorder);
 		devicePanel.add(keyboardPanel, BorderLayout.PAGE_START);
-		devicePanel.add(printerList, BorderLayout.CENTER);
+		devicePanel.add(printerPanel, BorderLayout.CENTER);
 		
 		outputTabbedPane.addTab("Instruction", instructionPanel);
 		outputTabbedPane.addTab("I/O Panel", devicePanel);
@@ -311,7 +313,18 @@ public class MainFrame extends JFrame{
 		
 		JPanel rwPanel = new JPanel(new GridLayout(1,2));
 		JButton readButton = new JButton("Read");
-		readButton.setEnabled(false);
+		//readButton.setEnabled(false);
+		
+		readButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String addr = addrText.getText();
+				int n = Integer.parseInt(addr);
+				String res = MainApp.myMemory.GetMemo().elementAt(n).convertToString();
+				valueText.setText(res);
+			}
+		});
+		
 		JButton writeButton = new JButton("Write");
 		writeButton.addActionListener(writeButtonListener);
 		rwPanel.add(readButton);
@@ -413,6 +426,12 @@ public class MainFrame extends JFrame{
 		}
 	};
 	
+	private ActionListener resumeButtonListener = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+	};
+	
 	private ActionListener singleRunButtonListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -448,6 +467,7 @@ public class MainFrame extends JFrame{
 			MainApp.myClock.resume();
 			//MainApp.myRegisters.writeToGR(2, "0000000000010100");
 			startProgram1();
+			
 		}
 	};
 	
@@ -514,7 +534,7 @@ public class MainFrame extends JFrame{
 					String pcNum = pcText.getText();
 					int index = Decode.ToDecimal(pcNum);
 					MainApp.myClock.singleRun(index);
-					Thread.sleep(1000);
+					Thread.sleep(100);
 					publish("run");
 				}
 				return null;
@@ -535,18 +555,24 @@ public class MainFrame extends JFrame{
 			@Override
 			protected Object doInBackground() throws Exception {
 				// TODO Auto-generated method stub
-				while (true) {
+				MainApp.myRegisters.writeToGR(3, "1111111111111111");
+				while (MainApp.myClock.isReady()) {
 					String pcNum = pcText.getText();
-					System.out.println("PC: " + pcNum);
+					//System.out.println("PC: " pcNum);
 					int index = Decode.ToDecimal(pcNum);
 					Random rand = new Random();
 					int n = rand.nextInt(65535);
 					keyboardField.setText(Integer.toString(n));
 					MainApp.myClock.singleRun(index);
-					Thread.sleep(1000);
+					Thread.sleep(100);
 					publish("run");
 				}
-				//return null;
+				printerModel.addElement("Please enter a search number: ");
+				printerList.setModel(printerModel);
+				keyboardField.setText("");
+				MainApp.myInstructionList.startSearching();
+				publish("run");
+				return null;
 			} 
 			
 			@Override

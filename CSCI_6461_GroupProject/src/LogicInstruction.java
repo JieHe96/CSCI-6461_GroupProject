@@ -139,6 +139,9 @@ public class LogicInstruction extends Instruction{
 	 */
 	public void execute() {
     	switch (opcode) {
+    		case 0:
+    			MainApp.myClock.setFlag(false);
+    			break;
 	    	case 1://LDR r, x, address[,I]
 	    		int ldr_ea = 0;
 	    		//Calculate EA
