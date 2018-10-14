@@ -104,8 +104,13 @@ public class InstructionList {
   		  
   		
   		
+  		//LDR R1, X1, 28
+  		addToInstructionList(11, "0000010101011100");
+  		//JZ R1, 13
+  		addToInstructionList(104,  "0010000100001100");
+  	
   		//LDR R2, X1, 28
-  		addToInstructionList(11, "0000011001011100");
+  		addToInstructionList(105, "0000011001011100");
   		//SIR R2, 1
   		addToInstructionList(89, "0001111000000001");
   		//STR R2, X1, 28
@@ -138,12 +143,9 @@ public class InstructionList {
   		addToInstructionList(102, "0000101001011000");
   		//OUT 
   		addToInstructionList(103, "1100101000000001");
-  		//LDR R1, X1, 28
-  		addToInstructionList(104, "0000010101011100");
-  		//JZ R1, 12
-  		addToInstructionList(105,  "0010000100001100");
   		//JNE R1, 11
   		addToInstructionList(106, "0010010100001011");
+  		
   	}
   	
   	public void startSearching() {
