@@ -9,12 +9,12 @@ subtract = 0 ;
 offset = 0; 
 
 
-LDA keyboard -> Register
-STR Register -> search
+LDR keyboard -> Register
+STR Register -> constant
 LDR offset=0
-SUB Reg = Reg - memory[100 + offset]
-STR subtract = reg
-DIV Reg = Reg/diff
+SUB Reg = Reg - memory[Offset]
+STR diff = reg
+DIV Reg = Reg/subtract
 SUB counter = counter - 1  
 ADD offset ++ 
 JNE Reg != 0  to 16 
