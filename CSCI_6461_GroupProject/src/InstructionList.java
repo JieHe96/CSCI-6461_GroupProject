@@ -29,7 +29,6 @@ public class InstructionList {
 		ioInstructionArray = new int[] {49, 50};
 		pointer = 0;
 		jump = false;
-		//initProgram();
 		
 	}
   	
