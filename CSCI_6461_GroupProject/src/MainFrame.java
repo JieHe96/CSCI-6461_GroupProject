@@ -368,7 +368,7 @@ public class MainFrame extends JFrame{
 		JPanel controlPanel = new JPanel(new FlowLayout());
 		TitledBorder controlBorder = new TitledBorder("Control");
 		controlPanel.setBorder(controlBorder);
-		iplButton = new JButton("IPL");
+		iplButton = new JButton("Program1");
 		iplButton.addActionListener(iplButtonListener);
 		singleRunButton = new JButton("Single Run");
 		singleRunButton.addActionListener(singleRunButtonListener);
