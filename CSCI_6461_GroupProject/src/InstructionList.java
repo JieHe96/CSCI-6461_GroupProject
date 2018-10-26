@@ -161,7 +161,7 @@ public class InstructionList {
 	 * @param value value of instruction
 	 * @see #addressList
 	 */
-	public void addToInstructionList(int index, String value) {
+	public int addToInstructionList(int index, String value) {
 		int type = Decode.decodeType(value);
 		System.out.println("type " + type);
 		switch (type) {
@@ -199,8 +199,9 @@ public class InstructionList {
 				MachineFault opFault = new MachineFault();
 				opFault.handleFault(2);
 				System.out.println("Machine Fault: Illegal Operation Code.");
-				break;
+				return 1;
 		}
+		return 0;
 		//Instruction newIns = new Instruction();
 
 	}

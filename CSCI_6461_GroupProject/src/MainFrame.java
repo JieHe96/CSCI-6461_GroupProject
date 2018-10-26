@@ -418,18 +418,14 @@ public class MainFrame extends JFrame{
 			String value = valueText.getText();
 			int index = Integer.parseInt(addr);
 			System.out.println(index);
-			MainApp.myMemory.writeToMemory(index, value);
-			MainApp.myInstructionList.addToInstructionList(index, value);
-			String ele = "Address: " + addr + "     " + "Value: " + value;
-			instructionModel.addElement(ele);
-			instructionList.setModel(instructionModel);
+			int fault1 = MainApp.myInstructionList.addToInstructionList(index, value);
+			int fault2 = MainApp.myMemory.writeToMemory(index, value);
+			if (fault1 == 0 && fault2 == 0) {
+				String ele = "Address: " + addr + "     " + "Value: " + value;
+				instructionModel.addElement(ele);
+				instructionList.setModel(instructionModel);
+			}
 			//SetPC(addr);
-		}
-	};
-	
-	private ActionListener resumeButtonListener = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			
 		}
 	};
 	

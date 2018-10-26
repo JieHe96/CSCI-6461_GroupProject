@@ -42,18 +42,18 @@ public class Memory {
 	 * @param index the address of memory
 	 * @param value the value of memory
 	 */
-	public void writeToMemory(int index, String value) {
+	public int writeToMemory(int index, String value) {
 		if (index >= 0 && index <= 5) {
 			MachineFault mrlFault = new MachineFault();
 			mrlFault.handleFault(0);
 			System.out.println("Machine Fault: Illegal Memory Address to Reserved Locations.");
-			return;
+			return 1;
 		}
 		if (index >= 2048) {
 			MachineFault mrlFault = new MachineFault();
 			mrlFault.handleFault(3);
 			System.out.println("Machine Fault: Illegal Memory Address beyond 2048.");
-			return;
+			return 1;
 		}
 		Word word = new Word();
     	for (int i = 0; i < 16; i++) {
@@ -61,6 +61,7 @@ public class Memory {
     		else word.set(i, false);
     	}
 		memoVec.set(index, word);
+		return 0;
 	}
 
 	/**
