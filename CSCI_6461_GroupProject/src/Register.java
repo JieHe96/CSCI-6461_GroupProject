@@ -69,7 +69,7 @@ public class Register {
 		if (name == "PC") {
 			chars = new char[12];
 		}
-		else if(name == "CC")
+		else if(name == "CC" || name == "MFR")
 		{
 			chars = new char[4];
 		}

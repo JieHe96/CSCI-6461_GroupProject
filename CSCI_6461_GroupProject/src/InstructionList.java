@@ -14,6 +14,7 @@ public class InstructionList {
     public int[] arithmeticInstructionArray;
     public int[] transferInstructionArray;
     public int[] ioInstructionArray;
+    public int[] misInstructionArray;
     private int pointer;
     private boolean jump;
 	
@@ -23,10 +24,11 @@ public class InstructionList {
   	public InstructionList() { // constructor 
 		instructionList = new HashMap<Integer, Instruction> ();
 		addressList = new Vector<Integer> ();
-		logicInstructionArray = new int[] {0, 1, 2, 3, 33, 34,18,19,20,21,25,26};
+		logicInstructionArray = new int[] {1,2,3,33,34,18,19,20,21,25,26};
 		arithmeticInstructionArray = new int[] {4,5,6,7,16,17};
 		transferInstructionArray = new int[] {8,9,10,11,12,13,14,15};
 		ioInstructionArray = new int[] {49, 50};
+		misInstructionArray = new int[] {0,30};
 		pointer = 0;
 		jump = false;
 		
@@ -186,6 +188,16 @@ public class InstructionList {
 				newIOIns.assignValue(value);
 				instructionList.put(index, newIOIns);
 				addressList.add(index);
+				break;
+			case 5:
+				MiscellaneousInstruction newMisIns = new MiscellaneousInstruction();
+				newMisIns.assignValue(value);
+				instructionList.put(index, newMisIns);
+				addressList.add(index);
+				break;	
+			case 6:
+				MachineFault opFault = new MachineFault();
+				opFault.handleFault(2);
 				break;
 		}
 		//Instruction newIns = new Instruction();

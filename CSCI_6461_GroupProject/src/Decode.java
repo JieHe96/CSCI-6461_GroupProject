@@ -69,7 +69,12 @@ public class Decode
         	return 4;
         }
         
-        return 0;
+        else if (IntStream.of(MainApp.myInstructionList.misInstructionArray)
+        		.anyMatch(x -> x == opcode)) {
+        	return 5;
+        }
+        
+        return 6;
     }
 }
    

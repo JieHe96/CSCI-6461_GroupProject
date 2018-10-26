@@ -61,22 +61,22 @@ public class LogicInstruction extends Instruction{
         if(opcode == 1 ||opcode ==  2 || opcode == 3|| opcode == 33 ||opcode ==  34 )
         {
         
-        String iregister = ins.substring(6,8);//r
-        String iindex = ins.substring(8,10);//ix
-        char temp = ins.charAt(10);
-        String itype = new StringBuilder().append("").append(temp).toString();
-        String iaddress = ins.substring(11,16);//ad
-        	
-        ireg = Decode.binaryToDecimal(iregister);//decimal r
-        index = Decode.binaryToDecimal(iindex);// decial ix
-        instype = Decode.binaryToDecimal(itype);//decimal i
-        insadd = Decode.binaryToDecimal(iaddress);//decimal address
-        
-        //System.out.println(opcode);
-        //System.out.println(ireg);
-        //System.out.println(index);
-        //System.out.println(instype);
-        //System.out.println(insadd);
+	        String iregister = ins.substring(6,8);//r
+	        String iindex = ins.substring(8,10);//ix
+	        char temp = ins.charAt(10);
+	        String itype = new StringBuilder().append("").append(temp).toString();
+	        String iaddress = ins.substring(11,16);//ad
+	        	
+	        ireg = Decode.binaryToDecimal(iregister);//decimal r
+	        index = Decode.binaryToDecimal(iindex);// decial ix
+	        instype = Decode.binaryToDecimal(itype);//decimal i
+	        insadd = Decode.binaryToDecimal(iaddress);//decimal address
+	        
+	        //System.out.println(opcode);
+	        //System.out.println(ireg);
+	        //System.out.println(index);
+	        //System.out.println(instype);
+	        //System.out.println(insadd);
         }
         else if(opcode == 18 ||opcode ==  19 ||opcode ==  20 ||opcode ==  21)
         {
@@ -139,9 +139,6 @@ public class LogicInstruction extends Instruction{
 	 */
 	public void execute() {
     	switch (opcode) {
-    		case 0:
-    			MainApp.myClock.setFlag(false);
-    			break;
 	    	case 1://LDR r, x, address[,I]
 	    		int ldr_ea = 0;
 	    		//Calculate EA
