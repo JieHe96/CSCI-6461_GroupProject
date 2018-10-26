@@ -198,6 +198,7 @@ public class InstructionList {
 			case 6:
 				MachineFault opFault = new MachineFault();
 				opFault.handleFault(2);
+				System.out.println("Machine Fault: Illegal Operation Code.");
 				break;
 		}
 		//Instruction newIns = new Instruction();

@@ -22,6 +22,10 @@ public class MachineFault {
 				MainApp.myRegisters.writeToRegister("MFR", "1000", 4);
 				break;
 		}
-		//MainApp.frame.updateUI();
+		String addr = MainApp.myMemory.readFromMemory(1).convertToString();
+		int pcNum = Decode.binaryToDecimal(addr);
+		String pcStr = Integer.toString(pcNum);
+		MainApp.myRegisters.writeToRegister("PC", pcStr, 12);
+		MainApp.frame.updateUI();
 	}
 }
