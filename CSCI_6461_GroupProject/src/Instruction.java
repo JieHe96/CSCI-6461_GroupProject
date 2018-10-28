@@ -7,6 +7,10 @@ public class Instruction {
 	
 	protected Word value;
 	
+	public Instruction () {
+		value = new Word();
+	}
+	
 	public Word getValue() {
     	return value;
     }

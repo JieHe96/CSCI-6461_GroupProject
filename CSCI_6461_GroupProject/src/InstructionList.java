@@ -196,10 +196,15 @@ public class InstructionList {
 				addressList.add(index);
 				break;	
 			case 6:
-				MachineFault opFault = new MachineFault();
-				opFault.handleFault(2);
-				System.out.println("Machine Fault: Illegal Operation Code.");
-				return 1;
+				Instruction errorIns = new Instruction();
+				errorIns.assignValue(value);
+				instructionList.put(index, errorIns);
+				addressList.add(index);
+				//MachineFault opFault = new MachineFault();
+				//opFault.handleFault(2);
+				//System.out.println("Machine Fault: Illegal Operation Code.");
+				//return 1;
+				break;
 		}
 		return 0;
 		//Instruction newIns = new Instruction();
@@ -216,6 +221,16 @@ public class InstructionList {
 	public void runSingleInstruction(int index) {
 		if (instructionList.containsKey(index)) {
 			pointer = addressList.indexOf(index);
+			
+			//check for machine fault
+			String temp = instructionList.get(index).getValue().convertToString();
+			int type = Decode.decodeType(temp);
+			if (type == 6) {
+				MachineFault opFault = new MachineFault();
+				opFault.handleFault(2);
+				System.out.println("Machine Fault: Illegal Operation Code.");
+			}
+			
 			instructionList.get(index).fetchInstruction();
 			instructionList.get(index).execute();
 			
