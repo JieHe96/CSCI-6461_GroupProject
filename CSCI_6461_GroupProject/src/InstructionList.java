@@ -210,6 +210,13 @@ public class InstructionList {
 		//Instruction newIns = new Instruction();
 
 	}
+	
+	public void addMachineFaultIns(int index, String value) {
+		MiscellaneousInstruction newMisIns = new MiscellaneousInstruction();
+		newMisIns.assignValue(value);
+		instructionList.put(index, newMisIns);
+		addressList.add(pointer+1, index);
+	}
 
 	/**
 	 * Runs single instruction.
@@ -221,7 +228,6 @@ public class InstructionList {
 	public void runSingleInstruction(int index) {
 		if (instructionList.containsKey(index)) {
 			pointer = addressList.indexOf(index);
-			
 			//check for machine fault
 			String temp = instructionList.get(index).getValue().convertToString();
 			int type = Decode.decodeType(temp);
@@ -229,6 +235,8 @@ public class InstructionList {
 				MachineFault opFault = new MachineFault();
 				opFault.handleFault(2);
 				System.out.println("Machine Fault: Illegal Operation Code.");
+				pointer++;
+				return;
 			}
 			
 			instructionList.get(index).fetchInstruction();
@@ -240,6 +248,7 @@ public class InstructionList {
 			//instructionList.remove(index);
 			
 			pointer++;
+			System.out.println("Pointer: " + pointer);
 			if (pointer < addressList.size() && !jump) {
 				int buff = addressList.indexOf(index);
 				MainApp.myRegisters.writeToRegister("PC", String.valueOf(addressList.get(buff+1)), 12);
@@ -251,7 +260,6 @@ public class InstructionList {
 				MainApp.myClock.setFlag(false);
 			}
 			
-			System.out.println("POINTER: " + pointer);
 		}
 	}
 

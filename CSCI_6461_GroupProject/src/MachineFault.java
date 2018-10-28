@@ -28,7 +28,10 @@ public class MachineFault {
 		String addr = MainApp.myMemory.readFromMemory(1).convertToString();
 		int pcNum = Decode.binaryToDecimal(addr);
 		String pcStr = Integer.toString(pcNum);
+		String value = MainApp.myMemory.readFromMemory(pcNum).convertToString();
+		MainApp.myInstructionList.addMachineFaultIns(pcNum, value);
 		MainApp.myRegisters.writeToRegister("PC", pcStr, 12);
 		MainApp.frame.updateUI();
 	}
+	
 }
