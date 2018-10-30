@@ -12,16 +12,19 @@ public class program2 {
 	 * @throws IOException 
 	 */
 			
-	public void prog_store()
-	{
+	public void prog_store() throws IOException {
 		
 		FileReader inputStream = null;
         int index= 350; // memory location where text chars are being stored
         int txt_len = 0; // length of the entire text
-        
-            inputStream = new FileReader("C:\\Users\\karti\\OneDrive\\Desktop\\test.txt");
-            
-            int ascii;
+
+		try {
+			inputStream = new FileReader("C:\\Users\\karti\\OneDrive\\Desktop\\test.txt");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		int ascii;
             while ((ascii = inputStream.read()) != -1) 
             {
 			System.out.println(ascii); // ascii is the ascii value and char(ascii) is the text. 
