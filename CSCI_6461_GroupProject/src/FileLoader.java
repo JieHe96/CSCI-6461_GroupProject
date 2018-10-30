@@ -5,21 +5,27 @@ import java.util.Scanner;
  * This file fetches characters from the input file 
  *
  */
-public class program2 {
+public class FileLoader {
 
 	/**
 	 * @param args
 	 * @throws IOException 
 	 */
-			
+	public FileLoader() {
+
+	}
+
 	public void prog_store() throws IOException {
 		
 		FileReader inputStream = null;
         int index= 350; // memory location where text chars are being stored
         int txt_len = 0; // length of the entire text
 
+		String filename = System.getProperty("user.dir") + "/program2text";
+		System.out.println(filename);
+
 		try {
-			inputStream = new FileReader("C:\\Users\\karti\\OneDrive\\Desktop\\test.txt");
+			inputStream = new FileReader(filename);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

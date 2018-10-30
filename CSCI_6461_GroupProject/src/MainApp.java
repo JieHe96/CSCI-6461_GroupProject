@@ -3,6 +3,7 @@ import javax.swing.SwingUtilities;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -20,6 +21,7 @@ public class MainApp {
 	public static Clock myClock;
 	public static Device myDevice;
 	public static Cache myCache;
+	public static FileLoader myFileLoader;
 	
 	public static void main (final String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -30,6 +32,11 @@ public class MainApp {
 				frame.setSize(800, 500);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
+				try {
+					myFileLoader.prog_store();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			
 		});
@@ -44,6 +51,7 @@ public class MainApp {
 		myClock = new Clock();
 		myDevice = new Device();
 		myCache = new Cache();
+		myFileLoader = new FileLoader();
 	}
 	
 }
