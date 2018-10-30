@@ -120,6 +120,7 @@ public class MainFrame extends JFrame{
 		//printerModel.addElement("$Simulator: " + str);
 		//printerModel.set(0, printerModel.getElementAt(0)+str);
 		//printerList.setModel(printerModel);
+		//new printer
 		printerArea.setText(printerArea.getText() + str);
 	}
 	
