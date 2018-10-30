@@ -43,7 +43,9 @@ public class InstructionList {
   		MainApp.myMemory.writeToMemory(11, "1100100000000000");
   		MainApp.myMemory.writeToMemory(12, "1100010000000000");
   		MainApp.myMemory.writeToMemory(13, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(14, "0000000000000000");
+  		MainApp.myMemory.writeToMemory(14, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(15, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(16, "0000000000000000");
   	}
   	
   	public void initProgram() {
@@ -225,11 +227,12 @@ public class InstructionList {
 	
 	public void exeMachineFaultIns() {
 		
-		for (int i = 6; i < 15; i++) {
+		for (int i = 6; i < 17; i++) {
 			if (i == 6) MainApp.frame.setKeyboard("H");
 			else if (i == 8) MainApp.frame.setKeyboard("A");
 			else if (i == 10) MainApp.frame.setKeyboard("L");
 			else if (i == 12) MainApp.frame.setKeyboard("T");
+			else if (i == 14) MainApp.frame.setKeyboard("\n");
 			String value = MainApp.myMemory.readFromMemory(i).convertToString();
 			int type = Decode.decodeType(value);
 			System.out.println("Machine Fault Ins: " + type);

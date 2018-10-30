@@ -11,18 +11,18 @@ public class MachineFault {
 		switch (faultID) {
 			case 0:
 				MainApp.myRegisters.writeToRegister("MFR", "0001", 4);
-				MainApp.frame.setPrinter("Machine Fault: Illegal Memory Address to Reserved Locations");
+				//MainApp.frame.setPrinter("Machine Fault: Illegal Memory Address to Reserved Locations");
 				break;
 			case 1:
 				MainApp.myRegisters.writeToRegister("MFR", "0010", 4);
 				break;
 			case 2:
 				MainApp.myRegisters.writeToRegister("MFR", "0100", 4);
-				MainApp.frame.setPrinter("Machine Fault: Illegal Operation Code");
+				//MainApp.frame.setPrinter("Machine Fault: Illegal Operation Code");
 				break;
 			case 3:
 				MainApp.myRegisters.writeToRegister("MFR", "1000", 4);
-				MainApp.frame.setPrinter("Machine Fault: Illegal Memory Address beyond 2048");
+				//MainApp.frame.setPrinter("Machine Fault: Illegal Memory Address beyond 2048");
 				break;
 		}
 		String currPC = MainApp.myRegisters.getRegister("PC", true);

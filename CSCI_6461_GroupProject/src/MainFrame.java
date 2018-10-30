@@ -13,6 +13,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.DefaultListModel;
 import java.util.List;
@@ -48,6 +49,7 @@ public class MainFrame extends JFrame{
 	JList<String> instructionList;
 	JTextField keyboardField;
 	DefaultListModel<String> printerModel;
+	JTextArea printerArea;
 	JList<String> printerList;
 	JTextField cacheValueText;
 	JTextField cacheAddrText;
@@ -89,11 +91,13 @@ public class MainFrame extends JFrame{
 		keyboardPanel.add(keyboardField, BorderLayout.CENTER);
 		
 		JScrollPane printerPanel = new JScrollPane();
-		printerModel = new DefaultListModel<String>();
-		printerModel.addElement("$Simulator: ");
-		printerList = new JList<String>();
-		printerList.setModel(printerModel);
-		printerPanel.setViewportView(printerList);
+		//printerModel = new DefaultListModel<String>();
+		//printerModel.addElement("$Simulator: ");
+		//printerList = new JList<String>();
+		//printerList.setModel(printerModel);
+		//printerPanel.setViewportView(printerList);
+		printerArea = new JTextArea();
+		printerPanel.setViewportView(printerArea);
 		TitledBorder printerBorder = new TitledBorder("Console");
 		printerPanel.setBorder(printerBorder);
 		devicePanel.add(keyboardPanel, BorderLayout.PAGE_START);
@@ -114,8 +118,9 @@ public class MainFrame extends JFrame{
 	
 	public void setPrinter(String str) {
 		//printerModel.addElement("$Simulator: " + str);
-		printerModel.set(0, printerModel.getElementAt(0)+str);
-		printerList.setModel(printerModel);
+		//printerModel.set(0, printerModel.getElementAt(0)+str);
+		//printerList.setModel(printerModel);
+		printerArea.setText(printerArea.getText() + str);
 	}
 	
 	private JPanel initRPanel() {

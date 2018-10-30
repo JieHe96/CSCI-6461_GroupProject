@@ -58,9 +58,14 @@ public class IOInstruction extends Instruction{
 				        MainApp.myRegisters.setCharMap(ireg, 0);
 				    }  
 				    catch (NumberFormatException e) { 
-				    	System.out.println("String: " + keyboardStr);
-				    	char buff = keyboardStr.charAt(0);
-				    	int buffInt = buff;
+				    	int buffInt;
+				    	if (keyboardStr == "\n") {
+				    		buffInt = 10;
+				    	}
+				    	else {
+					    	char buff = keyboardStr.charAt(0);
+					    	buffInt = buff;
+				    	}
 				    	buffStr = Decode.IntegerTo16sBinary(buffInt);
 				    	MainApp.myRegisters.setCharMap(ireg, 1);
 				    } 
