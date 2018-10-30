@@ -233,7 +233,8 @@ public class InstructionList {
 			String value = MainApp.myMemory.readFromMemory(i).convertToString();
 			int type = Decode.decodeType(value);
 			System.out.println("Machine Fault Ins: " + type);
-			switch (type) {
+			
+			switch (type) { 
 				case 1:
 					ArithmeticInstruction newArithIns = new ArithmeticInstruction();
 					newArithIns.assignValue(value);
