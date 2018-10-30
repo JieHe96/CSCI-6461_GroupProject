@@ -1,15 +1,21 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingWorker;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -55,12 +61,22 @@ public class MainFrame extends JFrame{
 	JTextField cacheAddrText;
 	JButton cacheReadButton;
 	JButton cacheWriteButton;
+	JMenuBar menuBar;
+	JMenu fileMenu;
+	JMenuItem openFileMenuItem;
 	
 	public MainFrame(String title) {
 		super(title);
 		
 		setLayout(new BorderLayout());
 		JPanel top = new JPanel(new GridLayout(1,2));
+		
+		menuBar = new JMenuBar();
+		fileMenu = new JMenu("File");
+		openFileMenuItem = new JMenuItem("Open");
+		openFileMenuItem.addActionListener(fileOpenListener);
+		fileMenu.add(openFileMenuItem);
+		menuBar.add(fileMenu);
 		
 		//Instruction Section
 		JTabbedPane instructionPanel = initOutputPanel();
@@ -70,6 +86,7 @@ public class MainFrame extends JFrame{
 		top.add(registerPanel);
 		
 		JPanel bottomPanel = initUIPanel();
+		add(menuBar, BorderLayout.PAGE_START);
 		add(top, BorderLayout.CENTER);
 		add(bottomPanel, BorderLayout.PAGE_END);
 	}
@@ -407,6 +424,24 @@ public class MainFrame extends JFrame{
 		return bottom;
 		
 	}
+	
+	private ActionListener fileOpenListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFileChooser fc = new JFileChooser();
+			fc.setCurrentDirectory(new File("."));
+			int result = fc.showOpenDialog(MainApp.frame);
+			if (result == JFileChooser.APPROVE_OPTION) {
+	            File f = fc.getSelectedFile();
+	            FileLoader fl = new FileLoader(f);
+	            try {
+					fl.progStore();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+	};
 	
 	private ActionListener cacheReadListener = new ActionListener() {
 		@Override

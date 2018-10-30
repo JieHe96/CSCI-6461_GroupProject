@@ -32,11 +32,6 @@ public class MainApp {
 				frame.setSize(800, 500);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
-				try {
-					myFileLoader.prog_store();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 			
 		});
@@ -51,7 +46,7 @@ public class MainApp {
 		myClock = new Clock();
 		myDevice = new Device();
 		myCache = new Cache();
-		myFileLoader = new FileLoader();
+		//myFileLoader = new FileLoader();
 	}
 	
 }

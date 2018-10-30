@@ -7,28 +7,21 @@ import java.util.Scanner;
  */
 public class FileLoader {
 
+	File file;
+	
 	/**
 	 * @param args
 	 * @throws IOException 
 	 */
-	public FileLoader() {
-
+	public FileLoader(File f) {
+		file = f;
 	}
 
-	public void prog_store() throws IOException {
+	public void progStore() throws IOException {
 		
-		FileReader inputStream = null;
+		FileReader inputStream = new FileReader(file);
         int index= 350; // memory location where text chars are being stored
         int txt_len = 0; // length of the entire text
-
-		String filename = System.getProperty("user.dir") + "/program2text";
-		System.out.println(filename);
-
-		try {
-			inputStream = new FileReader(filename);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
 
 		int ascii;
             while ((ascii = inputStream.read()) != -1) 
