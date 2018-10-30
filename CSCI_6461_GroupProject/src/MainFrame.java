@@ -31,6 +31,7 @@ public class MainFrame extends JFrame{
 	JButton singleRunButton;
 	JButton iplButton;
 	JButton startButton;
+	JButton program1Button;
 	JTextField irText;
 	JTextField marText;
 	JTextField mbrText;
@@ -89,6 +90,7 @@ public class MainFrame extends JFrame{
 		
 		JScrollPane printerPanel = new JScrollPane();
 		printerModel = new DefaultListModel<String>();
+		printerModel.addElement("$Simulator: ");
 		printerList = new JList<String>();
 		printerList.setModel(printerModel);
 		printerPanel.setViewportView(printerList);
@@ -106,8 +108,13 @@ public class MainFrame extends JFrame{
 		return keyboardField.getText();
 	}
 
+	public void setKeyboard(String str) {
+		keyboardField.setText(str);
+	}
+	
 	public void setPrinter(String str) {
-		printerModel.addElement("$Simulator: " + str);
+		//printerModel.addElement("$Simulator: " + str);
+		printerModel.set(0, printerModel.getElementAt(0)+str);
 		printerList.setModel(printerModel);
 	}
 	
@@ -369,8 +376,10 @@ public class MainFrame extends JFrame{
 		JPanel controlPanel = new JPanel(new FlowLayout());
 		TitledBorder controlBorder = new TitledBorder("Control");
 		controlPanel.setBorder(controlBorder);
-		iplButton = new JButton("Program1");
+		iplButton = new JButton("IPL");
 		iplButton.addActionListener(iplButtonListener);
+		program1Button = new JButton("Program1");
+		program1Button.addActionListener(p1ButtonListener);
 		singleRunButton = new JButton("Single Run");
 		singleRunButton.addActionListener(singleRunButtonListener);
 		JButton loadButton = new JButton("Load");
@@ -383,6 +392,7 @@ public class MainFrame extends JFrame{
 		stopButton.setEnabled(false);
 		//stopButton.addActionListener(stopButtonListener);
 		controlPanel.add(iplButton);
+		controlPanel.add(program1Button);
 		controlPanel.add(singleRunButton);
 		controlPanel.add(loadButton);
 		controlPanel.add(startButton);
@@ -441,6 +451,13 @@ public class MainFrame extends JFrame{
 	};
 	
 	private ActionListener iplButtonListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			MainApp.myInstructionList.initProgram1();
+		}
+	};
+	
+	private ActionListener p1ButtonListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			MainApp.myInstructionList.initProgram();

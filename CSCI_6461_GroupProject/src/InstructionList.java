@@ -32,7 +32,19 @@ public class InstructionList {
 		pointer = 0;
 		jump = false;
 		
-	}
+	} 
+  	
+  	public void initProgram1() {
+  		MainApp.myMemory.writeToMemory(6, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(7, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(8, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(9, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(10, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(11, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(12, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(13, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(14, "0000000000000000");
+  	}
   	
   	public void initProgram() {
 		//Initializing Instructions for IPL
@@ -211,11 +223,51 @@ public class InstructionList {
 
 	}
 	
-	public void addMachineFaultIns(int index, String value) {
-		MiscellaneousInstruction newMisIns = new MiscellaneousInstruction();
-		newMisIns.assignValue(value);
-		instructionList.put(index, newMisIns);
-		addressList.add(pointer+1, index);
+	public void exeMachineFaultIns() {
+		
+		for (int i = 6; i < 15; i++) {
+			if (i == 6) MainApp.frame.setKeyboard("H");
+			else if (i == 8) MainApp.frame.setKeyboard("A");
+			else if (i == 10) MainApp.frame.setKeyboard("L");
+			else if (i == 12) MainApp.frame.setKeyboard("T");
+			String value = MainApp.myMemory.readFromMemory(i).convertToString();
+			int type = Decode.decodeType(value);
+			System.out.println("Machine Fault Ins: " + type);
+			switch (type) {
+				case 1:
+					ArithmeticInstruction newArithIns = new ArithmeticInstruction();
+					newArithIns.assignValue(value);
+					newArithIns.fetchInstruction();
+					newArithIns.execute();
+					break;
+				case 2:
+					TransferInstruction newTransIns = new TransferInstruction();
+					newTransIns.assignValue(value);
+					newTransIns.fetchInstruction();
+					newTransIns.execute();
+					break;
+				case 3:
+					LogicInstruction newLogicIns = new LogicInstruction();
+					newLogicIns.assignValue(value);
+					newLogicIns.fetchInstruction();
+					newLogicIns.execute();
+					break;
+				case 4:
+					IOInstruction newIOIns = new IOInstruction();
+					newIOIns.assignValue(value);
+					newIOIns.fetchInstruction();
+					newIOIns.execute();
+					break;
+				case 5:
+					MiscellaneousInstruction newMisIns = new MiscellaneousInstruction();
+					newMisIns.assignValue(value);
+					newMisIns.fetchInstruction();
+					newMisIns.execute();
+					break;	
+				case 6:
+					break;
+			}
+		}
 	}
 
 	/**
