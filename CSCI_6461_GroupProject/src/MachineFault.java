@@ -25,16 +25,22 @@ public class MachineFault {
 				//MainApp.frame.setPrinter("Machine Fault: Illegal Memory Address beyond 2048");
 				break;
 		}
+		//write current PC value to memory location 4
 		String currPC = MainApp.myRegisters.getRegister("PC", true);
-		System.out.println("currPC: " + currPC);
+		String currPC16s = Decode.IntegerTo16sBinary(Integer.parseInt(currPC));
+		MainApp.myMemory.setFlag(false);
+		MainApp.myMemory.writeToMemory(4, currPC16s);
+		MainApp.myMemory.setFlag(true);
+		
+		//read value from memory location 1 to PC
 		String addr = MainApp.myMemory.readFromMemory(1).convertToString();
 		int pcNum = Decode.binaryToDecimal(addr);
 		String pcStr = Integer.toString(pcNum);
-		//String value = MainApp.myMemory.readFromMemory(pcNum).convertToString();
-		//MainApp.myInstructionList.addMachineFaultIns(pcNum, value);
 		MainApp.myRegisters.writeToRegister("PC", pcStr, 12);
 		MainApp.frame.updateUI();
+		//execute machine fault routine
 		MainApp.myInstructionList.exeMachineFaultIns();
+		
 	}
 	
 }

@@ -34,7 +34,9 @@ public class InstructionList {
 		
 	} 
   	
+  	//initialize trap and machine fault
   	public void initProgram1() {
+  		//machine fault routine
   		MainApp.myMemory.writeToMemory(6, "1100010000000000");
   		MainApp.myMemory.writeToMemory(7, "1100100000000000");
   		MainApp.myMemory.writeToMemory(8, "1100010000000000");
@@ -46,21 +48,38 @@ public class InstructionList {
   		MainApp.myMemory.writeToMemory(14, "1100010000000000");
   		MainApp.myMemory.writeToMemory(15, "1100100000000000");
   		MainApp.myMemory.writeToMemory(16, "0000000000000000");
+  		
+  		//trap routine 1
+  		MainApp.myMemory.writeToMemory(18, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(19, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(20, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(21, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(22, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(23, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(24, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(25, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(26, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(27, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(28, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(29, "1100100000000000");
+  		
+  		//trap routine 2
+  		MainApp.myMemory.writeToMemory(31, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(32, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(33, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(34, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(35, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(36, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(37, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(38, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(39, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(40, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(41, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(42, "1100100000000000");
   	}
   	
   	public void initProgram() {
-		//Initializing Instructions for IPL
-		//LDA r with some address 
-//		addToInstructionList(6,"0000110000011001");  
-//		addToInstructionList(7,"0000100000010100");
-//		addToInstructionList(8,"0000110000000011");
-//		addToInstructionList(9,"0000100000011110");
-//		addToInstructionList(10,"1000010001011110");
-//		addToInstructionList(11,"0000111100011101");
-//		addToInstructionList(12,"0000101101010110");
-//		addToInstructionList(13,"0000011000110100");
-//		addToInstructionList(14,"0000101001110001");
-//		addToInstructionList(15,"1000100001110100");
+		//Machine code for program1
   		
   		//LDA R0, 31
   		addToInstructionList(62, "0000110000011111");
@@ -163,10 +182,6 @@ public class InstructionList {
   		//finish
   		
   	}
-  	
-  	public void startSearching() {
-
-  	}
 
 	/**
 	 * Adds instruction to instruction list.
@@ -214,63 +229,89 @@ public class InstructionList {
 				errorIns.assignValue(value);
 				instructionList.put(index, errorIns);
 				addressList.add(index);
-				//MachineFault opFault = new MachineFault();
-				//opFault.handleFault(2);
-				//System.out.println("Machine Fault: Illegal Operation Code.");
-				//return 1;
 				break;
 		}
-		return 0;
-		//Instruction newIns = new Instruction();
-
+		int fault = MainApp.myMemory.writeToMemory(index, value);
+		return fault;
+	}
+	
+	private void executeHelper(int type, String value) {
+		switch (type) { 
+			case 1:
+				ArithmeticInstruction newArithIns = new ArithmeticInstruction();
+				newArithIns.assignValue(value);
+				newArithIns.fetchInstruction();
+				newArithIns.execute();
+				break;
+			case 2:
+				TransferInstruction newTransIns = new TransferInstruction();
+				newTransIns.assignValue(value);
+				newTransIns.fetchInstruction();
+				newTransIns.execute();
+				break;
+			case 3:
+				LogicInstruction newLogicIns = new LogicInstruction();
+				newLogicIns.assignValue(value);
+				newLogicIns.fetchInstruction();
+				newLogicIns.execute();
+				break;
+			case 4:
+				IOInstruction newIOIns = new IOInstruction();
+				newIOIns.assignValue(value);
+				newIOIns.fetchInstruction();
+				newIOIns.execute();
+				break;
+			case 5:
+				MiscellaneousInstruction newMisIns = new MiscellaneousInstruction();
+				newMisIns.assignValue(value);
+				newMisIns.fetchInstruction();
+				newMisIns.execute();
+				break;	
+			case 6:
+				break;
+		}
 	}
 	
 	public void exeMachineFaultIns() {
-		
 		for (int i = 6; i < 17; i++) {
 			if (i == 6) MainApp.frame.setKeyboard("H");
 			else if (i == 8) MainApp.frame.setKeyboard("A");
 			else if (i == 10) MainApp.frame.setKeyboard("L");
 			else if (i == 12) MainApp.frame.setKeyboard("T");
-			else if (i == 14) MainApp.frame.setKeyboard("\n");
+			else if (i == 14) MainApp.frame.setKeyboard("/n");
 			String value = MainApp.myMemory.readFromMemory(i).convertToString();
 			int type = Decode.decodeType(value);
-			System.out.println("Machine Fault Ins: " + type);
-			
-			switch (type) { 
-				case 1:
-					ArithmeticInstruction newArithIns = new ArithmeticInstruction();
-					newArithIns.assignValue(value);
-					newArithIns.fetchInstruction();
-					newArithIns.execute();
-					break;
-				case 2:
-					TransferInstruction newTransIns = new TransferInstruction();
-					newTransIns.assignValue(value);
-					newTransIns.fetchInstruction();
-					newTransIns.execute();
-					break;
-				case 3:
-					LogicInstruction newLogicIns = new LogicInstruction();
-					newLogicIns.assignValue(value);
-					newLogicIns.fetchInstruction();
-					newLogicIns.execute();
-					break;
-				case 4:
-					IOInstruction newIOIns = new IOInstruction();
-					newIOIns.assignValue(value);
-					newIOIns.fetchInstruction();
-					newIOIns.execute();
-					break;
-				case 5:
-					MiscellaneousInstruction newMisIns = new MiscellaneousInstruction();
-					newMisIns.assignValue(value);
-					newMisIns.fetchInstruction();
-					newMisIns.execute();
-					break;	
-				case 6:
-					break;
-			}
+			System.out.println("Type: " + type);
+			executeHelper(type, value);
+		}
+	}
+	
+	
+	public void exeTrapIns1() {
+		for (int i = 18; i < 30; i++) {
+			if (i == 18) MainApp.frame.setKeyboard("T");
+			else if (i == 20) MainApp.frame.setKeyboard("R");
+			else if (i == 22) MainApp.frame.setKeyboard("A");
+			else if (i == 24) MainApp.frame.setKeyboard("P");
+			else if (i == 26) MainApp.frame.setKeyboard("1");
+			else if (i == 28) MainApp.frame.setKeyboard("/n");
+			String value = MainApp.myMemory.readFromMemory(i).convertToString();
+			int type = Decode.decodeType(value);
+			executeHelper(type, value);	
+		}
+	}
+	
+	public void exeTrapIns2() {
+		for (int i = 31; i < 43; i++) {
+			if (i == 31) MainApp.frame.setKeyboard("T");
+			else if (i == 33) MainApp.frame.setKeyboard("R");
+			else if (i == 35) MainApp.frame.setKeyboard("A");
+			else if (i == 37) MainApp.frame.setKeyboard("P");
+			else if (i == 39) MainApp.frame.setKeyboard("2");
+			else if (i == 41) MainApp.frame.setKeyboard("/n");
+			String value = MainApp.myMemory.readFromMemory(i).convertToString();
+			int type = Decode.decodeType(value);
+			executeHelper(type, value);	
 		}
 	}
 

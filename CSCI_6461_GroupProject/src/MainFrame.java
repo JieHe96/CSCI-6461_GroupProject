@@ -470,8 +470,8 @@ public class MainFrame extends JFrame{
 			int index = Integer.parseInt(addr);
 			System.out.println(index);
 			int fault1 = MainApp.myInstructionList.addToInstructionList(index, value);
-			int fault2 = MainApp.myMemory.writeToMemory(index, value);
-			if (fault1 == 0 && fault2 == 0) {
+			//int fault2 = MainApp.myMemory.writeToMemory(index, value);
+			if (fault1 == 0) {
 				String ele = "Address: " + addr + "     " + "Value: " + value;
 				instructionModel.addElement(ele);
 				instructionList.setModel(instructionModel);
@@ -627,7 +627,6 @@ public class MainFrame extends JFrame{
 				printerModel.addElement("Please enter a search number: ");
 				printerList.setModel(printerModel);
 				keyboardField.setText("");
-				MainApp.myInstructionList.startSearching();
 				publish("run");
 				return null;
 			} 

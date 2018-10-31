@@ -21,7 +21,7 @@ public class IOInstruction extends Instruction{
 
     	String ins = value.convertToString();
     	
-    	System.out.println(ins);
+    	//System.out.println(ins);
         // Instruction register 
         // insert fetch instruction from input screen and assingn to variable ir 
     	//fetching various parts of the instructions 
@@ -59,7 +59,8 @@ public class IOInstruction extends Instruction{
 				    }  
 				    catch (NumberFormatException e) { 
 				    	int buffInt;
-				    	if (keyboardStr == "\n") {
+				    	System.out.println(keyboardStr);
+				    	if (keyboardStr.equals("/n")) {
 				    		buffInt = 10;
 				    	}
 				    	else {
