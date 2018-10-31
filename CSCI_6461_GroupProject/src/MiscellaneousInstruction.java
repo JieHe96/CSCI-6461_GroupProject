@@ -42,6 +42,15 @@ public class MiscellaneousInstruction extends Instruction{
     			break;
     		case 30:
     			//trap
+    			if (trapcode == 0) {
+    				
+    			}
+    			else if (trapcode == 1) {
+    				
+    			}
+    			else if (trapcode == 2) {
+    				
+    			}
     			break;
     	}
 	}
