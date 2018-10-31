@@ -23,7 +23,6 @@ public class FileLoader {
         int index= 350; // memory location where text chars are being stored
         int txt_len = 0; // length of the entire text
 		int ascii;
-		String element;
 		
 		while ((ascii = inputStream.read()) != -1) {
 			//System.out.println(ascii); // ascii is the ascii value and char(ascii) is the text. 
@@ -32,17 +31,11 @@ public class FileLoader {
 			// Printing to console
 			System.out.println(ascii + "\t" + inChar + "\t "+ inBin + "\t stored at  " + index + "\t " ); // pRinting to console
 			// writing to memory
-			MainApp.myMemory.writeToMemory(index, inBin);// Storing to memory location
-			MainApp.myMemory.setChar(true, index);
-			element=Character.toString(inChar);
-			MainApp.frame.setPrinter(element);
-			if(inChar=='.')
-				MainApp.frame.setPrinter("\n");
+			MainApp.myMemory.writeToMemory(index, inBin);		// Storing to memory location 
 			index++; // incrementing index for next storage
 			txt_len++;
 		}
-		
-		MainApp.frame.setPrinter("\n  Enter search element in keyboard  \n ");// Storing to memory location
+            
         System.out.print(" \t The total len" + txt_len);
 	}            
 } 

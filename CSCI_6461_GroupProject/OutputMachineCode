@@ -1,3 +1,3 @@
-
+set x2 =350 ; 
 0000010010000001 // Loading reg0 from memory
 1100100000000000 // out reg0 to IO console 
