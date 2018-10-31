@@ -30,7 +30,7 @@ public class FileLoader {
 			char inChar = (char)ascii; // inChar is the char value 
 			String inBin = Decode.IntegerTo16sBinary(ascii); // to 16 bit binary 
 			// Printing to console
-			System.out.println(ascii + "\t" + inChar + "\t "+ inBin + "\t stored at \t " + index + "\t " ); // pRinting to console
+			System.out.println(ascii + "\t" + inChar + "\t "+ inBin + "\t stored at  " + index + "\t " ); // pRinting to console
 			// writing to memory
 			MainApp.myMemory.writeToMemory(index, inBin);		// Storing to memory location 
 			index++; // incrementing index for next storage
@@ -38,9 +38,13 @@ public class FileLoader {
 			}
             
             System.out.print(" \t The total len" + txt_len);
-             index= 350;
-	}            
+            }            
         } 
+
+
+
+
+
      
         
 
