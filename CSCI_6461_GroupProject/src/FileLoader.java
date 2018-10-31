@@ -31,16 +31,19 @@ public class FileLoader {
 			String inBin = Decode.IntegerTo16sBinary(ascii); // to 16 bit binary 
 			// Printing to console
 			System.out.println(ascii + "\t" + inChar + "\t "+ inBin + "\t stored at  " + index + "\t " ); // pRinting to console
-			// writing to memory
-			MainApp.myMemory.writeToMemory(index, inBin);// Storing to memory location 
+			// writing to memory // Storing to memory location 
+			MainApp.myMemory.writeToMemory(index, inBin);
 			element=Character.toString(inChar);
-			MainApp.frame.setPrinter(element);
+			// printing to IO console
+			MainApp.frame.setPrinter(element); 
+			// checking or end of line
 			if(inChar=='.')
 				MainApp.frame.setPrinter("\n");
-			index++; // incrementing index for next storage
+			// incrementing index for next storage
+			index++; 
 			txt_len++;
 		}
-		
+		// Asking user for Input 
 		MainApp.frame.setPrinter("\n  Enter search element in keyboard  \n ");// Storing to memory location
         System.out.print(" \t The total len" + txt_len);
 	}            
