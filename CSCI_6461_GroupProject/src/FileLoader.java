@@ -24,8 +24,7 @@ public class FileLoader {
         int txt_len = 0; // length of the entire text
 		int ascii;
 		
-            while ((ascii = inputStream.read()) != -1) 
-            {
+		while ((ascii = inputStream.read()) != -1) {
 			//System.out.println(ascii); // ascii is the ascii value and char(ascii) is the text. 
 			char inChar = (char)ascii; // inChar is the char value 
 			String inBin = Decode.IntegerTo16sBinary(ascii); // to 16 bit binary 
@@ -35,11 +34,11 @@ public class FileLoader {
 			MainApp.myMemory.writeToMemory(index, inBin);		// Storing to memory location 
 			index++; // incrementing index for next storage
 			txt_len++;
-			}
+		}
             
-            System.out.print(" \t The total len" + txt_len);
-            }            
-        } 
+        System.out.print(" \t The total len" + txt_len);
+	}            
+} 
 
 
 
