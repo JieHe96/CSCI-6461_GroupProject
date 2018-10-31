@@ -171,7 +171,10 @@ public class LogicInstruction extends Instruction{
 	    		String ldr_eaStr = Decode.IntegerTo16sBinary(ldr_ea);
 	    		//fetching word from memory and converting to string - Getting value at the memory 
 	    		String ldr_mValue = MainApp.myMemory.readFromMemory(ldr_ea).convertToString();
-	    		if (MainApp.myMemory.readFromMemory(ldr_ea).checkFlag()) MainApp.myRegisters.setCharMap(ireg, 1);
+	    		if (MainApp.myMemory.readFromMemory(ldr_ea).checkFlag()) {
+	    			System.out.println("=================");
+	    			MainApp.myRegisters.setCharMap(ireg, 1);
+	    		}
 	    		//store address into MAR 
 	    		MainApp.myRegisters.writeToRegister("MAR", ldr_eaStr, 16);
 	    		//Store value into MBR

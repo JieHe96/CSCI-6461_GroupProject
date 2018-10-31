@@ -32,7 +32,8 @@ public class FileLoader {
 			// Printing to console
 			System.out.println(ascii + "\t" + inChar + "\t "+ inBin + "\t stored at  " + index + "\t " ); // pRinting to console
 			// writing to memory
-			MainApp.myMemory.writeToMemory(index, inBin);// Storing to memory location 
+			MainApp.myMemory.writeToMemory(index, inBin);// Storing to memory location
+			MainApp.myMemory.setChar(true, index);
 			element=Character.toString(inChar);
 			MainApp.frame.setPrinter(element);
 			if(inChar=='.')
