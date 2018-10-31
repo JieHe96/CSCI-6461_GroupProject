@@ -20,13 +20,13 @@ public class Cache {
 		int offset = isHit(address);
 		//cache hit, return data copy from cache
 		if (offset != -1) {
-			System.out.print("found");
+			System.out.print("\n found in cache");
 			CacheLine cl = cacheData.get(address-offset);
 			Word data = cl.getData(offset);
 			return data.convertToString();
 		}
 		else {
-			System.out.print("not found");
+			System.out.print(" \n not found in cache ");
 			CacheLine newCL = new CacheLine();
 			Word data = newCL.updateCacheLine(address);
 			replace(address, newCL);
@@ -38,13 +38,13 @@ public class Cache {
 		int offset = isHit(address);
 		//cache hit, write to cache and memory
 		if (offset != -1) {
-			System.out.print("found");
+			System.out.print("\n found in cache ");
 			cacheData.get(address-offset).writeToData(offset, data);
 			MainApp.myMemory.writeToMemory(address, data);
 		}
 		//cache miss, replace cache
 		else {
-			System.out.print("Not found");
+			System.out.print("Not found in cache ");
 			CacheLine newCL = new CacheLine();
 			newCL.updateCacheLine(address);
 			replace(address, newCL);
@@ -56,12 +56,12 @@ public class Cache {
 		int offset = isHit(address);
 		//cache hit, only write to cache
 		if (offset != -1) {
-			System.out.print("found");
+			System.out.print("found in cache ");
 			cacheData.get(address-offset).writeToData(offset, data);
 		}
 		//cache miss, replace cache and write to memory
 		else {
-			System.out.print("Not found");
+			System.out.print("Not found in cache");
 			CacheLine newCL = new CacheLine();
 			newCL.updateCacheLine(address);
 			replaceAndUpdate(address, newCL);

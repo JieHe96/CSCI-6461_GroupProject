@@ -22,24 +22,29 @@ public class FileLoader {
 		FileReader inputStream = new FileReader(file);
         int index= 350; // memory location where text chars are being stored
         int txt_len = 0; // length of the entire text
-
 		int ascii;
+		
             while ((ascii = inputStream.read()) != -1) 
             {
-			System.out.println(ascii); // ascii is the ascii value and char(ascii) is the text. 
+			//System.out.println(ascii); // ascii is the ascii value and char(ascii) is the text. 
 			char inChar = (char)ascii; // inChar is the char value 
-			
 			String inBin = Decode.IntegerTo16sBinary(ascii); // to 16 bit binary 
-			System.out.print(ascii + "\t" + inChar + "\t "+ inBin ); // pRinting to console
+			// Printing to console
+			System.out.println(ascii + "\t" + inChar + "\t "+ inBin + "\t stored at  " + index + "\t " ); // pRinting to console
+			// writing to memory
 			MainApp.myMemory.writeToMemory(index, inBin);		// Storing to memory location 
 			index++; // incrementing index for next storage
 			txt_len++;
 			}
             
-            System.out.print("The total len" + txt_len);
-            
-	}            
+            System.out.print(" \t The total len" + txt_len);
+            }            
         } 
+
+
+
+
+
      
         
 
