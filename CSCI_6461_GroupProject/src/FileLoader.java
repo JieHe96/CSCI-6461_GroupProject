@@ -37,7 +37,7 @@ public class FileLoader {
 			txt_len++;
 		}
             
-        System.out.print(" \t The total len" + txt_len);
+        System.out.print(" \t The total len = " + txt_len);
 	}            
 } 
 

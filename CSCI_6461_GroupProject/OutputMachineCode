@@ -1,3 +1,21 @@
-set x2 =350 ; 
-0000010010000001 // Loading reg0 from memory
-1100100000000000 // out reg0 to IO console 
+x1=235;
+x2=350
+x3 = 80 ;
+
+0000111101000000 // r3 = 235 // store at 75
+
+1000100010011111 // location 31 = X2(350) // 76
+0000010100011111 // LDR R1,0,0,31 // at 80
+
+0000100100011111 // STR r1,0,0,31 // STORE at 81
+0000010000111111 // LDR r0,0,0,1,31 // get value at address // store at 82
+1100100000000000 // out reg0 to IO console 	 // store instruction at 83
+0010001100000001 // JZ ( r3,x0,0,1) // if r3=0 , jumping to 1 - machine fault // at 84
+0001100100000001 // AIR R1,0,0,1		// store instruction at 85
+0011101111000001 // SOB ( r3) // jump to 81 // at 86 
+
+
+
+
+
+
