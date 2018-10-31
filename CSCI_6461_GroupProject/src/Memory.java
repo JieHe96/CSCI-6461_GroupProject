@@ -84,4 +84,6 @@ public class Memory {
 	}
 	
 	public void setFlag(boolean flag) {checkFault = flag;}
+	
+	public void setChar(boolean flag, int index) {memoVec.get(index).setCharFlag(flag);}
 }

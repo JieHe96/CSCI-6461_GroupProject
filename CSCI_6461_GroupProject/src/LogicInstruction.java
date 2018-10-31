@@ -171,6 +171,7 @@ public class LogicInstruction extends Instruction{
 	    		String ldr_eaStr = Decode.IntegerTo16sBinary(ldr_ea);
 	    		//fetching word from memory and converting to string - Getting value at the memory 
 	    		String ldr_mValue = MainApp.myMemory.readFromMemory(ldr_ea).convertToString();
+	    		if (MainApp.myMemory.readFromMemory(ldr_ea).checkFlag()) MainApp.myRegisters.setCharMap(ireg, 1);
 	    		//store address into MAR 
 	    		MainApp.myRegisters.writeToRegister("MAR", ldr_eaStr, 16);
 	    		//Store value into MBR
@@ -249,6 +250,7 @@ public class LogicInstruction extends Instruction{
 	    		String lda_eaStr = Decode.IntegerTo16sBinary(lda_ea);
 	    		//fetching word from memory and converting to string - Getting value at the memory 
 	    		String lda_mValue = MainApp.myMemory.readFromMemory(lda_ea).convertToString();
+	    		if (MainApp.myMemory.readFromMemory(lda_ea).checkFlag()) MainApp.myRegisters.setCharMap(ireg, 1);
 	    		//store address into MAR 
 	    		MainApp.myRegisters.writeToRegister("MAR", lda_eaStr, 16);
 	    		//Store value into MBR
@@ -279,6 +281,7 @@ public class LogicInstruction extends Instruction{
 	    		String ldx_eaStr = Decode.IntegerTo16sBinary(ldx_ea);
 	    		//fetching word from memory and converting to string - Getting value at the memory 
 	    		String ldx_mValue = MainApp.myMemory.readFromMemory(ldx_ea).convertToString();
+	    		if (MainApp.myMemory.readFromMemory(ldx_ea).checkFlag()) MainApp.myRegisters.setCharMap(ireg, 1);
 	    		//store address into MAR 
 	    		MainApp.myRegisters.writeToRegister("MAR", ldx_eaStr, 16);
 	    		//Store value into MBR
