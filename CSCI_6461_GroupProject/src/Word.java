@@ -7,10 +7,11 @@ import java.util.BitSet;
  * Word class extends the BitSet type
  */
 public class Word extends BitSet{
-	private boolean isChar = false;
+	private boolean isChar;
 	
 	public Word() {
 		super(16);
+		isChar = false;
 	}
 
 	public String convertToString() {
@@ -31,4 +32,7 @@ public class Word extends BitSet{
     		else this.set(i, false);
     	}
 	}
+	
+	public void setCharFlag(boolean flag) {isChar = flag;}
+	public boolean checkFlag() {return isChar;}
 }
