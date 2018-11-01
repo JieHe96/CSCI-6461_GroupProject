@@ -40,6 +40,7 @@ public class FileLoader {
         System.out.print(" \t The total len = " + txt_len);
 	}
 	
+	//load machine code
 	public void loadMachineCode() throws FileNotFoundException {
 		Scanner sc = new Scanner(file);
 		while(sc.hasNext()){
