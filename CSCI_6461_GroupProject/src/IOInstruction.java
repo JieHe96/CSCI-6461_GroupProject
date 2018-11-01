@@ -59,7 +59,6 @@ public class IOInstruction extends Instruction{
 				    }  
 				    catch (NumberFormatException e) { 
 				    	int buffInt;
-				    	System.out.println(keyboardStr);
 				    	if (keyboardStr.equals("/n")) {
 				    		buffInt = 10;
 				    	}
@@ -67,9 +66,12 @@ public class IOInstruction extends Instruction{
 					    	char buff = keyboardStr.charAt(0);
 					    	buffInt = buff;
 				    	}
+				    	System.out.println("===== " + buffInt);
 				    	buffStr = Decode.IntegerTo16sBinary(buffInt);
 				    	MainApp.myRegisters.setCharMap(ireg, 1);
-				    } 
+				    }
+					keyboardStr.substring(1);
+					MainApp.frame.setKeyboard(keyboardStr);
 					//String buffStr = String.format("%16s", keyboardStr).replace(" ", "0");
 					MainApp.myRegisters.writeToGR(ireg, buffStr);
 					

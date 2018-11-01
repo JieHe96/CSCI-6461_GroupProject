@@ -409,6 +409,7 @@ public class MainFrame extends JFrame{
 		program1Button = new JButton("Program1");
 		program1Button.addActionListener(p1ButtonListener);
 		program2Button = new JButton("Program2");
+		program2Button.addActionListener(p2ButtonListener);
 		singleRunButton = new JButton("Single Run");
 		singleRunButton.addActionListener(singleRunButtonListener);
 		JButton loadButton = new JButton("Load");
@@ -551,6 +552,16 @@ public class MainFrame extends JFrame{
 		}
 	};
 	
+	private ActionListener p2ButtonListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			MainApp.myRegisters.writeToIX(1, "235");
+			MainApp.myRegisters.writeToIX(2, "350");
+			MainApp.myRegisters.writeToIX(3, "80");
+			MainApp.myRegisters.writeToRegister("PC", "78", 12);
+		}
+	};
+	
 	private ActionListener loadButtonListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -623,10 +634,10 @@ public class MainFrame extends JFrame{
 			protected Object doInBackground() throws Exception {
 				// TODO Auto-generated method stub
 				while (MainApp.myClock.isReady()) {
-					String pcNum = pcText.getText();
+					String pcNum = MainApp.myRegisters.getRegister("PC", true);
 					int index = Decode.ToDecimal(pcNum);
 					MainApp.myClock.singleRun(index);
-					Thread.sleep(100);
+					Thread.sleep(50);
 					publish("run");
 				}
 				return null;
