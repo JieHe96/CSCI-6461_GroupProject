@@ -36,7 +36,7 @@ public class FileLoader {
 			index++; // incrementing index for next storage
 			txt_len++;
 		}
-            
+        MainApp.myRegisters.writeToIX(1, Integer.toString(txt_len));   
         System.out.print(" \t The total len = " + txt_len);
 	}
 	

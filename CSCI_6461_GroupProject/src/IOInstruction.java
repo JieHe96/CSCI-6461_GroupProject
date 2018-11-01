@@ -50,6 +50,7 @@ public class IOInstruction extends Instruction{
 					String keyboardStr = MainApp.frame.getKeyboardStr();
 					MainApp.myDevice.setKeyboard(keyboardStr);
 					String buffStr = null;
+					String resStr = null;
 					try { 
 						// checking valid integer using parseInt() method 
 				        int buff = Integer.parseInt(keyboardStr); 
@@ -60,9 +61,11 @@ public class IOInstruction extends Instruction{
 				    catch (NumberFormatException e) { 
 				    	int buffInt;
 				    	if (keyboardStr.equals("/n")) {
+				    		resStr = keyboardStr.substring(2);
 				    		buffInt = 10;
 				    	}
 				    	else {
+				    		resStr = keyboardStr.substring(1);
 					    	char buff = keyboardStr.charAt(0);
 					    	buffInt = buff;
 				    	}
@@ -71,8 +74,8 @@ public class IOInstruction extends Instruction{
 				    	MainApp.myRegisters.setCharMap(ireg, 1);
 				    }
 					//remove first char
-					keyboardStr.substring(1);
-					MainApp.frame.setKeyboard(keyboardStr);
+					
+					MainApp.frame.setKeyboard(resStr);
 					//String buffStr = String.format("%16s", keyboardStr).replace(" ", "0");
 					MainApp.myRegisters.writeToGR(ireg, buffStr);
 					

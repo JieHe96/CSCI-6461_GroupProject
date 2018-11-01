@@ -555,10 +555,13 @@ public class MainFrame extends JFrame{
 	private ActionListener p2ButtonListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			MainApp.myRegisters.writeToIX(1, "235");
+			//MainApp.myRegisters.writeToIX(1, "235");
 			MainApp.myRegisters.writeToIX(2, "350");
 			MainApp.myRegisters.writeToIX(3, "80");
 			MainApp.myRegisters.writeToRegister("PC", "78", 12);
+			MainApp.myClock.resume();
+			startProgram2();
+			
 		}
 	};
 	
@@ -636,6 +639,38 @@ public class MainFrame extends JFrame{
 				while (MainApp.myClock.isReady()) {
 					String pcNum = MainApp.myRegisters.getRegister("PC", true);
 					int index = Decode.ToDecimal(pcNum);
+					MainApp.myClock.singleRun(index);
+					Thread.sleep(50);
+					publish("run");
+				}
+				return null;
+			} 
+			
+			@Override
+			protected void process(List chunks) {
+				updateUI();
+			}
+		}; 
+		// executes the swingworker on worker thread 
+		sw1.execute();  
+	}
+	
+	private void startProgram2() { 
+		SwingWorker sw1 = new SwingWorker() {
+
+			@Override
+			protected Object doInBackground() throws Exception {
+				// TODO Auto-generated method stub
+				while (MainApp.myClock.isReady()) {
+					String pcNum = MainApp.myRegisters.getRegister("PC", true);
+					int index = Decode.ToDecimal(pcNum);
+					if (index == 87) MainApp.frame.setKeyboard("S");
+					else if (index == 89) MainApp.frame.setKeyboard("e");
+					else if (index == 91) MainApp.frame.setKeyboard("a");
+					else if (index == 93) MainApp.frame.setKeyboard("r");
+					else if (index == 95) MainApp.frame.setKeyboard("c");
+					else if (index == 97) MainApp.frame.setKeyboard("h");
+					else if (index == 99) MainApp.frame.setKeyboard("/n");
 					MainApp.myClock.singleRun(index);
 					Thread.sleep(50);
 					publish("run");
