@@ -1,0 +1,19 @@
+// instructions for output of a program 
+x1=235;
+x2=350
+x3 = 80;
+MainApp.frame.setPrinter(" \n SET VALUES OF x1=235 , x2=350 , x3 = 80  \n ");
+MainApp.frame.setPrinter("\n Check input file data \n ");  
+
+addToInstructionList(78, "0000111101000000");
+addToInstructionList(79, "1000100010011111");
+addToInstructionList(80, "0000010100011111");
+addToInstructionList(81, "0000100100011111");
+addToInstructionList(82, "0000010000111111");
+addToInstructionList(83, "1100100000000000");
+addToInstructionList(84, "0010001100000001");
+addToInstructionList(85, "0001100100000001");
+addToInstructionList(86, "0011101111000001");
+
+
+
