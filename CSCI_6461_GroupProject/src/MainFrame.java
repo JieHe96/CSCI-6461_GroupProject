@@ -39,6 +39,7 @@ public class MainFrame extends JFrame{
 	JButton iplButton;
 	JButton startButton;
 	JButton program1Button;
+	JButton program2Button;
 	JTextField irText;
 	JTextField marText;
 	JTextField mbrText;
@@ -64,6 +65,7 @@ public class MainFrame extends JFrame{
 	JMenuBar menuBar;
 	JMenu fileMenu;
 	JMenuItem openFileMenuItem;
+	JMenuItem openMachineCodeItem;
 	
 	public MainFrame(String title) {
 		super(title);
@@ -73,9 +75,12 @@ public class MainFrame extends JFrame{
 		
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("File");
-		openFileMenuItem = new JMenuItem("Open");
+		openFileMenuItem = new JMenuItem("Open Text File...");
 		openFileMenuItem.addActionListener(fileOpenListener);
+		openMachineCodeItem = new JMenuItem("Open Machine Code...");
+		openMachineCodeItem.addActionListener(machineCodeListener);
 		fileMenu.add(openFileMenuItem);
+		fileMenu.add(openMachineCodeItem);
 		menuBar.add(fileMenu);
 		
 		//Instruction Section
@@ -403,6 +408,7 @@ public class MainFrame extends JFrame{
 		iplButton.addActionListener(iplButtonListener);
 		program1Button = new JButton("Program1");
 		program1Button.addActionListener(p1ButtonListener);
+		program2Button = new JButton("Program2");
 		singleRunButton = new JButton("Single Run");
 		singleRunButton.addActionListener(singleRunButtonListener);
 		JButton loadButton = new JButton("Load");
@@ -416,6 +422,7 @@ public class MainFrame extends JFrame{
 		//stopButton.addActionListener(stopButtonListener);
 		controlPanel.add(iplButton);
 		controlPanel.add(program1Button);
+		controlPanel.add(program2Button);
 		controlPanel.add(singleRunButton);
 		controlPanel.add(loadButton);
 		controlPanel.add(startButton);
@@ -442,6 +449,26 @@ public class MainFrame extends JFrame{
 			}
 		}
 	};
+	
+	
+	private ActionListener machineCodeListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFileChooser fc = new JFileChooser();
+			fc.setCurrentDirectory(new File("."));
+			int result = fc.showOpenDialog(MainApp.frame);
+			if (result == JFileChooser.APPROVE_OPTION) {
+	            File f = fc.getSelectedFile();
+	            FileLoader fl = new FileLoader(f);
+	            try {
+					fl.loadMachineCode();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+	};
+	
 	
 	private ActionListener cacheReadListener = new ActionListener() {
 		@Override
@@ -479,6 +506,14 @@ public class MainFrame extends JFrame{
 			//SetPC(addr);
 		}
 	};
+	
+	public void updateInstructionUI(int fault, String addr, String value) {
+		if (fault == 0) {
+			String ele = "Address: " + addr + "     " + "Value: " + value;
+			instructionModel.addElement(ele);
+			instructionList.setModel(instructionModel);
+		}
+	}
 	
 	private ActionListener singleRunButtonListener = new ActionListener() {
 		@Override

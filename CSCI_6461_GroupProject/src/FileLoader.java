@@ -38,7 +38,18 @@ public class FileLoader {
 		}
             
         System.out.print(" \t The total len = " + txt_len);
-	}            
+	}
+	
+	public void loadMachineCode() throws FileNotFoundException {
+		Scanner sc = new Scanner(file);
+		while(sc.hasNext()){
+			String line = sc.nextLine();
+			String[] words = line.split(" ");
+			System.out.println(words[0] + " " + words[1]);
+			int fault = MainApp.myInstructionList.addToInstructionList(Integer.parseInt(words[0]), words[1]);
+			MainApp.frame.updateInstructionUI(fault, words[0], words[1]);
+		}
+	}
 } 
 
 
