@@ -70,6 +70,7 @@ public class IOInstruction extends Instruction{
 				    	buffStr = Decode.IntegerTo16sBinary(buffInt);
 				    	MainApp.myRegisters.setCharMap(ireg, 1);
 				    }
+					//remove first char
 					keyboardStr.substring(1);
 					MainApp.frame.setKeyboard(keyboardStr);
 					//String buffStr = String.format("%16s", keyboardStr).replace(" ", "0");
