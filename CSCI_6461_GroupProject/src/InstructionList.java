@@ -37,45 +37,45 @@ public class InstructionList {
   	//initialize trap and machine fault
   	public void initProgram1() {
   		//machine fault routine
-  		MainApp.myMemory.writeToMemory(6, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(7, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(8, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(9, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(10, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(11, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(12, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(13, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(14, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(15, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(16, "0000000000000000");
+  		MainApp.myMemory.writeToMemory(2000, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2001, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2002, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2003, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2004, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2005, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2006, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2007, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2008, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2009, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2010, "0000000000000000");
   		
   		//trap routine 1
-  		MainApp.myMemory.writeToMemory(18, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(19, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(20, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(21, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(22, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(23, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(24, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(25, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(26, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(27, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(28, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(29, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2012, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2013, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2014, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2015, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2016, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2017, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2018, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2019, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2020, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2021, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2022, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2023, "1100100000000000");
   		
   		//trap routine 2
-  		MainApp.myMemory.writeToMemory(31, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(32, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(33, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(34, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(35, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(36, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(37, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(38, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(39, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(40, "1100100000000000");
-  		MainApp.myMemory.writeToMemory(41, "1100010000000000");
-  		MainApp.myMemory.writeToMemory(42, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2025, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2026, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2027, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2028, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2029, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2030, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2031, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2032, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2033, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2034, "1100100000000000");
+  		MainApp.myMemory.writeToMemory(2035, "1100010000000000");
+  		MainApp.myMemory.writeToMemory(2036, "1100100000000000");
   	}
   	
   	public void initProgram() {
@@ -273,12 +273,12 @@ public class InstructionList {
 	}
 	
 	public void exeMachineFaultIns() {
-		for (int i = 6; i < 17; i++) {
-			if (i == 6) MainApp.frame.setKeyboard("H");
-			else if (i == 8) MainApp.frame.setKeyboard("A");
-			else if (i == 10) MainApp.frame.setKeyboard("L");
-			else if (i == 12) MainApp.frame.setKeyboard("T");
-			else if (i == 14) MainApp.frame.setKeyboard("/n");
+		for (int i = 2000; i < 2011; i++) {
+			if (i == 2000) MainApp.frame.setKeyboard("H");
+			else if (i == 2002) MainApp.frame.setKeyboard("A");
+			else if (i == 2004) MainApp.frame.setKeyboard("L");
+			else if (i == 2006) MainApp.frame.setKeyboard("T");
+			else if (i == 2008) MainApp.frame.setKeyboard("/n");
 			String value = MainApp.myMemory.readFromMemory(i).convertToString();
 			int type = Decode.decodeType(value);
 			System.out.println("Type: " + type);
@@ -288,13 +288,13 @@ public class InstructionList {
 	
 	
 	public void exeTrapIns1() {
-		for (int i = 18; i < 30; i++) {
-			if (i == 18) MainApp.frame.setKeyboard("T");
-			else if (i == 20) MainApp.frame.setKeyboard("R");
-			else if (i == 22) MainApp.frame.setKeyboard("A");
-			else if (i == 24) MainApp.frame.setKeyboard("P");
-			else if (i == 26) MainApp.frame.setKeyboard("1");
-			else if (i == 28) MainApp.frame.setKeyboard("/n");
+		for (int i = 2012; i < 2024; i++) {
+			if (i == 2012) MainApp.frame.setKeyboard("T");
+			else if (i == 2014) MainApp.frame.setKeyboard("R");
+			else if (i == 2016) MainApp.frame.setKeyboard("A");
+			else if (i == 2018) MainApp.frame.setKeyboard("P");
+			else if (i == 2020) MainApp.frame.setKeyboard("1");
+			else if (i == 2022) MainApp.frame.setKeyboard("/n");
 			String value = MainApp.myMemory.readFromMemory(i).convertToString();
 			int type = Decode.decodeType(value);
 			executeHelper(type, value);	
@@ -302,13 +302,13 @@ public class InstructionList {
 	}
 	
 	public void exeTrapIns2() {
-		for (int i = 31; i < 43; i++) {
-			if (i == 31) MainApp.frame.setKeyboard("T");
-			else if (i == 33) MainApp.frame.setKeyboard("R");
-			else if (i == 35) MainApp.frame.setKeyboard("A");
-			else if (i == 37) MainApp.frame.setKeyboard("P");
-			else if (i == 39) MainApp.frame.setKeyboard("2");
-			else if (i == 41) MainApp.frame.setKeyboard("/n");
+		for (int i = 2025; i < 2037; i++) {
+			if (i == 2025) MainApp.frame.setKeyboard("T");
+			else if (i == 2027) MainApp.frame.setKeyboard("R");
+			else if (i == 2029) MainApp.frame.setKeyboard("A");
+			else if (i == 2031) MainApp.frame.setKeyboard("P");
+			else if (i == 2033) MainApp.frame.setKeyboard("2");
+			else if (i == 2035) MainApp.frame.setKeyboard("/n");
 			String value = MainApp.myMemory.readFromMemory(i).convertToString();
 			int type = Decode.decodeType(value);
 			executeHelper(type, value);	
