@@ -1,0 +1,244 @@
+/******************************************************************************************
+//Program 2	
+//
+//A program that reads a set of a paragraph of 6 sentences from a file into memory. 
+//It prints the sentences on the console printer. It then asks the user for a word. 
+//It searches the paragraph to see if it contains the word. If so, it prints out the word, 
+//the sentence number, and the word number in the sentence
+//
+//Register designations:
+//	R0   - 	Holds the current index into the paragraph.
+//	R1   - 	Holds the current index into the search word.
+//	R2   - 	Holds the current
+//	R3   - 	
+// 
+//Memory designations:
+//	$9   - 	Used as a temporary address for indirection, register-memory
+//		arithmetic, etc.
+//	$10  -	Holds the base address of the paragraph ($1000).
+//	$11  -	Holds the sentence count
+//	$12  -	Holds the word count
+//	$13  -	Answer word count
+//	$14  -	Answer sentence count
+//
+//Note: all pertinent jump labels are prefixed “P2” for “Program 2”
+//******************************************************************************************
+LDA 0,0,100
+LDA 2,0,10
+MLT 0,2				//Create base address of the paragraph (1000)
+STR 0,0,10			//Store it at $10 for future reference
+
+//First, print the entire paragraph to the console.
+P2_PRINT_PARA:
+STR 0,0,9			//Store current paragraph index at temp address
+LDR 1,0,9,1			//Load character into R1
+LDA 2,0,4			//Test to see if it is the EOT character
+TRR 1,2				
+JCC 3,0,P2_PRINT_DONE		//If so, break out of the loop
+
+OUT 1,1				//Print the character
+AIR 0,1				//Increment paragraph index
+JMP 0,P2_PRINT_PARA		//Jump back to loop start
+
+//Prompt the user for the search word
+P2_PRINT_DONE:
+LDA 0,0,10			
+OUT 0,1				//Print new line
+LDA 0,0,83
+OUT 0,1				//Print “S”
+LDA 0,0,101
+OUT 0,1				//Print “e”
+LDA 0,0,97
+OUT 0,1				//Print “a”
+LDA 0,0,114
+OUT 0,1				//Print “r”
+LDA 0,0,99
+OUT 0,1				//Print “c”
+LDA 0,0,104
+OUT 0,1				//Print “h”
+LDA 0,0,58
+OUT 0,1				//Print “:”
+LDA 0,0,32		
+OUT 0,1				//Print space
+
+LDR 1,0,10			//Load R1 with 1000
+SIR 1,100			//Subtract 100 from R1 (search term will be stored at 900)
+LDA 2,0,32
+STR 1,0,9
+STR 2,0,9,1			//Set the first character of the search word to be a space (so that “this” and “is” are different)
+AIR 1,1
+
+//Read in the search word until EOT is found
+P2_INPUT_WORD:
+IN 0,0                  	//Getting input
+STR 1,0,9			//Store search word character index at temp address
+STR 0,0,9,1			//Store inputted character
+LDA 2,0,4			//Checking if end of string has been reached
+TRR 0,2				//Testing is done after storing the character so that EOT gets stored too
+JCC 3,0,P2_DONE_INPUT		//If so, can move onto the actual main part of the program
+AIR 1,1				//Increment character index
+JMP 0,P2_INPUT_WORD		//Jump to get the next character
+
+P2_DONE_INPUT:
+LDR 0,0,10			//R0 = start of paragraph
+LDR 1,0,10			
+SIR 1,100			//R1 = start of search word
+LDA 2,0,1
+STR 2,0,11			//Sentence count starts at 1
+STR 2,0,12			//Word count starts at 1
+
+P2_SEARCH:
+//Search the paragraph for the search word, keeping track of spaces, periods, etc.
+STR 0,0,9			//Store current paragraph index
+LDR 2,0,9,1			//Load paragraph[index] into R2
+STR 1,0,9			//Store current search word index
+LDR 3,0,9,1			//Load word[index] into R3
+
+STR 0,0,9			//Saving R0
+
+LDA 0,0,4			//Load R0 with EOT character
+TRR 0,3				//Test if the end of the search string has been reached
+JCC 3,0,P2_CONFIRM		//If so, end of word has been reached
+TRR 0,2				//Test if R2 == EOT
+JCC 3,0,P2_SEARCH_FAIL		//If so, end of paragraph has been reached
+
+LDA 0,0,46			//Load R0 with ASCII period
+TRR 0,2				//Test if R2 == period
+JCC 3,0,P2_INC_SENT		//If R2 == period, jump
+
+LDA 0,0,32			//Load R0 with ASCII space
+TRR 0,2				//Test if R2 == space
+JCC 3,0,P2_INC_WORD		//If R2 == space, jump
+
+TRR 2,3				//Test if R2 == R3 (i.e. sentence char == search char)
+JCC 3,0,P2_CHAR_MATCH
+
+JMP 0,P2_NO_MATCHES
+
+P2_INC_SENT:
+LDR 0,0,11			//Load R0 with sentence count
+AIR 0,1				//Increment sentence count
+STR 0,0,11			//Store it back
+LDA 0,0,0
+STR 0,0,12			//Reset word count
+JMP 0,P2_NO_MATCHES		//Jump to top of loop
+
+
+P2_INC_WORD:
+AIR 1,1				//Increment search word index	
+LDR 0,0,12			//Load R0 with word count
+AIR 0,1				//Increment word count
+STR 0,0,12			//Store it back
+LDR 0,0,9			//Restore R0
+AIR 0,1				//Increment paragraph index
+JMP 0, P2_SEARCH		//Jump to top of loop
+
+P2_CHAR_MATCH:
+AIR 1,1				//Increment search word index	
+LDR 0,0,9			//Restore R0
+AIR 0,1				//Increment paragraph index
+JMP 0,P2_SEARCH			//Jump to top of loop
+
+P2_NO_MATCHES:
+LDR 0,0,9			//Restore R0
+AIR 0,1				//Increment paragraph index
+LDR 1,0,10			//Load 1000 into R1
+SIR 1,100			//R1 = 900 (start of search word)
+JMP 0,P2_SEARCH			//Jump to top of loop
+
+P2_CONFIRM:
+LDA 0,0,32			//Load R0 with ASCII space
+TRR 0,2				//Test if R2 == space
+JCC 3,0,P2_SEARCH_SUCCESS	//If R2 == space, jump
+
+LDA 0,0,46			//Load R0 with ASCII period
+TRR 0,2				//Test if R2 == space
+JCC 3,0,P2_SEARCH_SUCCESS	//If R2 == space, jump
+JMP 0,P2_NO_MATCHES
+
+P2_SEARCH_FAIL:
+LDA 0,0,10			
+OUT 0,1				//Print new line
+LDA 0,0,78
+OUT 0,1				//Print “N”
+LDA 0,0,111
+OUT 0,1				//Print “o”
+LDA 0,0,116
+OUT 0,1				//Print “t”
+LDA 0,0,32
+OUT 0,1				//Print space
+LDA 0,0,70
+OUT 0,1				//Print “F”
+LDA 0,0,111
+OUT 0,1				//Print “o”
+LDA 0,0,117
+OUT 0,1				//Print “u”
+LDA 0,0,110
+OUT 0,1				//Print “n”
+LDA 0,0,100
+OUT 0,1				//Print “d”
+HLT
+
+P2_SEARCH_SUCCESS:
+LDA 0,0,10			
+OUT 0,1				//Print new line
+LDA 0,0,70
+OUT 0,1				//Print “F”
+LDA 0,0,111
+OUT 0,1				//Print “o”
+LDA 0,0,117
+OUT 0,1				//Print “u”
+LDA 0,0,110
+OUT 0,1				//Print “n”
+LDA 0,0,100
+OUT 0,1				//Print “d”
+
+LDA 0,0,32
+OUT 0,1				//Print space
+LDA 0,0,97
+OUT 0,1				//Print “a”
+LDA 0,0,116
+OUT 0,1				//Print “t”
+LDA 0,0,32
+OUT 0,1				//Print space
+
+LDA 0,0,115
+OUT 0,1				//Print “s”
+LDA 0,0,101
+OUT 0,1				//Print “e”
+LDA 0,0,110
+OUT 0,1				//Print “n”
+LDA 0,0,116
+OUT 0,1				//Print “t”
+LDA 0,0,46
+OUT 0,1				//Print “.”
+
+LDA 0,0,32
+OUT 0,1				//Print space
+
+LDR 0,0,11
+AIR 0,48
+OUT 0,1				//Print sentence number
+
+LDA 0,0,44
+OUT 0,1				//Print comma
+LDA 0,0,32
+OUT 0,1				//Print space
+
+LDA 0,0,119
+OUT 0,1				//Print “w”
+LDA 0,0,111
+OUT 0,1				//Print “o”
+LDA 0,0,114
+OUT 0,1				//Print “r”
+LDA 0,0,100
+OUT 0,1				//Print “d”
+
+LDA 0,0,32
+OUT 0,1				//Print space
+
+LDR 0,0,12
+AIR 0,48
+OUT 0,1				//Print sentence number
+
+HLT
