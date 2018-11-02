@@ -239,6 +239,6 @@ OUT 0,1				//Print space
 
 LDR 0,0,12
 AIR 0,48
-OUT 0,1				//Print sentence number
+OUT 0,1				//Print word number
 
 HLT

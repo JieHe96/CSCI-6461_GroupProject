@@ -27,5 +27,50 @@ P2_CHAR_MATCH
 
 LDR R1,0,0,WORD_rEF
 AIR R1,1 // INCREAMENT SEARCH_rEF
+STR R1,0,0,WORD_REF
+LDR R0,0,0,Para_Ref
+AIR R0,1 // INCREMENTING PARA_REF
+STR R0,0,0,PARA_REF
+JMA 0, P2_SEARCH
+
+
+P2_NO_MATCHES
+
+LDR R0,0,0,PARA_REF
+AIR R0,1 // INCREMENTING PARA INDEX
+STR R0,0,PARA_REF
+
+LDR R1,1024 // R1=START OF SERACH WORD
+JMA 0,P2_SEARCH 
+
+
+P2_CONFIRM
+ 
+LDA 0,0,EndofPara // COMPARE 
+LDR R2,
+TRR 0,2 
+JCC 3,0,P2_SEARCH_SUCCESS
+
+//incomplete
+
+
+
+
+P2_SEARCH_FAIL 
+
+// print not found
+// HLT
+
+p2_search success
+
+// print "found at sentence number" 
+// print sentence_variable  
+// print " word no " 
+// print word_variable 
+// HLT 
+
+
+LDA  
+
 
 
