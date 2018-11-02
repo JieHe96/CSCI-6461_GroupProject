@@ -1,12 +1,26 @@
 MAIN 
 
+SENTENCE
+WORD
+PARA_REF
+WORD_REF
+
+
+
+
+
+
+
+-------------------------------------
 135: 
 LDR R0,X3,0,0 // r0=350
 LDA R1,0,0,1
 SRC R1,1,1,10 // r1=1024
-LDA r2,0,0,0
-STR R2,0,word
-STR r2,0,sentence
+L
+DA r2,0,0,0
+STR R2,0,word // WORD =0
+STR r2,0,sentence // SENTENCE = 0
+
 STR R0,0,0,PARA_REF // PARA_REF=350
 STR R1,0,0,WORD_REF // WORD_REF=1024
 LDR,2,0,1,PARA_REF // R2=CHAR(PARA)
@@ -25,25 +39,21 @@ JCC 3,0,P2_CONFIRM
  JCC 3,0,P2_SEARCH_FAIL
  
  LDR 0,0,46 // R0=46 : ( PERIOD)
+ TRR 0,2 // comparing for end of line 
+ JCC 3,0,P2_INC_SENT
  
- 
- 
- 
- LDA 0,0,31
+  LDA 0,0,31
  AIR 0,1 // R=32
  LDR R1,1,WORD_REF
  TRR 0,1 // COMAPRING IF CHAR(WORD)= SPACE
  JCC 3,0,P2_INC_WORD
  
- 
- 
- 
-
+ TRR 2,3 // IF CHAR(WORD)=CHAR(PARA)
+ JCC 3,0,P2_CHAR_MATCH
  
 
-
-
-
+ 
+----------------------------------------------------
 
 
 p2_INC_SENT
