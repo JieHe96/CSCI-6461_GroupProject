@@ -24,7 +24,7 @@ MAIN
 -------------------------------------
 
 135: 
-LDR R0,X3,0,0 // r0=350
+LDA R0,X2,0,1// r0=351
 LDA R1,0,0,1
 SRC R1,1,1,10 // r1=1024
 LDA r2,0,0,0
@@ -34,23 +34,26 @@ STR r2,X3,0,25 // SENTENCE(105) = 0
 
 P2_SEARCH
 141
-STR R0,X3,0,27 // PARA_REF(107)=350
+STR R0,X3,0,27 // PARA_REF(107)=351
 STR R1,x3,0,28 // WORD_REF=1024
 LDR,r2,x3,1,27 // R2=CHAR(PARA)
 LDR r3,x3,1,28 // R3= CHAR(WORD)
 
-
-LDA 0,0,0 // LOADING R0=0 FOR COMPARING  blank SPACES 
-TRR 0,3  // CHAR(WORD)=  empty
+145
+LDA 0,0,31 // LOADING R0=0 FOR COMPARING   SPACES 
+air r0,1
+TRR 0,3  // CHAR(WORD)=  space
 JCC 3,0,1,15 // indirectly to P2_CONFIRM //15->750
  
+ 149
  // COMPARE END OF PARAGRAPH  
- LDR R0,x3,25,SENTENCE
+ LDR R0,x3,25 // SENTENCE
  LDA R1,0,0,6  // counter =6 , end of para
  TRR 0,1
  JCC 3,0,1,16 // P2_SEARCH_FAIL
  
- LDR 0,0,1,17// R0=46 : ( PERIOD)
+ 154
+ LDR 0,0,0,17// R0=46 : ( PERIOD)
  TRR 0,2 // comparing for end of line 
  JCC 3,0,1,10 // 10->780 // P2_INC_SENT
  
@@ -63,6 +66,7 @@ JCC 3,0,1,15 // indirectly to P2_CONFIRM //15->750
  TRR 2,3 // IF CHAR(WORD)=CHAR(PARA)
  JCC 3,0,1,12 //P2_CHAR_MATCH
  
+ JMA 0,0,1,13
 
  
 ----------------------------------------------------
@@ -108,7 +112,7 @@ LDR R0,X3,0,27 // PARA_REF
 AIR R0,1 // INCREMENTING PARA INDEX
 STR R0,X3,0,27 //PARA_REF
 
-LDR R1,0,0,1 // R1=START OF SERACH WORD
+LDA R1,0,0,1 // R1=START OF SERACH WORD
 SRC R1,1,1,10 
 JMA 0,P2_SEARCH 
 
