@@ -56,10 +56,11 @@ public class TransferInstruction extends Instruction{
 
 	//get condition code
 	private void getCC() {
-        int cValue = Integer.parseInt(MainApp.myRegisters.getRegister("CC", false));
+        int cValue = Integer.parseInt(MainApp.myRegisters.getRegister("CC", true));
         if (cValue != 0){
             cc = true;
         }
+        else cc = false;
 
 /*
         switch (icc){

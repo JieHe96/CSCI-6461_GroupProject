@@ -7,7 +7,7 @@ MAIN
 
 
 10 : 780
-11 : 810
+11 : 813//810
 12 : 840
 13 : 870
 14 : 950
@@ -43,14 +43,14 @@ MAIN
 	TRR 00,1,0,0
 152 JCC 3,0,1,16 // P2_SEARCH_FAIL
  
-154 LDR 0,0,0,17// R0=46 : ( PERIOD)
+153 LDR 0,0,0,17// R0=46 : ( PERIOD)
 	TRR 0,2 // comparing for end of line 
 	JCC 3,0,1,10 // 10->780 // P2_INC_SENT
  
-157	LDA 0,0,31
+156	LDA 0,0,31
 	AIR 0,1 // R=32   // CHECK 
-	LDR R1,x3,1,28 // char(WORD_REF) 
-160	TRR 0,2 // COMAPRING IF CHAR(para)= SPACE 
+158 LDR R2,x3,1,27 // char(para_REF) 
+	TRR 0,2 // COMAPRING IF CHAR(para)= SPACE 
  	JCC 3,0,1,11 // P2_INC_WORD
  
 162	TRR 2,3 // IF CHAR(WORD)=CHAR(PARA)
@@ -66,7 +66,7 @@ MAIN
 780	LDR R0,x3,0,25 // r0=sentence
 	AIR 0,0,0,1 // increment SENTENENCE
 	STR R0,x3,0,25 //Sentence 
-	LDA R0,0,0,0
+	LDA R0,0,0,1
 	STR R0,x3,0,26 // word  // RESET WORD COUNT
 785 JMA 0,0,1,13 // P2_No_Matches 
 

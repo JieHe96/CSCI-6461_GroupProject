@@ -325,7 +325,7 @@ public class LogicInstruction extends Instruction{
  	    		String str_rxValue = MainApp.myRegisters.getGRValue(rx1);
 				//Rx value in decimal
 				int regxvalue=Decode.binaryToDecimal(str_rxValue);
-								//Get value of RY
+				//Get value of RY
 				String str_ryValue = MainApp.myRegisters.getGRValue(ry1);
 				//Ry value in decimal
 				// Check for equivalence
