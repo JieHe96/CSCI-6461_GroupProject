@@ -664,7 +664,9 @@ public class MainFrame extends JFrame{
 					}
 					if (index == 715) {
 						String senStr = MainApp.myMemory.readFromMemory(105).convertToString();
+						senStr = Integer.toString(Decode.binaryToDecimal(senStr));
 						String wordStr = MainApp.myMemory.readFromMemory(106).convertToString();
+						wordStr = Integer.toString(Decode.binaryToDecimal(wordStr));
 						setPrinter("Found at Sentence: " + senStr + " at Word: " + wordStr + "\n");
 					}
 					MainApp.myClock.singleRun(index);
