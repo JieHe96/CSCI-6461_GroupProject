@@ -560,8 +560,8 @@ public class MainFrame extends JFrame{
 			MainApp.myRegisters.writeToIX(3, "80");
 			MainApp.myRegisters.writeToRegister("PC", "78", 12);
 			String i1 = Decode.IntegerTo16sBinary(780);
-			//ring i2 = Decode.IntegerTo16sBinary(810);
-			String i2 = Decode.IntegerTo16sBinary(813);
+			String i2 = Decode.IntegerTo16sBinary(810);
+			//String i2 = Decode.IntegerTo16sBinary(813);
 			String i3 = Decode.IntegerTo16sBinary(840);
 			String i4 = Decode.IntegerTo16sBinary(870);
 			String i5 = Decode.IntegerTo16sBinary(950);
@@ -696,7 +696,10 @@ public class MainFrame extends JFrame{
 				while (MainApp.myClock.isReady()) {
 					String pcNum = MainApp.myRegisters.getRegister("PC", true);
 					int index = Decode.ToDecimal(pcNum);
-					if (index == 87) MainApp.frame.setKeyboard("S");
+					if (index == 87) {
+						setPrinter("\n");
+						MainApp.frame.setKeyboard("S");
+					}
 					else if (index == 89) MainApp.frame.setKeyboard("e");
 					else if (index == 91) MainApp.frame.setKeyboard("a");
 					else if (index == 93) MainApp.frame.setKeyboard("r");
