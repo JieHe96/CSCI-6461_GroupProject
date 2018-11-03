@@ -55,15 +55,25 @@ public class MiscellaneousInstruction extends Instruction{
 				MainApp.myMemory.writeToMemory(2, currPC16s);
 				MainApp.myMemory.setFlag(true);
 				
-				//read value from memory location 1 to PC
-				String addr = MainApp.myMemory.readFromMemory(0).convertToString();
-				int pcNum = Decode.binaryToDecimal(addr);
-				String pcStr = Integer.toString(pcNum);
-				MainApp.myRegisters.writeToRegister("PC", pcStr, 12);
+				
 				
 				//execute machine fault routine and return to PC+1
-				if (trapcode == 0) MainApp.myInstructionList.exeTrapIns1();
-				else if (trapcode == 1) MainApp.myInstructionList.exeTrapIns2();
+				if (trapcode == 0) {
+					//read value from memory location 1 to PC
+					String addr = MainApp.myMemory.readFromMemory(0).convertToString();
+					int pcNum = Decode.binaryToDecimal(addr);
+					String pcStr = Integer.toString(pcNum);
+					MainApp.myRegisters.writeToRegister("PC", pcStr, 12);
+					MainApp.myInstructionList.exeTrapIns1();
+				}
+				else if (trapcode == 1) {
+					//read value from memory location 1 to PC
+					String addr = MainApp.myMemory.readFromMemory(0).convertToString();
+					int pcNum = Decode.binaryToDecimal(addr) + 13;
+					String pcStr = Integer.toString(pcNum);
+					MainApp.myRegisters.writeToRegister("PC", pcStr, 12);
+					MainApp.myInstructionList.exeTrapIns2();
+				}
 				
 				String addr1 = MainApp.myMemory.readFromMemory(2).convertToString();
 				int pcNum1 = Decode.binaryToDecimal(addr1);

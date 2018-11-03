@@ -27,14 +27,14 @@ public class Memory {
 		{
 			Word ept = new Word();
 			if (i == 0) {
-				String value = "0000000000010010";
+				String value = "0000011111011100";
 		    	for (int j = 0; j < 16; j++) {
 		    		if (value.charAt(j) == '1') ept.set(j, true);
 		    		else ept.set(j, false);
 		    	}
 			}
 			if (i == 1) {
-				String value = "0000000000000110";
+				String value = "0000011111010000";
 		    	for (int j = 0; j < 16; j++) {
 		    		if (value.charAt(j) == '1') ept.set(j, true);
 		    		else ept.set(j, false);
