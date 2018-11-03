@@ -57,7 +57,7 @@ JCC 3,0,1,15 // indirectly to P2_CONFIRM //15->750
  TRR 0,2 // comparing for end of line 
  JCC 3,0,1,10 // 10->780 // P2_INC_SENT
  
-  LDA 0,0,31
+ LDA 0,0,31
  AIR 0,1 // R=32   // CHECK 
  LDR R1,x3,1,28 WORD_REF 
  TRR 0,2 // COMAPRING IF CHAR(para)= SPACE 
@@ -78,7 +78,7 @@ LDR R0,x3,0,25 // r0=sentence
 AIR 0,0,0,1 // increment SENTENENCE
 STR R0,x3,0,25 //Sentence 
 LDA R0,0,0,0
-STR 0,x3,0,26 // word  // RESET WORD COUNT
+STR R0,x3,0,26 // word  // RESET WORD COUNT
 JMA 0, P2_No_Matches 
 
 
@@ -114,12 +114,13 @@ STR R0,X3,0,27 //PARA_REF
 
 LDA R1,0,0,1 // R1=START OF SERACH WORD
 SRC R1,1,1,10 
+STR R1,X3,0,25
 JMA 0,P2_SEARCH 
 
 
 P2_CONFIRM
 750: 
- LDA R0,0,0,1
+ LDA R0,0,0,31
  AIR R0,0,0,1 // STORING SPACE
  TRR 0,2 // COMPARING IS ITS A SPACE
  JCC 3,0,P2_SEARCH_SUCCESS
