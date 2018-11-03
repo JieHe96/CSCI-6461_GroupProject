@@ -20,7 +20,7 @@ public class FileLoader {
 	public void progStore() throws IOException {
 		
 		FileReader inputStream = new FileReader(file);
-        int index= 350; // memory location where text chars are being stored
+        int index= 351; // memory location where text chars are being stored
         int txt_len = 0; // length of the entire text
 		int ascii;
 		
