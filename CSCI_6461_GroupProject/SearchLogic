@@ -24,10 +24,10 @@ MAIN
 -------------------------------------
 
 135: 
-LDA R0,X2,0,1// r0=351
+LDA R0,X2,0,1 // r0=351
 LDA R1,0,0,1
 SRC R1,1,1,10 // r1=1024
-LDA r2,0,0,0
+LDA r2,0,0,1
 STR R2,X3,0,26 // WORD (106) =0
 STR r2,X3,0,25 // SENTENCE(105) = 0
 
@@ -59,14 +59,14 @@ JCC 3,0,1,15 // indirectly to P2_CONFIRM //15->750
  
  LDA 0,0,31
  AIR 0,1 // R=32   // CHECK 
- LDR R1,x3,1,28 WORD_REF 
+ LDR R1,x3,1,28 // char(WORD_REF) 
  TRR 0,2 // COMAPRING IF CHAR(para)= SPACE 
  JCC 3,0,1,11 // P2_INC_WORD
  
  TRR 2,3 // IF CHAR(WORD)=CHAR(PARA)
  JCC 3,0,1,12 //P2_CHAR_MATCH
  
- JMA 0,0,1,13
+ JMA 0,0,1,13 // p2_no_matches
 
  
 ----------------------------------------------------
@@ -114,7 +114,7 @@ STR R0,X3,0,27 //PARA_REF
 
 LDA R1,0,0,1 // R1=START OF SERACH WORD
 SRC R1,1,1,10 
-STR R1,X3,0,25
+STR R1,X3,0,28 // word ref 
 JMA 0,P2_SEARCH 
 
 
