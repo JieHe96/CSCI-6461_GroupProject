@@ -560,14 +560,16 @@ public class MainFrame extends JFrame{
 			MainApp.myRegisters.writeToIX(3, "80");
 			MainApp.myRegisters.writeToRegister("PC", "78", 12);
 			String i1 = Decode.IntegerTo16sBinary(780);
-			String i2 = Decode.IntegerTo16sBinary(810);
+			//ring i2 = Decode.IntegerTo16sBinary(810);
+			String i2 = Decode.IntegerTo16sBinary(813);
 			String i3 = Decode.IntegerTo16sBinary(840);
 			String i4 = Decode.IntegerTo16sBinary(870);
 			String i5 = Decode.IntegerTo16sBinary(950);
 			String i6 = Decode.IntegerTo16sBinary(750);
 			String i7 = Decode.IntegerTo16sBinary(700);
 			String i8 = Decode.IntegerTo16sBinary(46);
-			String i9 = Decode.IntegerTo16sBinary(141);
+			//String i9 = Decode.IntegerTo16sBinary(141);
+			String i9 = Decode.IntegerTo16sBinary(143);
 			String i10 = Decode.IntegerTo16sBinary(715);
 			MainApp.myMemory.writeToMemory(10, i1);
 			MainApp.myMemory.writeToMemory(11, i2);
