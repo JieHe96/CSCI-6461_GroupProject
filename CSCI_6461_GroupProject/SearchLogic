@@ -39,7 +39,7 @@ MAIN
  
   // COMPARE END OF PARAGRAPH  
 149 LDR R0,x3,25 // SENTENCE
-	LDA R1,0,0,6  // counter =6 , end of para
+	LDA R1,0,0,7  // counter =7 , end of para
 	TRR 00,1,0,0
 152 JCC 3,0,1,16 // P2_SEARCH_FAIL
  
