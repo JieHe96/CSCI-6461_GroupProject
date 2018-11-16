@@ -15,6 +15,7 @@ public class InstructionList {
     public int[] transferInstructionArray;
     public int[] ioInstructionArray;
     public int[] misInstructionArray;
+    public int[] fpInstructionArray;
     private int pointer;
     private boolean jump;
 	
@@ -29,6 +30,7 @@ public class InstructionList {
 		transferInstructionArray = new int[] {8,9,10,11,12,13,14,15};
 		ioInstructionArray = new int[] {49, 50};
 		misInstructionArray = new int[] {0,30};
+		fpInstructionArray = new int[] {27,28,29,30,31,40,41};
 		pointer = 0;
 		jump = false;
 		
@@ -228,6 +230,12 @@ public class InstructionList {
 				Instruction errorIns = new Instruction();
 				errorIns.assignValue(value);
 				instructionList.put(index, errorIns);
+				addressList.add(index);
+				break;
+			case 7:
+				Instruction newfpIns = new FPInstruction();
+				newfpIns.assignValue(value);
+				instructionList.put(index, newfpIns);
 				addressList.add(index);
 				break;
 		}
