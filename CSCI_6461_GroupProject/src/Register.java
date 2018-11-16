@@ -7,7 +7,8 @@ import java.util.stream.IntStream;
 public class Register {
 	/**
 	 * {"R0:", "R1:", "R2:", "R3:", "PC:", "CC:", "IR:", 
-	 * "MAR:", "MBR:", "MSR:", "MFR:", "X1:", "X2:", "X3:"};
+	 * "MAR:", "MBR:", "MSR:", "MFR:", "X1:", "X2:", "X3:", 
+	 * "FR0:", "FR1:"};
 	 */
 	private Map<String, BitSet> registerMap;
 	private Map<String, Integer> checkCharMap;
