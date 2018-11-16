@@ -52,6 +52,8 @@ public class MainFrame extends JFrame{
 	JTextField x3Text;
 	JTextField ccText;
 	JTextField mfrText;
+	JTextField fr1Text;
+	JTextField fr2Text;
 	DefaultListModel<String> instructionModel;
 	JList<String> instructionList;
 	JTextField keyboardField;
@@ -147,7 +149,7 @@ public class MainFrame extends JFrame{
 	}
 	
 	private JPanel initRPanel() {
-		JPanel registerPanel = new JPanel(new GridLayout(14, 1));
+		JPanel registerPanel = new JPanel(new GridLayout(16, 1));
 		
 		JPanel r0Panel = new JPanel(new BorderLayout());
 		JLabel r0Label = new JLabel("R0");
@@ -309,6 +311,18 @@ public class MainFrame extends JFrame{
 		msrPanel.add(msrLabel, BorderLayout.WEST);
 		msrPanel.add(msrText, BorderLayout.CENTER);
 		
+		JPanel fr1Panel = new JPanel(new BorderLayout());
+		JLabel fr1Label = new JLabel("FR1");
+		JTextField fr1Text = new JTextField();
+		fr1Panel.add(fr1Label, BorderLayout.WEST);
+		fr1Panel.add(fr1Text, BorderLayout.CENTER);
+		
+		JPanel fr2Panel = new JPanel(new BorderLayout());
+		JLabel fr2Label = new JLabel("FR2");
+		JTextField fr2Text = new JTextField();
+		fr2Panel.add(fr2Label, BorderLayout.WEST);
+		fr2Panel.add(fr2Text, BorderLayout.CENTER);
+		
 		registerPanel.add(r0Panel);
 		registerPanel.add(r1Panel);
 		registerPanel.add(r2Panel);
@@ -323,6 +337,8 @@ public class MainFrame extends JFrame{
 		registerPanel.add(ccPanel);
 		registerPanel.add(mfrPanel);
 		registerPanel.add(msrPanel);
+		registerPanel.add(fr1Panel);
+		registerPanel.add(fr2Panel);
 		
 		return registerPanel;
 	}

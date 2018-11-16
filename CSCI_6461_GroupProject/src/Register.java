@@ -33,6 +33,8 @@ public class Register {
 		registerMap.put("X1", new BitSet(16));
 		registerMap.put("X2", new BitSet(16));
 		registerMap.put("X3", new BitSet(16));
+		registerMap.put("FR1", new BitSet(16));
+		registerMap.put("FR2", new BitSet(16));
 		
 		//use to check if data in register is character
 		checkCharMap = new HashMap<String, Integer> ();
@@ -205,6 +207,22 @@ public class Register {
 			return checkCharMap.get("R3");
 		}
 		return 0;
+	}
+	
+	public void writeToFP(int num, char sign, String exponent, String mantissa) {
+		BitSet buffer = new BitSet(16);
+		if (sign == '0') buffer.set(0, false);
+		else buffer.set(0, false);
+		for (int i = 0; i < exponent.length(); i++) {
+			if (exponent.charAt(i) == '1') buffer.set(i+1, true);
+    		else buffer.set(i, false);
+		}
+		for (int i = 0; i < mantissa.length(); i++) {
+			if (exponent.charAt(i) == '1') buffer.set(i+8, true);
+    		else buffer.set(i, false);
+		}
+		if (num == 1) registerMap.put("FR1", buffer);
+		else registerMap.put("FR2", buffer);
 	}
 
 }
