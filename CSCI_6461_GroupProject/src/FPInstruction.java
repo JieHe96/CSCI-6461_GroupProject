@@ -37,9 +37,35 @@ public class FPInstruction extends Instruction{
 			String itype = new StringBuilder().append("").append(temp).toString();
 			String iaddress = ins.substring(11,16);//address
 			
+			freg = Decode.binaryToDecimal(freg_bin);//decimal r
+			index = Decode.binaryToDecimal(iindex);// decial ix
+			instype = Decode.binaryToDecimal(itype);//decimal i
+			insadd = Decode.binaryToDecimal(iaddress);//decimal address
+
 		}
 		
-		
+		MainApp.myRegisters.writeToRegister("IR", ins, 16);
     }
 	
+public void execute() {
+		
+		switch (opcode)
+		{
+		case 27: break;
+		
+		case 28: break;
+		
+		case 29: break;
+		
+		
+		case 30: break;
+		
+		case 31: break;
+		
+		case 40: break;
+		
+		case 41: break;
+		}
+    
+    
 }
