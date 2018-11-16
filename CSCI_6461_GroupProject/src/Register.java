@@ -33,8 +33,8 @@ public class Register {
 		registerMap.put("X1", new BitSet(16));
 		registerMap.put("X2", new BitSet(16));
 		registerMap.put("X3", new BitSet(16));
+		registerMap.put("FR0", new BitSet(16));
 		registerMap.put("FR1", new BitSet(16));
-		registerMap.put("FR2", new BitSet(16));
 		
 		//use to check if data in register is character
 		checkCharMap = new HashMap<String, Integer> ();
@@ -221,8 +221,8 @@ public class Register {
 			if (exponent.charAt(i) == '1') buffer.set(i+8, true);
     		else buffer.set(i, false);
 		}
-		if (num == 1) registerMap.put("FR1", buffer);
-		else registerMap.put("FR2", buffer);
+		if (num == 1) registerMap.put("FR0", buffer);
+		else registerMap.put("FR1", buffer);
 	}
 
 }
