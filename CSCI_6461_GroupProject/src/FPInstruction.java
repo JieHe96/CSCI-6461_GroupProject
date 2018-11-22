@@ -49,7 +49,7 @@ public class FPInstruction extends Instruction{
 			String iaddress = ins.substring(11,16);//address
 			
 			freg = Decode.binaryToDecimal(freg_bin);//decimal f
-			index = Decode.binaryToDecimal(iindex);// decial ix
+			index = Decode.binaryToDecimal(iindex);// decimal ix
 			instype = Decode.binaryToDecimal(itype);//decimal i
 			insadd = Decode.binaryToDecimal(iaddress);//decimal address
 
@@ -58,25 +58,143 @@ public class FPInstruction extends Instruction{
 		MainApp.myRegisters.writeToRegister("IR", ins, 16);
     }
 	
-public void execute() {
+    public void execute() {
 		
 		switch (opcode)
 		{
-		case 27: break;
-		
-		case 28: break;
-		
-		case 29: break;
-		
-		
-		case 30: break;
-		
-		case 31: break;
-		
-		case 40: break;
-		
-		case 41: break;
+			case 27: break;
+			
+			case 28: 
+				
+				//calculate ea
+				int sub_ea = 0;
+	    		if (instype == 0) {
+	    			//Direct Addressing
+	    			if (index == 0) {
+	    				//Get the value stored in insadd
+	    				sub_ea = insadd;
+	    			}
+	    			else {
+	    				//Get the value stored in [ix] + insadd
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				sub_ea = ixValue + insadd;
+	    			}
+	    		}
+	    		else {
+	    			//Indirect Addressing
+	    			if (index == 0) {
+	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				sub_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    			else {
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				int buffer = ixValue + insadd;
+	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+	    				sub_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    		}
+				
+	    		//get the fr floating point value
+				String fr_str = "";
+				if (freg == 0) fr_str = MainApp.myRegisters.getRegister("FR0", false);
+				else fr_str = MainApp.myRegisters.getRegister("FR1", false);
+				int fr_sign = Character.getNumericValue(fr_str.charAt(0));
+				int fr_exsign = Character.getNumericValue(fr_str.charAt(1));
+				int fr_exponent = Decode.binaryToDecimal(fr_str.substring(2, 8));
+				if (fr_exsign == 1) fr_exponent *= -1;
+				String fr_mantissa = fr_str.substring(8,16);
+				//normalize the mantissa
+				while (fr_mantissa.charAt(0) == fr_mantissa.charAt(1)) {
+					fr_mantissa = fr_mantissa.substring(1);
+					fr_mantissa += "0";
+					fr_exponent --;
+				}
+				
+				//get the ea floating point value
+				String ea_str = "";
+				ea_str = MainApp.myMemory.readFromMemory(sub_ea).convertToString();
+				int ea_sign = Character.getNumericValue(fr_str.charAt(0));
+				int ea_exsign = Character.getNumericValue(fr_str.charAt(1));
+				int ea_exponent = Decode.binaryToDecimal(fr_str.substring(2, 8));
+				if (ea_exsign == 1) ea_exponent *= -1;
+				String ea_mantissa = ea_str.substring(8,16);
+				//normalize the mantissa
+				while (ea_mantissa.charAt(0) == ea_mantissa.charAt(1)) {
+					ea_mantissa = ea_mantissa.substring(1);
+					ea_mantissa += "0";
+					ea_exponent --;
+				}
+				
+				int res_exponent = 0;
+				//normalize exponent to the same
+				if (fr_exponent > ea_exponent) {
+					//calculate the num of bit need to move
+					int bit_move = Math.abs(fr_exponent - ea_exponent);
+					for (int i = 0; i < bit_move; i++) {
+						//remove the last bit
+						ea_mantissa = ea_mantissa.substring(0, ea_mantissa.length()-1);
+						//add to the front of the mantissa
+						char adding = ea_mantissa.charAt(0);
+						ea_mantissa = adding + ea_mantissa;
+					}
+					res_exponent = fr_exponent;
+				}
+				else {
+					//calculate the num of bit need to move
+					int bit_move = Math.abs(ea_exponent - fr_exponent);
+					for (int i = 0; i < bit_move; i++) {
+						//remove the last bit
+						fr_mantissa = fr_mantissa.substring(0, fr_mantissa.length()-1);
+						//add to the front of the mantissa
+						char adding = fr_mantissa.charAt(0);
+						fr_mantissa = adding + fr_mantissa;
+					}
+					res_exponent = ea_exponent;
+				}
+				
+				int fr_dec = Decode.binaryToDecimal(fr_mantissa);
+				int ea_dec = Decode.binaryToDecimal(ea_mantissa);
+				if (fr_sign == 1) fr_dec *= -1;
+				if (ea_sign == 1) ea_dec *= -1;
+				int res = fr_dec - ea_dec;
+				
+				char res_sign = '0';
+				if (res < 0) {
+					res *= -1;
+					res_sign = '1';
+				}
+				
+				String res_mantissa = Integer.toBinaryString(res);
+				if (res_mantissa.length() < 8) String.format("%8s", res_mantissa);
+				else if (res_mantissa.length() > 8) res_mantissa = res_mantissa.substring(res_mantissa.length()-8, res_mantissa.length());
+				String res_exstr = "";
+				
+				if (res_exponent < 0) {
+					res_exponent *= -1;
+					res_exstr = Integer.toBinaryString(res_exponent);
+					res_exstr = '1' + res_exstr;
+				}
+				else {
+					res_exstr = Integer.toBinaryString(res_exponent);
+				}
+				
+				MainApp.myRegisters.writeToFP(freg, res_sign, res_exstr, res_mantissa);
+				
+				
+				break;
+			
+			case 29: break;
+			
+			
+			case 30: break;
+			
+			case 31: break;
+			
+			case 40: break;
+			
+			case 41: break;
 		}
+    }
     
     
 }
