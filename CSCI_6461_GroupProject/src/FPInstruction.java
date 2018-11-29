@@ -304,10 +304,82 @@ public class FPInstruction extends Instruction{
 			case 30: break;
 			
 			case 31: break;
-			
-			case 40: break;
-			
-			case 41: break;
+
+			case 40: {
+				int ldfr_ea = 0;
+				//Calculate EA
+				if (instype == 0) {
+					//Direct Addressing
+					if (index == 0) {
+						//Get the value stored in insadd
+						ldfr_ea = insadd;
+					}
+					else {
+						//Get the value stored in [ix] + insadd
+						int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+						ldfr_ea = ixValue + insadd;
+					}
+				}
+				else {
+					//Indirect Addressing
+					if (index == 0) {
+						String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+						ldfr_ea = Decode.binaryToDecimal(tmp);
+					}
+					else {
+						int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+						int buffer = ixValue + insadd;
+						String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+						ldfr_ea = Decode.binaryToDecimal(tmp);
+					}
+				}
+
+				//fetching word from memory and converting to string - Getting value at the memory
+				String ldfr_ex = MainApp.myMemory.readFromMemory(ldfr_ea).convertToString();
+				String ldfr_ma = MainApp.myMemory.readFromMemory(ldfr_ea + 1).convertToString();
+
+				//Store value into FR
+				char s = ldfr_ex.charAt(0);
+				MainApp.myRegisters.writeToFP(freg, s, ldfr_ex, ldfr_ma);
+			}
+			break;
+
+			case 41: {
+				int stfr_ea = 0;
+				//Calculate EA
+				if (instype == 0) {
+					//Direct addressing
+					if (index == 0) {
+						stfr_ea = insadd;
+					}
+					else {
+						int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+						stfr_ea = ixValue + insadd;
+					}
+				}
+				else {
+					//Indirect addressing
+					if (index == 0) {
+						String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+						stfr_ea = Decode.binaryToDecimal(tmp);
+					}
+					else {
+						int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+						int buffer = ixValue + insadd;
+						String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+						stfr_ea = Decode.binaryToDecimal(tmp);
+					}
+				}
+				//get the fr floating point value
+				if (freg == 0) fr_str = MainApp.myRegisters.getRegister("FR0", false);
+				else fr_str = MainApp.myRegisters.getRegister("FR1", false);
+
+				MainApp.myMemory.writeToMemory(stfr_ea, fr_str.substring(0, 8));
+
+				MainApp.myMemory.writeToMemory(stfr_ea + 1, fr_str.substring(8, 16));
+			}
+			break;
+
 		}
     }
     

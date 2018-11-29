@@ -1,1 +1,1 @@
-hello to program.this is a sentence.enter a word.it will return location.thank you for using.csci.
+hello to program. this is a sentence. enter a word. it will return location. thank you for using. rcsci.
