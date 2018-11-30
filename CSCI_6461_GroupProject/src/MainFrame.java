@@ -314,14 +314,33 @@ public class MainFrame extends JFrame{
 		JPanel fr0Panel = new JPanel(new BorderLayout());
 		JLabel fr0Label = new JLabel("FR0");
 		fr0Text = new JTextField();
+		JButton fr0Button = new JButton("Write");
+		pcText = new JTextField();
+		fr0Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainApp.myRegisters.writeToRegister("FR0", fr0Text.getText(), 16);
+				System.out.println(MainApp.myRegisters.getRegister("FR0", false));
+			}
+		});
 		fr0Panel.add(fr0Label, BorderLayout.WEST);
 		fr0Panel.add(fr0Text, BorderLayout.CENTER);
+		fr0Panel.add(fr0Button, BorderLayout.EAST);
 		
 		JPanel fr1Panel = new JPanel(new BorderLayout());
 		JLabel fr1Label = new JLabel("FR1");
 		fr1Text = new JTextField();
+		JButton fr1Button = new JButton("Write");
+		fr1Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainApp.myRegisters.writeToRegister("FR1", fr1Text.getText(), 16);
+				System.out.println(MainApp.myRegisters.getRegister("FR1", false));
+			}
+		});
 		fr1Panel.add(fr1Label, BorderLayout.WEST);
 		fr1Panel.add(fr1Text, BorderLayout.CENTER);
+		fr1Panel.add(fr1Button, BorderLayout.EAST);
 		
 		registerPanel.add(r0Panel);
 		registerPanel.add(r1Panel);
