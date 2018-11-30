@@ -273,6 +273,7 @@ public class FPInstruction extends Instruction{
 					}
 					res_exponent = ea_exponent;
 				}
+				System.out.println("res_exp: " + res_exponent);
 				
 				int fr_dec = Decode.binaryToDecimal(fr_mantissa);
 				int ea_dec = Decode.binaryToDecimal(ea_mantissa);
@@ -293,6 +294,8 @@ public class FPInstruction extends Instruction{
 				
 				if (res_exponent < 0) {
 					res_exponent *= -1;
+					System.out.println(res_exstr);
+					System.out.println(res_exstr.length());
 					res_exstr = Integer.toBinaryString(res_exponent);
 					res_exstr = String.format("%6s", res_exstr).replace(" ", "0");
 					res_exstr = '1' + res_exstr;
@@ -301,6 +304,7 @@ public class FPInstruction extends Instruction{
 					res_exstr = Integer.toBinaryString(res_exponent);
 					res_exstr = String.format("%7s", res_exstr).replace(" ", "0");
 				}
+				System.out.println(freg +"   " +res_sign +"   " + res_exstr +"   " + res_mantissa);
 				
 				MainApp.myRegisters.writeToFP(freg, res_sign, res_exstr, res_mantissa);
 				
