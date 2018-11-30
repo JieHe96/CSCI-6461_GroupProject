@@ -560,7 +560,29 @@ public class FPInstruction extends Instruction{
 					MainApp.myRegisters.writeToGR(ireg, res_fix);
 				}
 				else {
-					//fix to floating
+					//fix to floating point num
+					String num_str = MainApp.myMemory.readFromMemory(convrt_ea).convertToString();
+					
+					char sign = '0';
+					int exponent = 0;
+					while(num_str.charAt(0) == '0') {
+						num_str = num_str.substring(1);
+					}
+					System.out.println("----"+num_str);
+					exponent = num_str.length()-1;
+					
+					while(num_str.length() < 8) {
+						num_str+='0';
+					}
+					
+					String exp_str = Integer.toBinaryString(exponent);
+					exp_str = String.format("%7s", exp_str).replace(" ", "0");
+					
+					System.out.println("===" + exp_str);
+					System.out.println(num_str);
+					
+					MainApp.myRegisters.writeToFP(0, sign, exp_str, num_str.substring(0, 8));
+					
 					
 				}
 				

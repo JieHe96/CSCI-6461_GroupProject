@@ -40,6 +40,8 @@ public class MainFrame extends JFrame{
 	JButton startButton;
 	JButton program1Button;
 	JButton program2Button;
+	JButton floatingButton;
+	JButton vectorButton;
 	JTextField irText;
 	JTextField marText;
 	JTextField mbrText;
@@ -444,6 +446,10 @@ public class MainFrame extends JFrame{
 		program1Button.addActionListener(p1ButtonListener);
 		program2Button = new JButton("Program2");
 		program2Button.addActionListener(p2ButtonListener);
+		floatingButton = new JButton("Floating Test");
+		floatingButton.addActionListener(floatingButtonListener);
+		vectorButton = new JButton("Vector Test");
+		vectorButton.addActionListener(vectorButtonListener);
 		singleRunButton = new JButton("Single Run");
 		singleRunButton.addActionListener(singleRunButtonListener);
 		JButton loadButton = new JButton("Load");
@@ -452,12 +458,23 @@ public class MainFrame extends JFrame{
 		startButton = new JButton("Start");
 		//startButton.setEnabled(false);
 		startButton.addActionListener(startButtonListener);
-		JButton stopButton = new JButton("Stop");
-		stopButton.setEnabled(false);
+		JButton stopButton = new JButton("Restart");
+		stopButton.addActionListener( new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				MainApp.restart();
+			}
+			
+		});
+		//stopButton.setEnabled(false);
 		//stopButton.addActionListener(stopButtonListener);
 		controlPanel.add(iplButton);
 		controlPanel.add(program1Button);
 		controlPanel.add(program2Button);
+		controlPanel.add(floatingButton);
+		controlPanel.add(vectorButton);
 		controlPanel.add(singleRunButton);
 		controlPanel.add(loadButton);
 		controlPanel.add(startButton);
@@ -587,6 +604,76 @@ public class MainFrame extends JFrame{
 	};
 	
 	private ActionListener p2ButtonListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//MainApp.myRegisters.writeToIX(1, "235");
+			MainApp.myRegisters.writeToIX(2, "350");
+			MainApp.myRegisters.writeToIX(3, "80");
+			MainApp.myRegisters.writeToRegister("PC", "78", 12);
+			String i1 = Decode.IntegerTo16sBinary(780);
+			//String i2 = Decode.IntegerTo16sBinary(810);
+			String i2 = Decode.IntegerTo16sBinary(813);
+			String i3 = Decode.IntegerTo16sBinary(840);
+			String i4 = Decode.IntegerTo16sBinary(870);
+			String i5 = Decode.IntegerTo16sBinary(950);
+			String i6 = Decode.IntegerTo16sBinary(750);
+			String i7 = Decode.IntegerTo16sBinary(700);
+			String i8 = Decode.IntegerTo16sBinary(46);
+			//String i9 = Decode.IntegerTo16sBinary(141);
+			String i9 = Decode.IntegerTo16sBinary(143);
+			String i10 = Decode.IntegerTo16sBinary(715);
+			MainApp.myMemory.writeToMemory(10, i1);
+			MainApp.myMemory.writeToMemory(11, i2);
+			MainApp.myMemory.writeToMemory(12, i3);
+			MainApp.myMemory.writeToMemory(13, i4);
+			MainApp.myMemory.writeToMemory(14, i5);
+			MainApp.myMemory.writeToMemory(15, i6);
+			MainApp.myMemory.writeToMemory(16, i7);
+			MainApp.myMemory.writeToMemory(17, i8);
+			MainApp.myMemory.writeToMemory(18, i9);
+			MainApp.myMemory.writeToMemory(19, i10);
+			MainApp.myClock.resume();
+			startProgram2();
+			
+		}
+	};
+	
+	private ActionListener floatingButtonListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//MainApp.myRegisters.writeToIX(1, "235");
+			MainApp.myRegisters.writeToIX(2, "350");
+			MainApp.myRegisters.writeToIX(3, "80");
+			MainApp.myRegisters.writeToRegister("PC", "78", 12);
+			String i1 = Decode.IntegerTo16sBinary(780);
+			//String i2 = Decode.IntegerTo16sBinary(810);
+			String i2 = Decode.IntegerTo16sBinary(813);
+			String i3 = Decode.IntegerTo16sBinary(840);
+			String i4 = Decode.IntegerTo16sBinary(870);
+			String i5 = Decode.IntegerTo16sBinary(950);
+			String i6 = Decode.IntegerTo16sBinary(750);
+			String i7 = Decode.IntegerTo16sBinary(700);
+			String i8 = Decode.IntegerTo16sBinary(46);
+			//String i9 = Decode.IntegerTo16sBinary(141);
+			String i9 = Decode.IntegerTo16sBinary(143);
+			String i10 = Decode.IntegerTo16sBinary(715);
+			MainApp.myMemory.writeToMemory(10, i1);
+			MainApp.myMemory.writeToMemory(11, i2);
+			MainApp.myMemory.writeToMemory(12, i3);
+			MainApp.myMemory.writeToMemory(13, i4);
+			MainApp.myMemory.writeToMemory(14, i5);
+			MainApp.myMemory.writeToMemory(15, i6);
+			MainApp.myMemory.writeToMemory(16, i7);
+			MainApp.myMemory.writeToMemory(17, i8);
+			MainApp.myMemory.writeToMemory(18, i9);
+			MainApp.myMemory.writeToMemory(19, i10);
+			MainApp.myClock.resume();
+			startProgram2();
+			
+		}
+	};
+	
+	private ActionListener vectorButtonListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//MainApp.myRegisters.writeToIX(1, "235");
