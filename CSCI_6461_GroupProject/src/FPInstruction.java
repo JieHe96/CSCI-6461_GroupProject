@@ -526,7 +526,38 @@ public class FPInstruction extends Instruction{
 				int f_val = Decode.binaryToDecimal(r_str);
 				if (f_val == 0) {
 					//floating to fix
+					String num_str = MainApp.myMemory.readFromMemory(convrt_ea).convertToString();
 					
+					int num_sign = Character.getNumericValue(num_str.charAt(0));
+					int num_exsign = Character.getNumericValue(num_str.charAt(1));
+					int num_exponent = Decode.binaryToDecimal(num_str.substring(2, 8));
+					
+					String num_mantissa = num_str.substring(8,16);
+					
+					String res_fix = "";
+					
+					if (num_exsign == 1) {
+						res_fix = "0";
+					}
+					else {
+						if (num_exponent > 7) {
+							for (int i = 0; i < num_exponent - 7; i++) {
+								num_mantissa += "0";
+							}
+							res_fix = num_mantissa;
+						}
+						else {
+							num_mantissa = num_mantissa.substring(0, num_exponent+1);
+							res_fix = num_mantissa;
+						}
+					}
+					res_fix = String.format("%16s", res_fix).replace(" ", "0");
+					System.out.println("-----" + res_fix);
+					if (num_sign == 1) {
+						res_fix = '1' + res_fix.substring(1, res_fix.length());
+					}
+					System.out.println(res_fix);
+					MainApp.myRegisters.writeToGR(ireg, res_fix);
 				}
 				else {
 					//fix to floating
