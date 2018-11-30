@@ -169,12 +169,14 @@ public class FPInstruction extends Instruction{
 				if (res_exponent1 < 0) {
 					res_exponent1 *= -1;
 					res_exstr1 = Integer.toBinaryString(res_exponent1);
+					res_exstr1 = String.format("%06s", res_exstr1).replace("", "0");
 					res_exstr1 = '1' + res_exstr1;
 				}
 				else {
+					res_exstr1 = String.format("%07s", res_exstr1).replace("", "0");
 					res_exstr1 = Integer.toBinaryString(res_exponent1);
 				}
-				
+				System.out.println(freg +"   " +res_sign1 +"   " + res_exstr1 +"   " + res_mantissa1);
 				MainApp.myRegisters.writeToFP(freg, res_sign1, res_exstr1, res_mantissa1);
 										
 				break;
