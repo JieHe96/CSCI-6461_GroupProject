@@ -222,7 +222,7 @@ public class Register {
 			if (mantissa.charAt(i) == '1') buffer.set(i+8, true);
     		else buffer.set(i+8, false);
 		}
-		if (num == 1) registerMap.put("FR0", buffer);
+		if (num == 0) registerMap.put("FR0", buffer);
 		else registerMap.put("FR1", buffer);
 	}
 

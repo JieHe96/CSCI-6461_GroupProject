@@ -165,7 +165,7 @@ public class FPInstruction extends Instruction{
 				}
 				
 				String res_mantissa1 = Integer.toBinaryString(res1);
-				if (res_mantissa1.length() < 8) String.format("%8s", res_mantissa1);
+				if (res_mantissa1.length() < 8)res_mantissa1 = String.format("%8s", res_mantissa1).replace(" ", "0");
 				else if (res_mantissa1.length() > 8) res_mantissa1 = res_mantissa1.substring(res_mantissa1.length()-8, res_mantissa1.length());
 				String res_exstr1 = "";
 				
@@ -288,10 +288,11 @@ public class FPInstruction extends Instruction{
 				}
 				
 				String res_mantissa = Integer.toBinaryString(res);
-				if (res_mantissa.length() < 8) String.format("%8s", res_mantissa);
+				System.out.println("res_mantissa (before)= " + res_mantissa);
+				if (res_mantissa.length() < 8) res_mantissa = String.format("%8s", res_mantissa).replace(" ", "0");
 				else if (res_mantissa.length() > 8) res_mantissa = res_mantissa.substring(res_mantissa.length()-8, res_mantissa.length());
 				String res_exstr = "";
-				
+				System.out.println("res_mantissa = " + res_mantissa);
 				if (res_exponent < 0) {
 					res_exponent *= -1;
 					System.out.println(res_exstr);
