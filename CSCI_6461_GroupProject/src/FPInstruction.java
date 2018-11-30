@@ -560,7 +560,7 @@ public class FPInstruction extends Instruction{
 					MainApp.myRegisters.writeToGR(ireg, res_fix);
 				}
 				else {
-					//fix to floating
+					//fix to floating point
 					String num_str = MainApp.myMemory.readFromMemory(convrt_ea).convertToString();
 					
 					char sign = '0';
