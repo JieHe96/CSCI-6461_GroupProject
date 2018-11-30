@@ -388,7 +388,7 @@ public class FPInstruction extends Instruction{
 				
 				break;
 			
-			
+			//change to 42
 			case 42: 
 				
 				if (freg == 0) fr_str = MainApp.myRegisters.getRegister("FR0", false);
