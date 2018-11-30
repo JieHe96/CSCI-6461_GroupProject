@@ -566,6 +566,18 @@ public class FPInstruction extends Instruction{
 
 				//fetching word from memory and converting to string - Getting value at the memory
 				String ldfr_str = MainApp.myMemory.readFromMemory(ldfr_ea).convertToString();
+				//creating 16 bit string of EA
+				String ldfr_eaStr = Decode.IntegerTo16sBinary(ldfr_ea);
+				//fetching word from memory and converting to string - Getting value at the memory
+
+				if (MainApp.myMemory.readFromMemory(ldfr_ea).checkFlag()) {
+					System.out.println("=================");
+					MainApp.myRegisters.setCharMap(ireg, 1);
+				}
+				//store address into MAR
+				MainApp.myRegisters.writeToRegister("MAR", ldfr_eaStr, 16);
+				//Store value into MBR
+				MainApp.myRegisters.writeToRegister("MBR", ldfr_str, 16);
 
 				//Store value into FR
 				char s = ldfr_str.charAt(0);
@@ -605,6 +617,12 @@ public class FPInstruction extends Instruction{
 				else fr_str = MainApp.myRegisters.getRegister("FR1", false);
 
 				MainApp.myMemory.writeToMemory(stfr_ea, fr_str);
+
+				//Set MAR = EA, MBR = [RR], then write to memory
+				String stfr_eaStr = Decode.IntegerTo16sBinary(stfr_ea);
+				String stfr_rValue = fr_str;
+				MainApp.myRegisters.writeToRegister("MAR", stfr_eaStr, 16);
+				MainApp.myRegisters.writeToRegister("MBR", stfr_rValue, 16);
 			}
 			break;
 
