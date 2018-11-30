@@ -680,6 +680,7 @@ public class MainFrame extends JFrame{
 		}
 	};
 	
+	//useless
 	private ActionListener stopButtonListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
