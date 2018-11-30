@@ -29,7 +29,7 @@ public class MainApp {
 			/** Creates mainframe and set size. */
 			public void run() {
 				frame = new MainFrame("Computer Simulator");
-				frame.setSize(800, 600);
+				frame.setSize(950, 600);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -47,6 +47,15 @@ public class MainApp {
 		myDevice = new Device();
 		myCache = new Cache();
 		//myFileLoader = new FileLoader();
+	}
+	
+	public static void restart() {
+		myMemory = new Memory();
+		myInstructionList = new InstructionList();
+		myRegisters = new Register();
+		myClock = new Clock();
+		myDevice = new Device();
+		myCache = new Cache();
 	}
 	
 }
