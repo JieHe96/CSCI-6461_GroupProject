@@ -642,34 +642,12 @@ public class MainFrame extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//MainApp.myRegisters.writeToIX(1, "235");
-			MainApp.myRegisters.writeToIX(2, "350");
-			MainApp.myRegisters.writeToIX(3, "80");
-			MainApp.myRegisters.writeToRegister("PC", "78", 12);
-			String i1 = Decode.IntegerTo16sBinary(780);
-			//String i2 = Decode.IntegerTo16sBinary(810);
-			String i2 = Decode.IntegerTo16sBinary(813);
-			String i3 = Decode.IntegerTo16sBinary(840);
-			String i4 = Decode.IntegerTo16sBinary(870);
-			String i5 = Decode.IntegerTo16sBinary(950);
-			String i6 = Decode.IntegerTo16sBinary(750);
-			String i7 = Decode.IntegerTo16sBinary(700);
-			String i8 = Decode.IntegerTo16sBinary(46);
-			//String i9 = Decode.IntegerTo16sBinary(141);
-			String i9 = Decode.IntegerTo16sBinary(143);
-			String i10 = Decode.IntegerTo16sBinary(715);
-			MainApp.myMemory.writeToMemory(10, i1);
-			MainApp.myMemory.writeToMemory(11, i2);
-			MainApp.myMemory.writeToMemory(12, i3);
-			MainApp.myMemory.writeToMemory(13, i4);
-			MainApp.myMemory.writeToMemory(14, i5);
-			MainApp.myMemory.writeToMemory(15, i6);
-			MainApp.myMemory.writeToMemory(16, i7);
-			MainApp.myMemory.writeToMemory(17, i8);
-			MainApp.myMemory.writeToMemory(18, i9);
-			MainApp.myMemory.writeToMemory(19, i10);
+			MainApp.myRegisters.writeToRegister("FR0", "0000010001100000", 16);
+			MainApp.myRegisters.writeToRegister("FR1", "0000001011000000", 16);
+			MainApp.myMemory.writeToMemory(16, "1100000111111111");
+			MainApp.myMemory.writeToMemory(17, "1000100111110001");
+			MainApp.myMemory.writeToMemory(18, "1000000111110001");
 			MainApp.myClock.resume();
-			startProgram2();
-			
 		}
 	};
 	
@@ -677,33 +655,9 @@ public class MainFrame extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//MainApp.myRegisters.writeToIX(1, "235");
-			MainApp.myRegisters.writeToIX(2, "350");
-			MainApp.myRegisters.writeToIX(3, "80");
-			MainApp.myRegisters.writeToRegister("PC", "78", 12);
-			String i1 = Decode.IntegerTo16sBinary(780);
-			//String i2 = Decode.IntegerTo16sBinary(810);
-			String i2 = Decode.IntegerTo16sBinary(813);
-			String i3 = Decode.IntegerTo16sBinary(840);
-			String i4 = Decode.IntegerTo16sBinary(870);
-			String i5 = Decode.IntegerTo16sBinary(950);
-			String i6 = Decode.IntegerTo16sBinary(750);
-			String i7 = Decode.IntegerTo16sBinary(700);
-			String i8 = Decode.IntegerTo16sBinary(46);
-			//String i9 = Decode.IntegerTo16sBinary(141);
-			String i9 = Decode.IntegerTo16sBinary(143);
-			String i10 = Decode.IntegerTo16sBinary(715);
-			MainApp.myMemory.writeToMemory(10, i1);
-			MainApp.myMemory.writeToMemory(11, i2);
-			MainApp.myMemory.writeToMemory(12, i3);
-			MainApp.myMemory.writeToMemory(13, i4);
-			MainApp.myMemory.writeToMemory(14, i5);
-			MainApp.myMemory.writeToMemory(15, i6);
-			MainApp.myMemory.writeToMemory(16, i7);
-			MainApp.myMemory.writeToMemory(17, i8);
-			MainApp.myMemory.writeToMemory(18, i9);
-			MainApp.myMemory.writeToMemory(19, i10);
+			MainApp.myRegisters.writeToIX(1, "32");
+			MainApp.myMemory.writeToMemory(26, "0000000000000011");
 			MainApp.myClock.resume();
-			startProgram2();
 			
 		}
 	};
