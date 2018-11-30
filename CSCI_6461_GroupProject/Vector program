@@ -1,0 +1,7 @@
+LDA R0,0,0,4
+
+STR R0,0,0,20 //Memory adress, c(20)=4
+
+LDFR FR0,0,0,20
+
+VADD
