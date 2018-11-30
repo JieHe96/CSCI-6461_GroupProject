@@ -30,7 +30,7 @@ public class InstructionList {
 		transferInstructionArray = new int[] {8,9,10,11,12,13,14,15};
 		ioInstructionArray = new int[] {49, 50};
 		misInstructionArray = new int[] {0,30};
-		fpInstructionArray = new int[] {27,28,29,30,31,40,41};
+		fpInstructionArray = new int[] {27,28,29,31,40,41,42};
 		pointer = 0;
 		jump = false;
 		

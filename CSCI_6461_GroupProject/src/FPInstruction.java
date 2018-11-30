@@ -333,10 +333,151 @@ public class FPInstruction extends Instruction{
 				
 				System.out.println(decimal_val);
 				
+				if (decimal_val != (float)((int)decimal_val)) break;
+				
+				int vadd_ea = 0;
+	    		if (instype == 0) {
+	    			//Direct Addressing
+	    			if (index == 0) {
+	    				//Get the value stored in insadd
+	    				vadd_ea = insadd;
+	    			}
+	    			else {
+	    				//Get the value stored in [ix] + insadd
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				vadd_ea = ixValue + insadd;
+	    			}
+	    		}
+	    		else {
+	    			//Indirect Addressing
+	    			if (index == 0) {
+	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				vadd_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    			else {
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				int buffer = ixValue + insadd;
+	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+	    				vadd_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    		}
+	    		
+	    		String v1_start = MainApp.myMemory.readFromMemory(vadd_ea).convertToString();
+	    		String v2_start = MainApp.myMemory.readFromMemory(vadd_ea+1).convertToString();
+	    		
+	    		int v1_addr = Decode.binaryToDecimal(v1_start);
+	    		int v2_addr = Decode.binaryToDecimal(v2_start);
+	    		decimal_val = (int) decimal_val;
+	    		
+	    		for (int i = 0; i < decimal_val; i++) {
+	    			String v1_str = MainApp.myMemory.readFromMemory(v1_addr+i).convertToString();
+	    			String v2_str = MainApp.myMemory.readFromMemory(v2_addr+i).convertToString();
+	    			
+	    			int result = Decode.binaryToDecimal(v1_str) + Decode.binaryToDecimal(v2_str);
+	    			String res_str = Integer.toString(result, 2);
+	    			
+	    			if (res_str.length() > 16) {
+	    				res_str = res_str.substring(0, 16);
+	    			}
+	    			else {
+	    				res_str = String.format("%16s", res_str).replace(" ", "0");
+	    			}
+	    			System.out.println(res_str);
+	    			MainApp.myMemory.writeToMemory(v1_addr+i, res_str);
+	    		}
+				
 				break;
 			
 			
-			case 30: break;
+			case 42: 
+				
+				if (freg == 0) fr_str = MainApp.myRegisters.getRegister("FR0", false);
+				else fr_str = MainApp.myRegisters.getRegister("FR1", false);
+				fr_sign = Character.getNumericValue(fr_str.charAt(0));
+				
+				if (fr_sign == '1') break;
+				
+				fr_exsign = Character.getNumericValue(fr_str.charAt(1));
+				fr_exponent = Decode.binaryToDecimal(fr_str.substring(2, 8));
+				if (fr_exsign == 1) fr_exponent *= -1;
+				fr_mantissa = fr_str.substring(8,16);
+				shift = (fr_mantissa.length() - 1);
+				System.out.println(fr_mantissa);
+				//System.out.println(2 ^ shift);
+				decimal_val = Decode.binaryToDecimal(fr_mantissa);
+				for (int i = 0; i < shift; i++) {
+					decimal_val = decimal_val / 2;
+				}
+				System.out.println(decimal_val);
+				
+				if (fr_exponent < 0) {
+					for (int i = 0; i < -fr_exponent; i++) {
+						decimal_val = decimal_val / 2;
+					}
+				}
+				else {
+					for (int i = 0; i < fr_exponent; i++) {
+						decimal_val = decimal_val * 2;
+					}
+				}
+				
+				System.out.println(decimal_val);
+				
+				if (decimal_val != (float)((int)decimal_val)) break;
+				
+				int vsub_ea = 0;
+	    		if (instype == 0) {
+	    			//Direct Addressing
+	    			if (index == 0) {
+	    				//Get the value stored in insadd
+	    				vsub_ea = insadd;
+	    			}
+	    			else {
+	    				//Get the value stored in [ix] + insadd
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				vsub_ea = ixValue + insadd;
+	    			}
+	    		}
+	    		else {
+	    			//Indirect Addressing
+	    			if (index == 0) {
+	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				vsub_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    			else {
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				int buffer = ixValue + insadd;
+	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+	    				vsub_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    		}
+	    		
+	    		v1_start = MainApp.myMemory.readFromMemory(vsub_ea).convertToString();
+	    		v2_start = MainApp.myMemory.readFromMemory(vsub_ea+1).convertToString();
+	    		
+	    		v1_addr = Decode.binaryToDecimal(v1_start);
+	    		v2_addr = Decode.binaryToDecimal(v2_start);
+	    		decimal_val = (int) decimal_val;
+	    		
+	    		for (int i = 0; i < decimal_val; i++) {
+	    			String v1_str = MainApp.myMemory.readFromMemory(v1_addr+i).convertToString();
+	    			String v2_str = MainApp.myMemory.readFromMemory(v2_addr+i).convertToString();
+	    			
+	    			int result = Decode.binaryToDecimal(v1_str) - Decode.binaryToDecimal(v2_str);
+	    			String res_str = Integer.toString(result, 2);
+	    			
+	    			if (res_str.length() > 16) {
+	    				res_str = res_str.substring(0, 16);
+	    			}
+	    			else {
+	    				res_str = String.format("%16s", res_str).replace(" ", "0");
+	    			}
+	    			System.out.println(res_str);
+	    			MainApp.myMemory.writeToMemory(v1_addr+i, res_str);
+	    		}
+				
+				
+				break;
 			
 			case 31: break;
 
