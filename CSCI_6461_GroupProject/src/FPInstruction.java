@@ -370,12 +370,12 @@ public class FPInstruction extends Instruction{
 				}
 
 				//fetching word from memory and converting to string - Getting value at the memory
-				String ldfr_ex = MainApp.myMemory.readFromMemory(ldfr_ea).convertToString();
-				String ldfr_ma = MainApp.myMemory.readFromMemory(ldfr_ea + 1).convertToString();
+				String ldfr_str = MainApp.myMemory.readFromMemory(ldfr_ea).convertToString();
 
 				//Store value into FR
-				char s = ldfr_ex.charAt(0);
-				MainApp.myRegisters.writeToFP(freg, s, ldfr_ex, ldfr_ma);
+				char s = ldfr_str.charAt(0);
+				MainApp.myRegisters.writeToFP(freg, s, ldfr_str.substring(1,8), ldfr_str.substring(8,15));
+				
 			}
 			break;
 
@@ -409,9 +409,7 @@ public class FPInstruction extends Instruction{
 				if (freg == 0) fr_str = MainApp.myRegisters.getRegister("FR0", false);
 				else fr_str = MainApp.myRegisters.getRegister("FR1", false);
 
-				MainApp.myMemory.writeToMemory(stfr_ea, fr_str.substring(0, 8));
-
-				MainApp.myMemory.writeToMemory(stfr_ea + 1, fr_str.substring(8, 16));
+				MainApp.myMemory.writeToMemory(stfr_ea, fr_str);
 			}
 			break;
 
