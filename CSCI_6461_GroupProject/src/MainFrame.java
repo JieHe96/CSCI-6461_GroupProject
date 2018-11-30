@@ -667,6 +667,8 @@ public class MainFrame extends JFrame{
 		String pc = MainApp.myRegisters.getRegister("PC", true);
 		String cc = MainApp.myRegisters.getRegister("CC", false);
 		String mfr = MainApp.myRegisters.getRegister("MFR", false);
+		String fr0 = MainApp.myRegisters.getRegister("FR0", false);
+		String fr1 = MainApp.myRegisters.getRegister("FR1", false);
 		irText.setText(ir);
 		marText.setText(mar);
 		mbrText.setText(mbr);
@@ -680,6 +682,8 @@ public class MainFrame extends JFrame{
 		pcText.setText(pc);
 		ccText.setText(cc);
 		mfrText.setText(mfr);
+		fr0Text.setText(fr0);
+		fr1Text.setText(fr1);
 		//if(instructionModel.getSize() != 0) {
 		//	instructionModel.removeElementAt(0);
 		//	instructionList.setModel(instructionModel);

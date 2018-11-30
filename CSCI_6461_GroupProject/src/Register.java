@@ -213,14 +213,14 @@ public class Register {
 	public void writeToFP(int num, char sign, String exponent, String mantissa) {
 		BitSet buffer = new BitSet(16);
 		if (sign == '0') buffer.set(0, false);
-		else buffer.set(0, false);
+		else buffer.set(0, true);
 		for (int i = 0; i < exponent.length(); i++) {
 			if (exponent.charAt(i) == '1') buffer.set(i+1, true);
-    		else buffer.set(i, false);
+    		else buffer.set(i+1, false);
 		}
 		for (int i = 0; i < mantissa.length(); i++) {
-			if (exponent.charAt(i) == '1') buffer.set(i+8, true);
-    		else buffer.set(i, false);
+			if (mantissa.charAt(i) == '1') buffer.set(i+8, true);
+    		else buffer.set(i+8, false);
 		}
 		if (num == 1) registerMap.put("FR0", buffer);
 		else registerMap.put("FR1", buffer);

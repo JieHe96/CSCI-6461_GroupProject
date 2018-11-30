@@ -100,29 +100,31 @@ public class FPInstruction extends Instruction{
 				int fr_exponent1 = Decode.binaryToDecimal(fr_str1.substring(2, 8));
 				if (fr_exsign1 == 1) fr_exponent1 *= -1;
 				String fr_mantissa1 = fr_str1.substring(8,16);
-				//normalize the mantissa
-				while (fr_mantissa1.charAt(0) == fr_mantissa1.charAt(1)) {
-					fr_mantissa1 = fr_mantissa1.substring(1);
-					fr_mantissa1 += "0";
-					fr_exponent1 --;
-				}
+//				//normalize the mantissa
+//				while (fr_mantissa1.charAt(0) == fr_mantissa1.charAt(1)) {
+//					fr_mantissa1 = fr_mantissa1.substring(1);
+//					fr_mantissa1 += "0";
+//					fr_exponent1 --;
+//				}
 				
 				//get the ea floating point value
 				String ea_str1 = "";
 				ea_str1 = MainApp.myMemory.readFromMemory(sub_ea1).convertToString();
-				int ea_sign1 = Character.getNumericValue(fr_str1.charAt(0));
-				int ea_exsign1 = Character.getNumericValue(fr_str1.charAt(1));
-				int ea_exponent1 = Decode.binaryToDecimal(fr_str1.substring(2, 8));
+				int ea_sign1 = Character.getNumericValue(ea_str1.charAt(0));
+				int ea_exsign1 = Character.getNumericValue(ea_str1.charAt(1));
+				int ea_exponent1 = Decode.binaryToDecimal(ea_str1.substring(2, 8));
 				if (ea_exsign1 == 1) ea_exponent1 *= -1;
 				String ea_mantissa1 = ea_str1.substring(8,16);
-				//normalize the mantissa
-				while (ea_mantissa1.charAt(0) == ea_mantissa1.charAt(1)) {
-					ea_mantissa1 = ea_mantissa1.substring(1);
-					ea_mantissa1 += "0";
-					ea_exponent1 --;
-				}
+//				//normalize the mantissa
+//				while (ea_mantissa1.charAt(0) == ea_mantissa1.charAt(1)) {
+//					ea_mantissa1 = ea_mantissa1.substring(1);
+//					ea_mantissa1 += "0";
+//					ea_exponent1 --;
+//				}
 				
 				int res_exponent1 = 0;
+				System.out.println("fr_exp: " + fr_exponent1);
+				System.out.println("ea_exp: " + ea_exponent1);
 				//normalize exponent to the same
 				if (fr_exponent1 > ea_exponent1) {
 					//calculate the num of bit need to move
@@ -131,8 +133,8 @@ public class FPInstruction extends Instruction{
 						//remove the last bit
 						ea_mantissa1 = ea_mantissa1.substring(0, ea_mantissa1.length()-1);
 						//add to the front of the mantissa
-						char adding = ea_mantissa1.charAt(0);
-						ea_mantissa1 = adding + ea_mantissa1;
+						//char adding = ea_mantissa1.charAt(0);
+						ea_mantissa1 = '0' + ea_mantissa1;
 					}
 					res_exponent1 = fr_exponent1;
 				}
@@ -143,11 +145,12 @@ public class FPInstruction extends Instruction{
 						//remove the last bit
 						fr_mantissa1 = fr_mantissa1.substring(0, fr_mantissa1.length()-1);
 						//add to the front of the mantissa
-						char adding = fr_mantissa1.charAt(0);
-						fr_mantissa1 = adding + fr_mantissa1;
+						//char adding = fr_mantissa1.charAt(0);
+						fr_mantissa1 = '0' + fr_mantissa1;
 					}
 					res_exponent1 = ea_exponent1;
 				}
+				System.out.println("res_exp: " + res_exponent1);
 				
 				int fr_dec1 = Decode.binaryToDecimal(fr_mantissa1);
 				int ea_dec1 = Decode.binaryToDecimal(ea_mantissa1);
@@ -169,12 +172,14 @@ public class FPInstruction extends Instruction{
 				if (res_exponent1 < 0) {
 					res_exponent1 *= -1;
 					res_exstr1 = Integer.toBinaryString(res_exponent1);
-					res_exstr1 = String.format("%06s", res_exstr1).replace("", "0");
+					System.out.println(res_exstr1);
+					System.out.println(res_exstr1.length());
+					res_exstr1 = String.format("%6s", res_exstr1).replace(" ", "0");
 					res_exstr1 = '1' + res_exstr1;
 				}
 				else {
-					res_exstr1 = String.format("%07s", res_exstr1).replace("", "0");
 					res_exstr1 = Integer.toBinaryString(res_exponent1);
+					res_exstr1 = String.format("%7s", res_exstr1).replace(" ", "0");
 				}
 				System.out.println(freg +"   " +res_sign1 +"   " + res_exstr1 +"   " + res_mantissa1);
 				MainApp.myRegisters.writeToFP(freg, res_sign1, res_exstr1, res_mantissa1);
@@ -220,27 +225,27 @@ public class FPInstruction extends Instruction{
 				int fr_exponent = Decode.binaryToDecimal(fr_str.substring(2, 8));
 				if (fr_exsign == 1) fr_exponent *= -1;
 				String fr_mantissa = fr_str.substring(8,16);
-				//normalize the mantissa
-				while (fr_mantissa.charAt(0) == fr_mantissa.charAt(1)) {
-					fr_mantissa = fr_mantissa.substring(1);
-					fr_mantissa += "0";
-					fr_exponent --;
-				}
+//				//normalize the mantissa
+//				while (fr_mantissa.charAt(0) == fr_mantissa.charAt(1)) {
+//					fr_mantissa = fr_mantissa.substring(1);
+//					fr_mantissa += "0";
+//					fr_exponent --;
+//				}
 				
 				//get the ea floating point value
 				String ea_str = "";
 				ea_str = MainApp.myMemory.readFromMemory(sub_ea).convertToString();
-				int ea_sign = Character.getNumericValue(fr_str.charAt(0));
-				int ea_exsign = Character.getNumericValue(fr_str.charAt(1));
-				int ea_exponent = Decode.binaryToDecimal(fr_str.substring(2, 8));
+				int ea_sign = Character.getNumericValue(ea_str.charAt(0));
+				int ea_exsign = Character.getNumericValue(ea_str.charAt(1));
+				int ea_exponent = Decode.binaryToDecimal(ea_str.substring(2, 8));
 				if (ea_exsign == 1) ea_exponent *= -1;
 				String ea_mantissa = ea_str.substring(8,16);
-				//normalize the mantissa
-				while (ea_mantissa.charAt(0) == ea_mantissa.charAt(1)) {
-					ea_mantissa = ea_mantissa.substring(1);
-					ea_mantissa += "0";
-					ea_exponent --;
-				}
+//				//normalize the mantissa
+//				while (ea_mantissa.charAt(0) == ea_mantissa.charAt(1)) {
+//					ea_mantissa = ea_mantissa.substring(1);
+//					ea_mantissa += "0";
+//					ea_exponent --;
+//				}
 				
 				int res_exponent = 0;
 				//normalize exponent to the same
@@ -251,8 +256,8 @@ public class FPInstruction extends Instruction{
 						//remove the last bit
 						ea_mantissa = ea_mantissa.substring(0, ea_mantissa.length()-1);
 						//add to the front of the mantissa
-						char adding = ea_mantissa.charAt(0);
-						ea_mantissa = adding + ea_mantissa;
+						//char adding = ea_mantissa.charAt(0);
+						ea_mantissa = '0' + ea_mantissa;
 					}
 					res_exponent = fr_exponent;
 				}
@@ -263,8 +268,8 @@ public class FPInstruction extends Instruction{
 						//remove the last bit
 						fr_mantissa = fr_mantissa.substring(0, fr_mantissa.length()-1);
 						//add to the front of the mantissa
-						char adding = fr_mantissa.charAt(0);
-						fr_mantissa = adding + fr_mantissa;
+						//char adding = fr_mantissa.charAt(0);
+						fr_mantissa = '0' + fr_mantissa;
 					}
 					res_exponent = ea_exponent;
 				}
@@ -289,10 +294,12 @@ public class FPInstruction extends Instruction{
 				if (res_exponent < 0) {
 					res_exponent *= -1;
 					res_exstr = Integer.toBinaryString(res_exponent);
+					res_exstr = String.format("%6s", res_exstr).replace(" ", "0");
 					res_exstr = '1' + res_exstr;
 				}
 				else {
 					res_exstr = Integer.toBinaryString(res_exponent);
+					res_exstr = String.format("%7s", res_exstr).replace(" ", "0");
 				}
 				
 				MainApp.myRegisters.writeToFP(freg, res_sign, res_exstr, res_mantissa);
@@ -481,7 +488,47 @@ public class FPInstruction extends Instruction{
 				
 				break;
 			
-			case 31: break;
+			case 31: 
+				
+				int convrt_ea = 0;
+	    		if (instype == 0) {
+	    			//Direct Addressing
+	    			if (index == 0) {
+	    				//Get the value stored in insadd
+	    				convrt_ea = insadd;
+	    			}
+	    			else {
+	    				//Get the value stored in [ix] + insadd
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				convrt_ea = ixValue + insadd;
+	    			}
+	    		}
+	    		else {
+	    			//Indirect Addressing
+	    			if (index == 0) {
+	    				String tmp = MainApp.myMemory.readFromMemory(insadd).convertToString();
+	    				convrt_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    			else {
+	    				int ixValue = Integer.parseInt(MainApp.myRegisters.getIXValue(index));
+	    				int buffer = ixValue + insadd;
+	    				String tmp = MainApp.myMemory.readFromMemory(buffer).convertToString();
+	    				convrt_ea = Decode.binaryToDecimal(tmp);
+	    			}
+	    		}
+				
+				String r_str = MainApp.myRegisters.getGRValue(ireg);
+				int f_val = Decode.binaryToDecimal(r_str);
+				if (f_val == 0) {
+					//floating to fix
+					
+				}
+				else {
+					//fix to floating
+					
+				}
+				
+				break;
 
 			case 40: {
 				int ldfr_ea = 0;
