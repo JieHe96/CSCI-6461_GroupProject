@@ -315,7 +315,6 @@ public class MainFrame extends JFrame{
 		JLabel fr0Label = new JLabel("FR0");
 		fr0Text = new JTextField();
 		JButton fr0Button = new JButton("Write");
-		pcText = new JTextField();
 		fr0Button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

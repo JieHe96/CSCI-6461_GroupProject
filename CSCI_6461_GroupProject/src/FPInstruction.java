@@ -304,15 +304,34 @@ public class FPInstruction extends Instruction{
 				if (freg == 0) fr_str = MainApp.myRegisters.getRegister("FR0", false);
 				else fr_str = MainApp.myRegisters.getRegister("FR1", false);
 				fr_sign = Character.getNumericValue(fr_str.charAt(0));
+				
+				if (fr_sign == '1') break;
+				
 				fr_exsign = Character.getNumericValue(fr_str.charAt(1));
 				fr_exponent = Decode.binaryToDecimal(fr_str.substring(2, 8));
 				if (fr_exsign == 1) fr_exponent *= -1;
 				fr_mantissa = fr_str.substring(8,16);
-				int shift = (fr_mantissa.length() - 1) * -1;
-				float decimal_val = Decode.binaryToDecimal(fr_mantissa) * 2 ^ shift;
-				decimal_val = decimal_val * (2 ^ fr_exponent);
+				int shift = (fr_mantissa.length() - 1);
+				System.out.println(fr_mantissa);
+				//System.out.println(2 ^ shift);
+				float decimal_val = Decode.binaryToDecimal(fr_mantissa);
+				for (int i = 0; i < shift; i++) {
+					decimal_val = decimal_val / 2;
+				}
+				System.out.println(decimal_val);
 				
+				if (fr_exponent < 0) {
+					for (int i = 0; i < -fr_exponent; i++) {
+						decimal_val = decimal_val / 2;
+					}
+				}
+				else {
+					for (int i = 0; i < fr_exponent; i++) {
+						decimal_val = decimal_val * 2;
+					}
+				}
 				
+				System.out.println(decimal_val);
 				
 				break;
 			
