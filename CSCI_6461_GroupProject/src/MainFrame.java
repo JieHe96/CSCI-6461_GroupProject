@@ -735,6 +735,7 @@ public class MainFrame extends JFrame{
 		//}
 	}
 	
+	//start
 	private void startThread() { 
 		SwingWorker sw1 = new SwingWorker() {
 
