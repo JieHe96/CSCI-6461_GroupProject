@@ -349,6 +349,8 @@ public class FPInstruction extends Instruction{
 				
 				if (decimal_val != (float)((int)decimal_val)) break;
 				
+				
+				
 				int vadd_ea = 0;
 	    		if (instype == 0) {
 	    			//Direct Addressing

@@ -465,6 +465,9 @@ public class MainFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				MainApp.restart();
+				instructionModel.clear();
+				instructionList.setModel(instructionModel);
+				updateUI();
 			}
 			
 		});
@@ -656,7 +659,7 @@ public class MainFrame extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			//MainApp.myRegisters.writeToIX(1, "235");
 			MainApp.myRegisters.writeToIX(1, "32");
-			MainApp.myMemory.writeToMemory(26, "0000000000000011");
+			MainApp.myMemory.writeToMemory(26, "0000000111000000");
 			MainApp.myClock.resume();
 			
 		}
@@ -751,6 +754,7 @@ public class MainFrame extends JFrame{
 						wordStr = Integer.toString(Decode.binaryToDecimal(wordStr));
 						setPrinter("Found at Sentence: " + senStr + " at Word: " + wordStr + "\n");
 					}
+					if (index == 103) setPrinter("\n");
 					MainApp.myClock.singleRun(index);
 					Thread.sleep(50);
 					publish("run");
@@ -817,11 +821,13 @@ public class MainFrame extends JFrame{
 					int n = rand.nextInt(65535);
 					keyboardField.setText(Integer.toString(n));
 					MainApp.myClock.singleRun(index);
+					if (index == 69) {
+						setPrinter("\n");
+					}
 					Thread.sleep(100);
 					publish("run");
 				}
-				printerModel.addElement("Please enter a search number: ");
-				printerList.setModel(printerModel);
+				setPrinter("Please enter a search number: ");
 				keyboardField.setText("");
 				publish("run");
 				return null;
